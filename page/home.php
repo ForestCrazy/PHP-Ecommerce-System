@@ -7,28 +7,43 @@
         height: 1px;
         content: "";
     }
+
+    .top-buffer {
+        margin-top: -15px;
+    }
 </style>
+<div class="search-box-header card">
+    <div class="d-flex justify-content-start align-items-center bd-highlight">
+        <div class="p-2 bd-highlight" style="width: 90%"><input type="text" class="w-100 form-control" name="search" placeholder="พิมพ์เพื่อค้นหา"></div>
+        <div class="p-2 bd-highlight"> <button type="submit" class="btn btn-green">ค้นหา</button></div>
+    </div>
+</div>
+<br>
 <div class="section-banner-header card">
-    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img class="d-block w-100" src="asset/img/banner1.png" alt="First slide">
-            </div>
-            <div class="carousel-item">
-                <img class="d-block w-100" src="asset/img/banner2.png" alt="Second slide">
-            </div>
-            <div class="carousel-item">
-                <img class="d-block w-100" src="asset/img/banner3.png" alt="Third slide">
+    <div class="row top-buffer">
+        <div class="col-sm-8">
+            <div id="carouselBannerControls" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img class="d-block w-100" src="asset/img/banner1.png" alt="First slide">
+                    </div>
+                    <div class="carousel-item">
+                        <img class="d-block w-100" src="asset/img/banner2.png" alt="Second slide">
+                    </div>
+                    <div class="carousel-item">
+                        <img class="d-block w-100" src="asset/img/banner3.png" alt="Third slide">
+                    </div>
+                </div>
+                <a class="carousel-control-prev" href="#carouselBannerControls" role="button" data-slide="prev">
+                    <i class="far fa-chevron-left carousel-control-prev-icon"></i>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselBannerControls" role="button" data-slide="next">
+                    <i class="far fa-chevron-right carousel-control-next-icon"></i>
+                    <span class="sr-only">Next</span>
+                </a>
             </div>
         </div>
-        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-            <i class="far fa-chevron-left carousel-control-prev-icon"></i>
-            <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-            <i class="far fa-chevron-right carousel-control-next-icon"></i>
-            <span class="sr-only">Next</span>
-        </a>
     </div>
 </div>
 <!--<br>
