@@ -1,3 +1,10 @@
+<style>
+.categories-line {
+    display: inline-block;
+    background-color: #aaa;
+    vertical-align: middle;
+}
+</style>
 <div class="section-banner-header card">
     <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
@@ -74,6 +81,15 @@
 <br>
 <div class="categories">
     <div class="card">
-        
+        <div style="margin-top: 10px; padding: 0px 15px 0px 15px;">
+            <div class="p-2 bd-highlight">สินค้าแนะนำ</div>
+        </div>
+        <div class="card-body">
+            <div class="d-flex justify-content-center text-center">
+                <div class="categories-line"></div>
+                <div>FASHION</div>
+                <div class="categories-line"></div>
+            </div>
+        </div>
     </div>
 </div>
