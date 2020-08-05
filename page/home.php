@@ -30,20 +30,23 @@
         </div>
         <div class="card-body">
             <div class="row">
-                <div class="col-sm-4" style="padding: 0px 5px 0px 5px;">
+                <div class="col-sm-3" style="padding: 0px 5px 0px 5px;">
                     <img class="card-img-top" src="https://cf.shopee.co.th/file/5606b1695389ed56c7d8684730631301" alt="Card image cap">
                 </div>
-                <div class="col-sm-4" style="padding: 0px 5px 5px 5px;">
+                <div class="col-sm-3" style="padding: 0px 5px 5px 5px;">
                     <img class="card-img-top" src="https://cf.shopee.co.th/file/5606b1695389ed56c7d8684730631301" alt="Card image cap">
                 </div>
-                <div class="col-sm-4" style="padding: 0px 5px 5px 5px;">
+                <div class="col-sm-3" style="padding: 0px 5px 5px 5px;">
+                    <img class="card-img-top" src="https://cf.shopee.co.th/file/5606b1695389ed56c7d8684730631301" alt="Card image cap">
+                </div>
+                <div class="col-sm-3" style="padding: 0px 5px 5px 5px;">
                     <img class="card-img-top" src="https://cf.shopee.co.th/file/5606b1695389ed56c7d8684730631301" alt="Card image cap">
                 </div>
             </div>
         </div>
     </div>
 </div>
-<br>
+<!--<br>
 <div class="product-list">
     <div class="card">
         <div style="margin-top: 10px; padding: 0px 15px 0px 15px;">
@@ -51,26 +54,26 @@
         </div>
         <div class="card-body" style="padding-top: 0px !important;">
             <div class="row">
-                <?php
-                $i = 0;
-                while ($i < 26) {
-                    $i++;
-                ?>
-                    <div class="col-sm-3">
-                        <div class="card">
-                            <img class="card-img-top w-100" src="https://cf.shopee.co.th/file/7a81d50c5304f71ca9ff9f6824ca55ba" alt="Card image cap">
-                            <div style="padding: 5px 2px 0px 2px;">
-                                <p class="card-text">Product Name</p>
-                                <div class="d-flex justify-content-between bd-highlight mb-3">
-                                    <div class="bd-highlight" style="font-size: 18px;">฿ 120</div>
-                                    <div class="bd-highlight"></div>
-                                    <div class="bd-highlight" style="font-size: 16px;"><small>ขายแล้ว 10.3k ชิ้น</small></div>
-                                </div>
+                <div class="col-sm-3">
+                    <div class="card">
+                        <img class="card-img-top w-100" src="https://cf.shopee.co.th/file/7a81d50c5304f71ca9ff9f6824ca55ba" alt="Card image cap">
+                        <div style="padding: 5px 2px 0px 2px;">
+                            <p class="card-text">Product Name</p>
+                            <div class="d-flex justify-content-between bd-highlight mb-3">
+                                <div class="bd-highlight" style="font-size: 18px;">฿ 120</div>
+                                <div class="bd-highlight"></div>
+                                <div class="bd-highlight" style="font-size: 16px;"><small>ขายแล้ว 10.3k ชิ้น</small></div>
                             </div>
                         </div>
                     </div>
-                <?php } ?>
+                </div>
             </div>
         </div>
+    </div>
+</div>-->
+<br>
+<div class="categories">
+    <div class="card">
+        
     </div>
 </div>

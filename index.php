@@ -51,17 +51,17 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent-333">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
+                <li class="nav-item" id="home">
                     <a class="nav-link" href="?page=home"><i class="far fa-home"></i> หน้าหลัก</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="far fa-store-alt"></i> ขายสินค้า</a>
+                <li class="nav-item" id="sell">
+                    <a class="nav-link" href="?page=sell"><i class="far fa-store-alt"></i> ขายสินค้า</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="far fa-calendar-star"></i> กิจกรรม</a>
+                <li class="nav-item" id="event">
+                    <a class="nav-link" href="?page=event"><i class="far fa-calendar-star"></i> กิจกรรม</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="?page=vote"><i class="far fa-gavel"></i> การประมูล</a>
+                <li class="nav-item" id="auction">
+                    <a class="nav-link" href="?page=auction"><i class="far fa-gavel"></i> การประมูล</a>
                 </li>
             </ul>
             <ul class="navbar-nav ml-auto">
@@ -110,10 +110,10 @@
             include_once __DIR__ . '/page/home.php';
         } elseif ($_GET['page'] == "product") {
             include_once __DIR__ . '/page/product.php';
-        } elseif ($_GET['page'] == "vote") {
-            include_once __DIR__ . '/page/vote.php';
-        } elseif ($_GET['page'] == "result") {
-            include_once __DIR__ . '/page/result.php';
+        } elseif ($_GET['page'] == "sell") {
+            include_once __DIR__ . '/page/sell.php';
+        } elseif ($_GET['page'] == "cart") {
+            include_once __DIR__ . '/page/cart.php';
         } elseif ($_GET['page'] == "login") {
             include_once __DIR__ . '/page/login.php';
         } elseif ($_GET['page'] == "logout") {
