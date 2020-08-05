@@ -45,14 +45,14 @@
 <body>
     <!--Navbar -->
     <nav class="mb-1 navbar navbar-expand-lg navbar-dark default-color">
-        <a class="navbar-brand" href="#">Ecommerce</a>
+        <a class="navbar-brand" href="?page=home">Ecommerce</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-333" aria-controls="navbarSupportedContent-333" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent-333">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#"><i class="far fa-home"></i> หน้าหลัก</a>
+                    <a class="nav-link" href="?page=home"><i class="far fa-home"></i> หน้าหลัก</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#"><i class="far fa-store-alt"></i> ขายสินค้า</a>
@@ -61,7 +61,7 @@
                     <a class="nav-link" href="#"><i class="far fa-calendar-star"></i> กิจกรรม</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="far fa-gavel"></i> การประมูล</a>
+                    <a class="nav-link" href="?page=vote"><i class="far fa-gavel"></i> การประมูล</a>
                 </li>
             </ul>
             <ul class="navbar-nav ml-auto">
