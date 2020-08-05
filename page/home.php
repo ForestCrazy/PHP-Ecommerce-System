@@ -3,6 +3,8 @@
     display: inline-block;
     background-color: #aaa;
     vertical-align: middle;
+    width: 150px;
+    height: 1px;
 }
 </style>
 <div class="section-banner-header card">
