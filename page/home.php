@@ -1,11 +1,12 @@
 <style>
-.categories-line {
-    display: inline-block;
-    background-color: #aaa;
-    vertical-align: middle;
-    width: 150px;
-    height: 1px;
-}
+    .categories-line {
+        display: inline-block;
+        background-color: #aaa;
+        vertical-align: middle;
+        width: 150px;
+        height: 1px;
+        content: "";
+    }
 </style>
 <div class="section-banner-header card">
     <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
@@ -30,27 +31,56 @@
         </a>
     </div>
 </div>
-<br>
+<!--<br>
 <div class="top-product">
     <div class="card">
         <div class="d-flex justify-content-between" style="margin-top: 10px; padding: 0px 15px 0px 15px;">
+            <div class="p-2 bd-highlight">หมวดหมู่</div>
+        </div>
+        <div class="row" style="padding: 0px 5px 5px 5px;">
+            <div class="col-sm-2">
+                
+            </div>
+            <div class="col-sm-2">
+                
+            </div>
+            <div class="col-sm-2">
+                
+            </div>
+            <div class="col-sm-2">
+                
+            </div>
+            <div class="col-sm-2">
+                
+            </div>
+            <div class="col-sm-2">
+                
+            </div>
+            <div class="col-sm-2">
+                
+            </div>
+        </div>
+    </div>
+</div>-->
+<br>
+<div class="top-product">
+    <div class="card">
+        <div class="d-flex justify-content-between" style="margin-top: 10px; padding-right: 15px;">
             <div class="p-2 bd-highlight">ขายดีประจำสัปดาห์</div>
             <div class="p-2 bd-highlight">ดูเพิ่มเติม <i class="far fa-angle-double-right"></i></div>
         </div>
-        <div class="card-body">
-            <div class="row">
-                <div class="col-sm-3" style="padding: 0px 5px 0px 5px;">
-                    <img class="card-img-top" src="https://cf.shopee.co.th/file/5606b1695389ed56c7d8684730631301" alt="Card image cap">
-                </div>
-                <div class="col-sm-3" style="padding: 0px 5px 5px 5px;">
-                    <img class="card-img-top" src="https://cf.shopee.co.th/file/5606b1695389ed56c7d8684730631301" alt="Card image cap">
-                </div>
-                <div class="col-sm-3" style="padding: 0px 5px 5px 5px;">
-                    <img class="card-img-top" src="https://cf.shopee.co.th/file/5606b1695389ed56c7d8684730631301" alt="Card image cap">
-                </div>
-                <div class="col-sm-3" style="padding: 0px 5px 5px 5px;">
-                    <img class="card-img-top" src="https://cf.shopee.co.th/file/5606b1695389ed56c7d8684730631301" alt="Card image cap">
-                </div>
+        <div class="row" style="padding: 0px 5px 5px 5px;">
+            <div class="col-sm-3">
+                <img class="card-img-top" src="https://cf.shopee.co.th/file/5606b1695389ed56c7d8684730631301" alt="Card image cap">
+            </div>
+            <div class="col-sm-3">
+                <img class="card-img-top" src="https://cf.shopee.co.th/file/5606b1695389ed56c7d8684730631301" alt="Card image cap">
+            </div>
+            <div class="col-sm-3">
+                <img class="card-img-top" src="https://cf.shopee.co.th/file/5606b1695389ed56c7d8684730631301" alt="Card image cap">
+            </div>
+            <div class="col-sm-3">
+                <img class="card-img-top" src="https://cf.shopee.co.th/file/5606b1695389ed56c7d8684730631301" alt="Card image cap">
             </div>
         </div>
     </div>
@@ -88,9 +118,20 @@
         </div>
         <div class="card-body">
             <div class="d-flex justify-content-center text-center">
-                <div class="categories-line"></div>
-                <div>FASHION</div>
-                <div class="categories-line"></div>
+                <div class="align-self-center" style="margin-right: 30px;">
+                    <div class="categories-line"></div>
+                </div>
+                <div><b>FASHION</b></div>
+                <div class="align-self-center" style="margin-left: 30px;">
+                    <div class="categories-line"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="card-body">
+
+                    </div>
+                </div>
             </div>
         </div>
     </div>
