@@ -7,6 +7,14 @@
         height: 1px;
         content: "";
     }
+
+    .line-categories-left {
+        margin-right: 30px;
+    }
+
+    .line-categories-right {
+        margin-left: 30px;
+    }
 </style>
 <div class="search-box-header card">
     <div class="d-flex justify-content-start align-items-center bd-highlight">
@@ -35,6 +43,50 @@
                     <span class="sr-only">Previous</span>
                 </a>
                 <a class="carousel-control-next" href="#carouselBannerControls" role="button" data-slide="next">
+                    <i class="far fa-chevron-right carousel-control-next-icon"></i>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div id="carouselSubBannerControls1" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img class="d-block w-100" src="asset/img/banner2.png" alt="Second slide">
+                    </div>
+                    <div class="carousel-item">
+                        <img class="d-block w-100" src="asset/img/banner1.png" alt="First slide">
+                    </div>
+                    <div class="carousel-item">
+                        <img class="d-block w-100" src="asset/img/banner3.png" alt="Third slide">
+                    </div>
+                </div>
+                <a class="carousel-control-prev" href="#carouselSubBannerControls1" role="button" data-slide="prev">
+                    <i class="far fa-chevron-left carousel-control-prev-icon"></i>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselSubBannerControls1" role="button" data-slide="next">
+                    <i class="far fa-chevron-right carousel-control-next-icon"></i>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+            <div id="carouselSubBannerControls2" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img class="d-block w-100" src="asset/img/banner3.png" alt="Third slide">
+                    </div>
+                    <div class="carousel-item">
+                        <img class="d-block w-100" src="asset/img/banner2.png" alt="Second slide">
+                    </div>
+                    <div class="carousel-item">
+                        <img class="d-block w-100" src="asset/img/banner1.png" alt="First slide">
+                    </div>
+                </div>
+                <a class="carousel-control-prev" href="#carouselSubBannerControls2" role="button" data-slide="prev">
+                    <i class="far fa-chevron-left carousel-control-prev-icon"></i>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselSubBannerControls2" role="button" data-slide="next">
                     <i class="far fa-chevron-right carousel-control-next-icon"></i>
                     <span class="sr-only">Next</span>
                 </a>
@@ -129,18 +181,65 @@
         </div>
         <div class="card-body">
             <div class="d-flex justify-content-center text-center">
-                <div class="align-self-center" style="margin-right: 30px;">
+                <div class="align-self-center line-categories-left">
                     <div class="categories-line"></div>
                 </div>
-                <div><b>FASHION</b></div>
-                <div class="align-self-center" style="margin-left: 30px;">
+                <div><b>Categories</b></div>
+                <div class="align-self-center line-categories-right">
                     <div class="categories-line"></div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-sm-3">
-                    <div class="card-body">
-
+                    <div class="card">
+                        <img class="card-img-top w-100" src="https://cf.shopee.co.th/file/7a81d50c5304f71ca9ff9f6824ca55ba" alt="Card image cap">
+                        <div style="padding: 5px 2px 0px 2px;">
+                            <p class="card-text">Product Name</p>
+                            <div class="d-flex justify-content-between bd-highlight mb-3">
+                                <div class="bd-highlight" style="font-size: 18px;">฿ Price</div>
+                                <div class="bd-highlight"></div>
+                                <div class="bd-highlight" style="font-size: 16px;"><small>ขายแล้ว ชิ้น</small></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="card">
+                        <img class="card-img-top w-100" src="https://cf.shopee.co.th/file/7a81d50c5304f71ca9ff9f6824ca55ba" alt="Card image cap">
+                        <div style="padding: 5px 2px 0px 2px;">
+                            <p class="card-text">Product Name</p>
+                            <div class="d-flex justify-content-between bd-highlight mb-3">
+                                <div class="bd-highlight" style="font-size: 18px;">฿ Price</div>
+                                <div class="bd-highlight"></div>
+                                <div class="bd-highlight" style="font-size: 16px;"><small>ขายแล้ว ชิ้น</small></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="card">
+                        <img class="card-img-top w-100" src="https://cf.shopee.co.th/file/7a81d50c5304f71ca9ff9f6824ca55ba" alt="Card image cap">
+                        <div style="padding: 5px 2px 0px 2px;">
+                            <p class="card-text">Product Name</p>
+                            <div class="d-flex justify-content-between bd-highlight mb-3">
+                                <div class="bd-highlight" style="font-size: 18px;">฿ Price</div>
+                                <div class="bd-highlight"></div>
+                                <div class="bd-highlight" style="font-size: 16px;"><small>ขายแล้ว ชิ้น</small></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="card">
+                        <img class="card-img-top w-100" src="https://cf.shopee.co.th/file/7a81d50c5304f71ca9ff9f6824ca55ba" alt="Card image cap">
+                        <div style="padding: 5px 2px 0px 2px;">
+                            <p class="card-text">Product Name</p>
+                            <div class="d-flex justify-content-between bd-highlight mb-3">
+                                <div class="bd-highlight" style="font-size: 18px;">฿ Price</div>
+                                <div class="bd-highlight"></div>
+                                <div class="bd-highlight" style="font-size: 16px;"><small>ขายแล้ว ชิ้น</small></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

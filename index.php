@@ -186,7 +186,7 @@
         </div>
     </div>
     <div class="footer-copyright text-center py-3" style="background-color:#2f3133!important">
-        <small style="font-size:14px; color: white;">Copyright © <?php echo date("Y"); ?> IT HTC &emsp; | &emsp; Coding <a href="http://www.fb.com/profile.php?id=100010520769733">ForestCrazy</a></small>
+        <small style="font-size:14px; color: white;">Copyright © <?php echo date("Y"); ?> TPS Marketplace</small>
     </div>
     </div>
 </footer>
