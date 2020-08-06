@@ -7,10 +7,6 @@
         height: 1px;
         content: "";
     }
-
-    .top-buffer {
-        margin-top: -15px;
-    }
 </style>
 <div class="search-box-header card">
     <div class="d-flex justify-content-start align-items-center bd-highlight">

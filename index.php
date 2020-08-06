@@ -39,6 +39,10 @@
         .shipping-label {
             width: 110px;
         }
+
+        .top-buffer {
+            margin-top: -15px;
+        }
     </style>
 </head>
 
@@ -69,7 +73,7 @@
                     <a class="nav-link waves-effect waves-light">
                         <i class="far fa-shopping-cart"></i>
                         <sup class="sup-shopping-cart"><span class="badge badge-success">23</span></sup> ตะกร้าสินค้า
-                        
+
                     </a>
                 </li>
                 <li class="nav-item">
