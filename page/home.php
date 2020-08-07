@@ -3,17 +3,9 @@
         display: inline-block;
         background-color: #aaa;
         vertical-align: middle;
-        width: 150px;
+        width: 100%;
         height: 1px;
         content: "";
-    }
-
-    .line-categories-left {
-        margin-right: 30px;
-    }
-
-    .line-categories-right {
-        margin-left: 30px;
     }
 </style>
 <div class="search-box-header card">
@@ -61,16 +53,8 @@
                         <img class="d-block w-100" src="asset/img/banner3.png" alt="Third slide">
                     </div>
                 </div>
-                <a class="carousel-control-prev" href="#carouselSubBannerControls1" role="button" data-slide="prev">
-                    <i class="far fa-chevron-left carousel-control-prev-icon"></i>
-                    <span class="sr-only">Previous</span>
-                </a>
-                <a class="carousel-control-next" href="#carouselSubBannerControls1" role="button" data-slide="next">
-                    <i class="far fa-chevron-right carousel-control-next-icon"></i>
-                    <span class="sr-only">Next</span>
-                </a>
             </div>
-            <div id="carouselSubBannerControls2" class="carousel slide" data-ride="carousel">
+            <div id="carouselSubBannerControls2" class="carousel slide" data-ride="carousel" style="margin-top: .6em;">
                 <div class="carousel-inner">
                     <div class="carousel-item active">
                         <img class="d-block w-100" src="asset/img/banner3.png" alt="Third slide">
@@ -82,14 +66,6 @@
                         <img class="d-block w-100" src="asset/img/banner1.png" alt="First slide">
                     </div>
                 </div>
-                <a class="carousel-control-prev" href="#carouselSubBannerControls2" role="button" data-slide="prev">
-                    <i class="far fa-chevron-left carousel-control-prev-icon"></i>
-                    <span class="sr-only">Previous</span>
-                </a>
-                <a class="carousel-control-next" href="#carouselSubBannerControls2" role="button" data-slide="next">
-                    <i class="far fa-chevron-right carousel-control-next-icon"></i>
-                    <span class="sr-only">Next</span>
-                </a>
             </div>
         </div>
     </div>
@@ -133,16 +109,19 @@
             <div class="p-2 bd-highlight">ดูเพิ่มเติม <i class="far fa-angle-double-right"></i></div>
         </div>
         <div class="row" style="padding: 0px 5px 5px 5px;">
-            <div class="col-sm-3">
+            <div class="col-sm-2-5">
                 <img class="card-img-top" src="https://cf.shopee.co.th/file/5606b1695389ed56c7d8684730631301" alt="Card image cap">
             </div>
-            <div class="col-sm-3">
+            <div class="col-sm-2-5">
                 <img class="card-img-top" src="https://cf.shopee.co.th/file/5606b1695389ed56c7d8684730631301" alt="Card image cap">
             </div>
-            <div class="col-sm-3">
+            <div class="col-sm-2-5">
                 <img class="card-img-top" src="https://cf.shopee.co.th/file/5606b1695389ed56c7d8684730631301" alt="Card image cap">
             </div>
-            <div class="col-sm-3">
+            <div class="col-sm-2-5">
+                <img class="card-img-top" src="https://cf.shopee.co.th/file/5606b1695389ed56c7d8684730631301" alt="Card image cap">
+            </div>
+            <div class="col-sm-2-5">
                 <img class="card-img-top" src="https://cf.shopee.co.th/file/5606b1695389ed56c7d8684730631301" alt="Card image cap">
             </div>
         </div>
@@ -179,18 +158,27 @@
         <div style="margin-top: 10px; padding: 0px 15px 0px 15px;">
             <div class="p-2 bd-highlight">สินค้าแนะนำ</div>
         </div>
-        <div class="card-body">
-            <div class="d-flex justify-content-center text-center">
-                <div class="align-self-center line-categories-left">
-                    <div class="categories-line"></div>
+        
+            <div class="row d-flex justify-content-center text-center">
+                <div class="col-sm-2 d-none d-lg-block d-print-block">
+                    <div class="align-self-center">
+                        <div class="categories-line"></div>
+                    </div>
                 </div>
-                <div><b>Categories</b></div>
-                <div class="align-self-center line-categories-right">
-                    <div class="categories-line"></div>
+                <div class="col-sm-2">
+                    <div>
+                        <b>Categories</b>
+                    </div>
+                </div>
+                <div class="col-sm-2 d-none d-lg-block d-print-block">
+                    <div class="align-self-center">
+                        <div class="categories-line"></div>
+                    </div>
                 </div>
             </div>
+        <div style="padding: 0px 5px 5px 5px;">
             <div class="row">
-                <div class="col-sm-3">
+                <div class="col-sm-2-5">
                     <div class="card">
                         <img class="card-img-top w-100" src="https://cf.shopee.co.th/file/7a81d50c5304f71ca9ff9f6824ca55ba" alt="Card image cap">
                         <div style="padding: 5px 2px 0px 2px;">
@@ -203,7 +191,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-3">
+                <div class="col-sm-2-5">
                     <div class="card">
                         <img class="card-img-top w-100" src="https://cf.shopee.co.th/file/7a81d50c5304f71ca9ff9f6824ca55ba" alt="Card image cap">
                         <div style="padding: 5px 2px 0px 2px;">
@@ -216,7 +204,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-3">
+                <div class="col-sm-2-5">
                     <div class="card">
                         <img class="card-img-top w-100" src="https://cf.shopee.co.th/file/7a81d50c5304f71ca9ff9f6824ca55ba" alt="Card image cap">
                         <div style="padding: 5px 2px 0px 2px;">
@@ -229,7 +217,20 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-3">
+                <div class="col-sm-2-5">
+                    <div class="card">
+                        <img class="card-img-top w-100" src="https://cf.shopee.co.th/file/7a81d50c5304f71ca9ff9f6824ca55ba" alt="Card image cap">
+                        <div style="padding: 5px 2px 0px 2px;">
+                            <p class="card-text">Product Name</p>
+                            <div class="d-flex justify-content-between bd-highlight mb-3">
+                                <div class="bd-highlight" style="font-size: 18px;">฿ Price</div>
+                                <div class="bd-highlight"></div>
+                                <div class="bd-highlight" style="font-size: 16px;"><small>ขายแล้ว ชิ้น</small></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-2-5">
                     <div class="card">
                         <img class="card-img-top w-100" src="https://cf.shopee.co.th/file/7a81d50c5304f71ca9ff9f6824ca55ba" alt="Card image cap">
                         <div style="padding: 5px 2px 0px 2px;">

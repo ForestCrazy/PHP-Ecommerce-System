@@ -1,6 +1,3 @@
-<style>
-
-</style>
 <div class="row">
     <div class="col-sm-4">
         <img class="card-img-top w-100" src="https://cf.shopee.co.th/file/7a81d50c5304f71ca9ff9f6824ca55ba" alt="Card image cap">

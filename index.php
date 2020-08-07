@@ -81,11 +81,6 @@
                         <i class="far fa-bell"></i> การแจ้งเตือน
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link waves-effect waves-light">
-                        <i class="far fa-question-circle"></i> ช่วยเหลือ
-                    </a>
-                </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fas fa-user"></i> บัญชีของฉัน
@@ -129,9 +124,9 @@
         } ?>
     </div>
     <br>
-    <script src="asset/js/bootstrap.js"></script>
-    <script src="asset/js/mdb.js"></script>
-    <script src="asset/js/popper.js"></script>
+    <script defer src="asset/js/bootstrap.js"></script>
+    <script defer src="asset/js/mdb.js"></script>
+    <script defer src="asset/js/popper.js"></script>
 </body>
 
 <!-- Footer -->

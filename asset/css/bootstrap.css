@@ -684,6 +684,7 @@ pre code {
 .col-auto,
 .col-sm-1,
 .col-sm-2,
+.col-sm-2-5,
 .col-sm-3,
 .col-sm-4,
 .col-sm-5,
@@ -1041,6 +1042,11 @@ pre code {
         -ms-flex: 0 0 16.666667%;
         flex: 0 0 16.666667%;
         max-width: 16.666667%;
+    }
+    .col-sm-2-5 {
+        -ms-flex: 0 0 20%;
+        flex: 0 0 20%;
+        max-width: 20%;
     }
     .col-sm-3 {
         -ms-flex: 0 0 25%;
@@ -6861,7 +6867,7 @@ a.close.disabled {
     align-items: center;
     -ms-flex-pack: center;
     justify-content: center;
-    width: 15%;
+    width: 7%;
     color: #fff;
     text-align: center;
     opacity: 0.5;
