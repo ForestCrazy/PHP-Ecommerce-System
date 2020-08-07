@@ -109,8 +109,8 @@
             include_once __DIR__ . '/page/home.php';
         } elseif ($_GET['page'] == "product") {
             include_once __DIR__ . '/page/product.php';
-        } elseif ($_GET['page'] == "sell") {
-            include_once __DIR__ . '/page/sell.php';
+        } elseif ($_GET['page'] == "event") {
+            include_once __DIR__ . '/page/event.php';
         } elseif ($_GET['page'] == "cart") {
             include_once __DIR__ . '/page/cart.php';
         } elseif ($_GET['page'] == "login") {
