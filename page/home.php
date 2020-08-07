@@ -7,6 +7,18 @@
         height: 1px;
         content: "";
     }
+
+    .product-name-home {
+        font-size: 1.1rem;
+    }
+
+    .product-price-home {
+        font-size: 1rem;
+    }
+
+    .product-sale-home {
+        font-size: 1rem;
+    }
 </style>
 <div class="search-box-header card">
     <div class="d-flex justify-content-start align-items-center bd-highlight">
@@ -70,37 +82,6 @@
         </div>
     </div>
 </div>
-<!--<br>
-<div class="top-product">
-    <div class="card">
-        <div class="d-flex justify-content-between" style="margin-top: 10px; padding: 0px 15px 0px 15px;">
-            <div class="p-2 bd-highlight">หมวดหมู่</div>
-        </div>
-        <div class="row" style="padding: 0px 5px 5px 5px;">
-            <div class="col-sm-2">
-                
-            </div>
-            <div class="col-sm-2">
-                
-            </div>
-            <div class="col-sm-2">
-                
-            </div>
-            <div class="col-sm-2">
-                
-            </div>
-            <div class="col-sm-2">
-                
-            </div>
-            <div class="col-sm-2">
-                
-            </div>
-            <div class="col-sm-2">
-                
-            </div>
-        </div>
-    </div>
-</div>-->
 <br>
 <div class="top-product">
     <div class="card">
@@ -110,139 +91,65 @@
         </div>
         <div class="row" style="padding: 0px 5px 5px 5px;">
             <div class="col-sm-2-5">
-                <img class="card-img-top" src="https://cf.shopee.co.th/file/5606b1695389ed56c7d8684730631301" alt="Card image cap">
+                <img loading="lazy" class="card-img-top" src="https://cf.shopee.co.th/file/5606b1695389ed56c7d8684730631301" alt="Card image cap">
             </div>
             <div class="col-sm-2-5">
-                <img class="card-img-top" src="https://cf.shopee.co.th/file/5606b1695389ed56c7d8684730631301" alt="Card image cap">
+                <img loading="lazy" class="card-img-top" src="https://cf.shopee.co.th/file/5606b1695389ed56c7d8684730631301" alt="Card image cap">
             </div>
             <div class="col-sm-2-5">
-                <img class="card-img-top" src="https://cf.shopee.co.th/file/5606b1695389ed56c7d8684730631301" alt="Card image cap">
+                <img loading="lazy" class="card-img-top" src="https://cf.shopee.co.th/file/5606b1695389ed56c7d8684730631301" alt="Card image cap">
             </div>
             <div class="col-sm-2-5">
-                <img class="card-img-top" src="https://cf.shopee.co.th/file/5606b1695389ed56c7d8684730631301" alt="Card image cap">
+                <img loading="lazy" class="card-img-top" src="https://cf.shopee.co.th/file/5606b1695389ed56c7d8684730631301" alt="Card image cap">
             </div>
             <div class="col-sm-2-5">
-                <img class="card-img-top" src="https://cf.shopee.co.th/file/5606b1695389ed56c7d8684730631301" alt="Card image cap">
+                <img loading="lazy" class="card-img-top" src="https://cf.shopee.co.th/file/5606b1695389ed56c7d8684730631301" alt="Card image cap">
             </div>
         </div>
     </div>
 </div>
-<!--<br>
-<div class="product-list">
-    <div class="card">
-        <div style="margin-top: 10px; padding: 0px 15px 0px 15px;">
-            <div class="p-2 bd-highlight">สินค้าแนะนำ</div>
-        </div>
-        <div class="card-body" style="padding-top: 0px !important;">
-            <div class="row">
-                <div class="col-sm-3">
-                    <div class="card">
-                        <img class="card-img-top w-100" src="https://cf.shopee.co.th/file/7a81d50c5304f71ca9ff9f6824ca55ba" alt="Card image cap">
-                        <div style="padding: 5px 2px 0px 2px;">
-                            <p class="card-text">Product Name</p>
-                            <div class="d-flex justify-content-between bd-highlight mb-3">
-                                <div class="bd-highlight" style="font-size: 18px;">฿ 120</div>
-                                <div class="bd-highlight"></div>
-                                <div class="bd-highlight" style="font-size: 16px;"><small>ขายแล้ว 10.3k ชิ้น</small></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>-->
 <br>
 <div class="categories">
     <div class="card">
         <div style="margin-top: 10px; padding: 0px 15px 0px 15px;">
             <div class="p-2 bd-highlight">สินค้าแนะนำ</div>
         </div>
-        
-            <div class="row d-flex justify-content-center text-center">
-                <div class="col-sm-2 d-none d-lg-block d-print-block">
-                    <div class="align-self-center">
-                        <div class="categories-line"></div>
-                    </div>
-                </div>
-                <div class="col-sm-2">
-                    <div>
-                        <b>Categories</b>
-                    </div>
-                </div>
-                <div class="col-sm-2 d-none d-lg-block d-print-block">
-                    <div class="align-self-center">
-                        <div class="categories-line"></div>
-                    </div>
+
+        <div class="row d-flex justify-content-center text-center">
+            <div class="col-sm-2 d-none d-lg-block d-print-block">
+                <div class="align-self-center">
+                    <div class="categories-line"></div>
                 </div>
             </div>
+            <div class="col-sm-2">
+                <div>
+                    <b>Categories</b>
+                </div>
+            </div>
+            <div class="col-sm-2 d-none d-lg-block d-print-block">
+                <div class="align-self-center">
+                    <div class="categories-line"></div>
+                </div>
+            </div>
+        </div>
         <div style="padding: 0px 5px 5px 5px;">
             <div class="row">
-                <div class="col-sm-2-5">
-                    <div class="card">
-                        <img class="card-img-top w-100" src="https://cf.shopee.co.th/file/7a81d50c5304f71ca9ff9f6824ca55ba" alt="Card image cap">
-                        <div style="padding: 5px 2px 0px 2px;">
-                            <p class="card-text">Product Name</p>
-                            <div class="d-flex justify-content-between bd-highlight mb-3">
-                                <div class="bd-highlight" style="font-size: 18px;">฿ Price</div>
-                                <div class="bd-highlight"></div>
-                                <div class="bd-highlight" style="font-size: 16px;"><small>ขายแล้ว ชิ้น</small></div>
+                <?php $i = 0;
+                while ($i < 40) { $i++;?>
+                    <div class="col-sm-2-5">
+                        <div class="card">
+                            <img loading="lazy" class="card-img-top w-100" src="https://cf.shopee.co.th/file/7a81d50c5304f71ca9ff9f6824ca55ba" alt="Card image cap">
+                            <div style="padding: 5px 6px 0px 6px;">
+                                <p class="card-text product-name-home">Product Name</p>
+                                <div class="d-flex justify-content-between bd-highlight mb-3">
+                                    <div class="bd-highlight product-price-home">฿ Price</div>
+                                    <div class="bd-highlight"></div>
+                                    <div class="bd-highlight product-sale-home"><small>ขายแล้ว ชิ้น</small></div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-sm-2-5">
-                    <div class="card">
-                        <img class="card-img-top w-100" src="https://cf.shopee.co.th/file/7a81d50c5304f71ca9ff9f6824ca55ba" alt="Card image cap">
-                        <div style="padding: 5px 2px 0px 2px;">
-                            <p class="card-text">Product Name</p>
-                            <div class="d-flex justify-content-between bd-highlight mb-3">
-                                <div class="bd-highlight" style="font-size: 18px;">฿ Price</div>
-                                <div class="bd-highlight"></div>
-                                <div class="bd-highlight" style="font-size: 16px;"><small>ขายแล้ว ชิ้น</small></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-2-5">
-                    <div class="card">
-                        <img class="card-img-top w-100" src="https://cf.shopee.co.th/file/7a81d50c5304f71ca9ff9f6824ca55ba" alt="Card image cap">
-                        <div style="padding: 5px 2px 0px 2px;">
-                            <p class="card-text">Product Name</p>
-                            <div class="d-flex justify-content-between bd-highlight mb-3">
-                                <div class="bd-highlight" style="font-size: 18px;">฿ Price</div>
-                                <div class="bd-highlight"></div>
-                                <div class="bd-highlight" style="font-size: 16px;"><small>ขายแล้ว ชิ้น</small></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-2-5">
-                    <div class="card">
-                        <img class="card-img-top w-100" src="https://cf.shopee.co.th/file/7a81d50c5304f71ca9ff9f6824ca55ba" alt="Card image cap">
-                        <div style="padding: 5px 2px 0px 2px;">
-                            <p class="card-text">Product Name</p>
-                            <div class="d-flex justify-content-between bd-highlight mb-3">
-                                <div class="bd-highlight" style="font-size: 18px;">฿ Price</div>
-                                <div class="bd-highlight"></div>
-                                <div class="bd-highlight" style="font-size: 16px;"><small>ขายแล้ว ชิ้น</small></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-2-5">
-                    <div class="card">
-                        <img class="card-img-top w-100" src="https://cf.shopee.co.th/file/7a81d50c5304f71ca9ff9f6824ca55ba" alt="Card image cap">
-                        <div style="padding: 5px 2px 0px 2px;">
-                            <p class="card-text">Product Name</p>
-                            <div class="d-flex justify-content-between bd-highlight mb-3">
-                                <div class="bd-highlight" style="font-size: 18px;">฿ Price</div>
-                                <div class="bd-highlight"></div>
-                                <div class="bd-highlight" style="font-size: 16px;"><small>ขายแล้ว ชิ้น</small></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <?php } ?>
             </div>
         </div>
     </div>
