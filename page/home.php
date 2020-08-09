@@ -118,12 +118,12 @@
         </div>
         <div class="row row-fix text-center">
             <div class="col-sm-1-2 product-categories-box">
-                    <img class="rounded-circle img-categories-list" src="asset/img/tshirt.png">
-                    <div class="product-categories-text">เสื้อผ้าแฟชั่นผู้ชาย</div>
+                <img class="rounded-circle img-categories-list" src="asset/img/tshirt.png">
+                <div class="product-categories-text">เสื้อผ้าแฟชั่นผู้ชาย</div>
             </div>
             <div class="col-sm-1-2 product-categories-box">
-                    <img class="rounded-circle img-categories-list" src="asset/img/tshirt.png">
-                    <div class="product-categories-text">เสื้อผ้าแฟชั่นผู้ชาย</div>
+                <img class="rounded-circle img-categories-list" src="asset/img/tshirt.png">
+                <div class="product-categories-text">เสื้อผ้าแฟชั่นผู้ชาย</div>
             </div>
         </div>
     </div>
