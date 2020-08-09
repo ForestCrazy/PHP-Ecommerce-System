@@ -36,7 +36,7 @@
         -webkit-border-radius: 0px 0px 0px 0px;
         border: .5px solid rgba(0, 0, 0, .05);
         padding: 10px 3px 5px 3px;
-        height: 8rem;
+        height: 9rem;
         align-items: center !important;
     }
     
