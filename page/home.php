@@ -26,7 +26,7 @@
     }
 
     .product-categories-text {
-        font-size: 12px;
+        font-size: 14px;
     }
 
     .product-categories-box {
@@ -34,8 +34,12 @@
         -moz-border-radius: 0px 0px 0px 0px;
         -webkit-border-radius: 0px 0px 0px 0px;
         border: .5px solid rgba(0, 0, 0, .05);
-        margin-top: 0 !important;
         padding: 10px 0px 5px 0px;
+    }
+    
+    .product-categories-col {
+        margin-top: 0 !important;
+        padding: 0;
     }
 
     .row-fix {
@@ -117,13 +121,21 @@
             <div class="p-2 bd-highlight">หมวดหมู่</div>
         </div>
         <div class="row row-fix text-center">
-            <div class="col-sm-1-2 product-categories-box">
-                <img class="rounded-circle img-categories-list" src="asset/img/tshirt.png">
-                <div class="product-categories-text">เสื้อผ้าแฟชั่นผู้ชาย</div>
+            <div class="col-sm-1-2 product-categories-col">
+                <div class="product-categories-box">
+                    <img class="rounded-circle img-categories-list" src="asset/img/tshirt.png">
+                    <div class="product-categories-text">เสื้อผ้าแฟชั่นผู้ชาย</div>
+                </div>
+                <div class="product-categories-box">
+                    <img class="rounded-circle img-categories-list" src="asset/img/tshirt.png">
+                    <div class="product-categories-text">เสื้อผ้าแฟชั่นผู้หญิง</div>
+                </div>
             </div>
-            <div class="col-sm-1-2 product-categories-box">
-                <img class="rounded-circle img-categories-list" src="asset/img/tshirt.png">
-                <div class="product-categories-text">เสื้อผ้าแฟชั่นผู้ชาย</div>
+            <div class="col-sm-1-2 product-categories-col">
+                <div class="product-categories-box">
+                    <img class="rounded-circle img-categories-list" src="asset/img/laptop.png">
+                    <div class="product-categories-text">คอมพิวเตอร์และแล็ปท็อป</div>
+                </div>
             </div>
         </div>
     </div>
