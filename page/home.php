@@ -19,6 +19,29 @@
     .product-sale-home {
         font-size: 1rem;
     }
+
+    .img-categories-list {
+        width: 4em;
+        background-color: #f1f1f1;
+    }
+
+    .product-categories-text {
+        font-size: 12px;
+    }
+
+    .product-categories-box {
+        border-radius: 0px 0px 0px 0px;
+        -moz-border-radius: 0px 0px 0px 0px;
+        -webkit-border-radius: 0px 0px 0px 0px;
+        border: .5px solid rgba(0, 0, 0, .05);
+        margin-top: 0 !important;
+        padding: 10px 0px 5px 0px;
+    }
+
+    .row-fix {
+        margin: 0 !important;
+        margin-bottom: 5px !important;
+    }
 </style>
 <div class="search-box-header card">
     <div class="d-flex justify-content-start align-items-center bd-highlight">
@@ -88,13 +111,31 @@
     </div>
 </div>
 <br>
+<div class="product-categories">
+    <div class="card">
+        <div style="margin-top: 10px; padding-right: 15px;">
+            <div class="p-2 bd-highlight">หมวดหมู่</div>
+        </div>
+        <div class="row row-fix text-center">
+            <div class="col-sm-1-2 product-categories-box">
+                    <img class="rounded-circle img-categories-list" src="asset/img/tshirt.png">
+                    <div class="product-categories-text">เสื้อผ้าแฟชั่นผู้ชาย</div>
+            </div>
+            <div class="col-sm-1-2 product-categories-box">
+                    <img class="rounded-circle img-categories-list" src="asset/img/tshirt.png">
+                    <div class="product-categories-text">เสื้อผ้าแฟชั่นผู้ชาย</div>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
 <div class="top-product">
     <div class="card">
         <div class="d-flex justify-content-between" style="margin-top: 10px; padding-right: 15px;">
             <div class="p-2 bd-highlight">ขายดีประจำสัปดาห์</div>
             <div class="p-2 bd-highlight">ดูเพิ่มเติม <i class="far fa-angle-double-right"></i></div>
         </div>
-        <div class="row" style="padding: 0px 5px 5px 5px;">
+        <div class="row row-fix">
             <div class="col-sm-2-5">
                 <img loading="lazy" class="card-img-top" src="https://cf.shopee.co.th/file/5606b1695389ed56c7d8684730631301" alt="Card image cap">
             </div>
@@ -137,26 +178,24 @@
                 </div>
             </div>
         </div>
-        <div style="padding: 0px 5px 5px 5px;">
-            <div class="row">
-                <?php $i = 0;
-                while ($i < 40) {
-                    $i++; ?>
-                    <div class="col-sm-2-5">
-                        <div class="card">
-                            <img loading="lazy" class="card-img-top w-100" src="https://cf.shopee.co.th/file/7a81d50c5304f71ca9ff9f6824ca55ba" alt="Card image cap">
-                            <div style="padding: 5px 6px 0px 6px;">
-                                <p class="card-text product-name-home">Product Name</p>
-                                <div class="d-flex justify-content-between bd-highlight mb-3">
-                                    <div class="bd-highlight product-price-home">฿ Price</div>
-                                    <div class="bd-highlight"></div>
-                                    <div class="bd-highlight product-sale-home"><small>ขายแล้ว ชิ้น</small></div>
-                                </div>
+        <div class="row row-fix">
+            <?php $i = 0;
+            while ($i < 40) {
+                $i++; ?>
+                <div class="col-sm-2-5">
+                    <div class="card">
+                        <img loading="lazy" class="card-img-top w-100" src="https://cf.shopee.co.th/file/7a81d50c5304f71ca9ff9f6824ca55ba" alt="Card image cap">
+                        <div style="padding: 5px 6px 0px 6px;">
+                            <p class="card-text product-name-home">Product Name</p>
+                            <div class="d-flex justify-content-between bd-highlight mb-3">
+                                <div class="bd-highlight product-price-home">฿ Price</div>
+                                <div class="bd-highlight"></div>
+                                <div class="bd-highlight product-sale-home"><small>ขายแล้ว ชิ้น</small></div>
                             </div>
                         </div>
                     </div>
-                <?php } ?>
-            </div>
+                </div>
+            <?php } ?>
         </div>
     </div>
 </div>
