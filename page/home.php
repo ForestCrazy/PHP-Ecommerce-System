@@ -27,6 +27,7 @@
 
     .product-categories-text {
         font-size: 14px;
+        margin-top: 5px;
     }
 
     .product-categories-box {
@@ -34,7 +35,9 @@
         -moz-border-radius: 0px 0px 0px 0px;
         -webkit-border-radius: 0px 0px 0px 0px;
         border: .5px solid rgba(0, 0, 0, .05);
-        padding: 10px 0px 5px 0px;
+        padding: 10px 3px 5px 3px;
+        height: 8rem;
+        align-items: center !important;
     }
     
     .product-categories-col {
@@ -135,6 +138,140 @@
                 <div class="product-categories-box">
                     <img class="rounded-circle img-categories-list" src="asset/img/laptop.png">
                     <div class="product-categories-text">คอมพิวเตอร์และแล็ปท็อป</div>
+                </div>
+                <div class="product-categories-box">
+                    <img class="rounded-circle img-categories-list" src="asset/img/laptop.png">
+                    <div class="product-categories-text">เครื่องใช้ไฟฟ้าภายในบ้าน</div>
+                </div>
+            </div>
+            <div class="col-sm-1-2 product-categories-col">
+                <div class="product-categories-box">
+                    <img class="rounded-circle img-categories-list" src="asset/img/laptop.png">
+                    <div class="product-categories-text">อาหารเสริมและผลิตภัณฑ์สุขภาพ</div>
+                </div>
+                <div class="product-categories-box">
+                    <img class="rounded-circle img-categories-list" src="asset/img/laptop.png">
+                    <div class="product-categories-text">ความงามและของใช้ส่วนตัว</div>
+                </div>
+            </div>
+            <div class="col-sm-1-2 product-categories-col">
+                <div class="product-categories-box">
+                    <img class="rounded-circle img-categories-list" src="asset/img/laptop.png">
+                    <div class="product-categories-text">รองเท้าผู้ชาย</div>
+                </div>
+                <div class="product-categories-box">
+                    <img class="rounded-circle img-categories-list" src="asset/img/laptop.png">
+                    <div class="product-categories-text">รองเท้าผู้หญิง</div>
+                </div>
+            </div>
+            <div class="col-sm-1-2 product-categories-col">
+                <div class="product-categories-box">
+                    <img class="rounded-circle img-categories-list" src="asset/img/laptop.png">
+                    <div class="product-categories-text">นาฬิกาและแว่นตา</div>
+                </div>
+                <div class="product-categories-box">
+                    <img class="rounded-circle img-categories-list" src="asset/img/laptop.png">
+                    <div class="product-categories-text">กระเป๋า</div>
+                </div>
+            </div>
+            <div class="col-sm-1-2 product-categories-col">
+                <div class="product-categories-box">
+                    <img class="rounded-circle img-categories-list" src="asset/img/laptop.png">
+                    <div class="product-categories-text">กล้องและอุปกรณ์ถ่ายภาพ</div>
+                </div>
+                <div class="product-categories-box">
+                    <img class="rounded-circle img-categories-list" src="asset/img/laptop.png">
+                    <div class="product-categories-text">เครื่องประดับ</div>
+                </div>
+            </div>
+            <div class="col-sm-1-2 product-categories-col">
+                <div class="product-categories-box">
+                    <img class="rounded-circle img-categories-list" src="asset/img/laptop.png">
+                    <div class="product-categories-text">ยานยนต์</div>
+                </div>
+                <div class="product-categories-box">
+                    <img class="rounded-circle img-categories-list" src="asset/img/laptop.png">
+                    <div class="product-categories-text">อาหารและเครื่องดื่ม</div>
+                </div>
+            </div>
+            <div class="col-sm-1-2 product-categories-col">
+                <div class="product-categories-box">
+                    <img class="rounded-circle img-categories-list" src="asset/img/laptop.png">
+                    <div class="product-categories-text">สื่อบันเทิงภายในบ้าน</div>
+                </div>
+                <div class="product-categories-box">
+                    <img class="rounded-circle img-categories-list" src="asset/img/laptop.png">
+                    <div class="product-categories-text">เครื่องใช้ในบ้าน</div>
+                </div>
+            </div>
+            <div class="col-sm-1-2 product-categories-col">
+                <div class="product-categories-box">
+                    <img class="rounded-circle img-categories-list" src="asset/img/laptop.png">
+                    <div class="product-categories-text">เกมและอุปกรณ์เสริม</div>
+                </div>
+                <div class="product-categories-box">
+                    <img class="rounded-circle img-categories-list" src="asset/img/laptop.png">
+                    <div class="product-categories-text">ของเล่น สินค้าแม่และเด็ก</div>
+                </div>
+            </div>
+            <div class="col-sm-1-2 product-categories-col">
+                <div class="product-categories-box">
+                    <img class="rounded-circle img-categories-list" src="asset/img/laptop.png">
+                    <div class="product-categories-text">กีฬาและกิจกรรมกลางแจ้ง</div>
+                </div>
+                <div class="product-categories-box">
+                    <img class="rounded-circle img-categories-list" src="asset/img/laptop.png">
+                    <div class="product-categories-text">เครื่องเขียน หนังสือ และดนตรี</div>
+                </div>
+            </div>
+            <div class="col-sm-1-2 product-categories-col">
+                <div class="product-categories-box">
+                    <img class="rounded-circle img-categories-list" src="asset/img/laptop.png">
+                    <div class="product-categories-text">อุปกรณ์วงจรไฟฟ้าและอะไหล่</div>
+                </div>
+                <div class="product-categories-box">
+                    <img class="rounded-circle img-categories-list" src="asset/img/laptop.png">
+                    <div class="product-categories-text">สัตว์เลี้ยง</div>
+                </div>
+            </div>
+            <div class="col-sm-1-2 product-categories-col">
+                <div class="product-categories-box">
+                    <img class="rounded-circle img-categories-list" src="asset/img/laptop.png">
+                    <div class="product-categories-text">ตั๋วและบัตรกำนัน</div>
+                </div>
+                <div class="product-categories-box">
+                    <img class="rounded-circle img-categories-list" src="asset/img/laptop.png">
+                    <div class="product-categories-text">มือถือและอุปกรณ์เสริม</div>
+                </div>
+            </div>
+            <div class="col-sm-1-2 product-categories-col">
+                <div class="product-categories-box">
+                    <img class="rounded-circle img-categories-list" src="asset/img/laptop.png">
+                    <div class="product-categories-text">บ้านและที่ดิน</div>
+                </div>
+                <div class="product-categories-box">
+                    <img class="rounded-circle img-categories-list" src="asset/img/laptop.png">
+                    <div class="product-categories-text">เซรั่มและทรีทเมนต์</div>
+                </div>
+            </div>
+            <div class="col-sm-1-2 product-categories-col">
+                <div class="product-categories-box">
+                    <img class="rounded-circle img-categories-list" src="asset/img/laptop.png">
+                    <div class="product-categories-text">ดิน ปุ๋ย และอุปกรณ์เพาะชำ</div>
+                </div>
+                <div class="product-categories-box">
+                    <img class="rounded-circle img-categories-list" src="asset/img/laptop.png">
+                    <div class="product-categories-text">หูฟังเอียบัด</div>
+                </div>
+            </div>
+            <div class="col-sm-1-2 product-categories-col">
+                <div class="product-categories-box">
+                    <img class="rounded-circle img-categories-list" src="asset/img/laptop.png">
+                    <div class="product-categories-text">อุปกรณ์ติดตั้งบนมอเตอร์ไซค์</div>
+                </div>
+                <div class="product-categories-box">
+                    <img class="rounded-circle img-categories-list" src="asset/img/laptop.png">
+                    <div class="product-categories-text">อื่นๆ</div>
                 </div>
             </div>
         </div>
