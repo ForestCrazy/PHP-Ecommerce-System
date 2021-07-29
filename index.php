@@ -1,5 +1,6 @@
 <?php
 require('./system/database.php');
+require('./system/oop.php');
 
 if (!$_GET) {
     $_GET["page"] = 'home';
