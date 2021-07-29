@@ -49,7 +49,7 @@
 </div>
 <br>
 <div class="section-banner-header card">
-    <div class="row top-buffer">
+    <div class="row">
         <div class="col-sm-8">
             <div id="carouselBannerControls" class="carousel slide" data-ride="carousel">
                 <ol class="carousel-indicators">
