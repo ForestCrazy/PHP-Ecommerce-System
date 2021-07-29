@@ -56,7 +56,7 @@ if (isset($_SESSION['username'])) {
             padding: 1.0rem !important;
         }
 
-        [class*="col-"] {
+        .col-top {
             margin-top: 15px;
         }
 
