@@ -67,7 +67,7 @@ if (!isset($_SESSION['username'])) {
                     '<?php echo $alrt_text ?>',
                     '<?php echo $alrt_icon ?>',
                 ).then((value) => {
-                    window.location.href = '?page=store';
+                    window.location.href = '?page=store_dashboard';
                 });
             </script>
 <?php
