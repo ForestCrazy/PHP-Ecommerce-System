@@ -1,3 +1,30 @@
+<?php
+require('./system/database.php');
+
+if (!$_GET) {
+    $_GET["page"] = 'home';
+}
+if (!isset($_GET['page'])) {
+    $_GET['page'] = 'home';
+}
+if (!$_GET["page"]) {
+    $_GET["page"] = "home";
+}
+
+if (isset($_SESSION['username'])) {
+    $user_info = array();
+    $sql_check_hasStore = 'SELECT store_name FROM store WHERE u_id = "' . $_SESSION['u_id'] . '"';
+    $res_check_store = mysqli_query($connect, $sql_check_hasStore);
+    if ($res_check_store) {
+        if (mysqli_num_rows($res_check_store) == 1) {
+            $user_info['hasStore'] = true;
+        } else {
+            $user_info['hasStore'] = false;
+        }
+    }
+    $user_info['itemInCart'] = 0;
+}
+?>
 <!DOCTYPE html>
 <html lang="th">
 
@@ -5,13 +32,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ecommerce System</title>
-    <link rel="stylesheet" type="text/css" href="asset/css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="asset/css/mdb.css">
-    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300&display=swap" type="text/css" rel="stylesheet">
+    <!-- Font Awesome -->
     <link rel="stylesheet" type="text/css" href="asset/fontawesome/css/all.css">
-    <script src="asset/js/jquery.js"></script>
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300&display=swap" type="text/css" rel="stylesheet">
     <!-- Sweet Alert -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9.14.0/dist/sweetalert2.all.min.js"></script>
+    <!-- Chart JS -->
+    <script src='https://cdn.jsdelivr.net/npm/chart.js@3.4.1/dist/chart.min.js'></script>
     <style>
         body {
             font-family: 'Kanit', sans-serif;
@@ -43,68 +75,127 @@
         .top-buffer {
             margin-top: -15px;
         }
+
+        .categories-line {
+            display: inline-block;
+            background-color: #aaa;
+            vertical-align: middle;
+            width: 100%;
+            height: 1px;
+            content: "";
+        }
     </style>
 </head>
 
 <body>
-    <!--Navbar -->
-    <nav class="mb-1 navbar navbar-expand-lg navbar-dark default-color">
-        <a class="navbar-brand" href="?page=home">Ecommerce</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-333" aria-controls="navbarSupportedContent-333" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent-333">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item" id="home">
-                    <a class="nav-link" href="?page=home"><i class="far fa-home"></i> หน้าหลัก</a>
-                </li>
-                <li class="nav-item" id="sell">
-                    <a class="nav-link" href="?page=sell"><i class="far fa-store-alt"></i> ขายสินค้า</a>
-                </li>
+    <?php
+    if ($_GET['page'] == 'store' || $_GET['page'] == 'store_order' || $_GET['page'] == 'store_product' || $_GET['page'] == 'store_setting') {
+    ?>
+        <!--Navbar -->
+        <nav class="mb-1 navbar navbar-expand-lg navbar-dark default-color">
+            <a class="navbar-brand" href="?page=store">Store Management</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-333" aria-controls="navbarSupportedContent-333" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent-333">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item" id="home">
+                        <a class="nav-link" href="?page=home"><i class="far fa-home"></i> หน้าหลัก</a>
+                    </li>
+                    <li class="nav-item" id="sell">
+                        <a class="nav-link" href="?page=store"><i class="fas fa-chart-line"></i></i> แดชบอร์ด</a>
+                    </li>
+                    <li class="nav-item" id="store_order">
+                        <a class="nav-link" href="?page=store_order"><i class="fas fa-list"></i> ออเดอร์</a>
+                    </li>
+                    <li class="nav-item" id="store_product">
+                        <a class="nav-link" href="?page=store_product"><i class="fas fa-boxes"></i> สินค้า</a>
+                    </li>
+                    <li class="nav-item" id="store_setting">
+                        <a class="nav-link" href="?page=store_setting"><i class="fas fa-cog"></i> ตั้งค่าร้านค้า</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <!--/.Navbar -->
+    <?php
+    } else {
+    ?>
+        <!--Navbar -->
+        <nav class="mb-1 navbar navbar-expand-lg navbar-dark default-color">
+            <a class="navbar-brand" href="?page=home">Ecommerce</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-333" aria-controls="navbarSupportedContent-333" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent-333">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item" id="home">
+                        <a class="nav-link" href="?page=home"><i class="far fa-home"></i> หน้าหลัก</a>
+                    </li>
+                    <li class="nav-item" id="sell">
+                        <?php
+                        if (isset($_SESSION['username'])) {
+                            if ($user_info['hasStore']) {
+                                echo '<a class="nav-link" href="?page=store"><i class="far fa-store-alt"></i> ร้านค้าของฉัน</a>';
+                            } else {
+                                echo '<a class="nav-link" href="?page=create_store"><i class="far fa-store-alt"></i> ขายสินค้า</a>';
+                            }
+                        }
+                        ?>
+                    </li>
+                    <!--
                 <li class="nav-item" id="event">
                     <a class="nav-link" href="?page=event"><i class="far fa-calendar-star"></i> กิจกรรม</a>
                 </li>
                 <li class="nav-item" id="auction">
                     <a class="nav-link" href="?page=auction"><i class="far fa-gavel"></i> การประมูล</a>
                 </li>
-            </ul>
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link waves-effect waves-light">
-                        <i class="far fa-shopping-cart"></i>
-                        <sup class="sup-shopping-cart"><span class="badge badge-success">23</span></sup> ตะกร้าสินค้า
+                -->
+                </ul>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link waves-effect waves-light">
+                            <i class="far fa-shopping-cart"></i>
+                            <sup class="sup-shopping-cart"><span class="badge badge-success">23</span></sup> ตะกร้าสินค้า
 
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link waves-effect waves-light">
-                        <i class="far fa-bell"></i> การแจ้งเตือน
-                    </a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fas fa-user"></i> บัญชีของฉัน
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right dropdown-default" aria-labelledby="navbarDropdownMenuLink-333">
-                        <a class="dropdown-item" href="#"><i class="far fa-sliders-v-square"></i> จัดการบัญชีของฉัน</a>
-                        <a class="dropdown-item" href="#"><i class="far fa-box"></i> รายการสั่งซื้อของฉัน</a>
-                        <a class="dropdown-item" href="#"><i class="far fa-heart"></i> รายการสินค้าที่ฉันชอบ</a>
-                        <a class="dropdown-item" href="#"><i class="far fa-star"></i> รายการร้านค้าที่ฉันชอบ</a>
-                        <a class="dropdown-item" href="#"><i class="far fa-comment"></i> ประวัติการแสดงความคิดเห็น</a>
-                        <a class="dropdown-item" href="#"><i class="far fa-sign-out"></i> ออกจากระบบ</a>
-                    </div>
-                </li>
-            </ul>
-        </div>
-    </nav>
-    <!--/.Navbar -->
-    <div class="container">
-        <?php if (!$_GET) {
-            $_GET["page"] = 'home';
-        }
-        if (!$_GET["page"]) {
-            $_GET["page"] = "home";
-        }
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link waves-effect waves-light">
+                            <i class="far fa-bell"></i> การแจ้งเตือน
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link <?php if (isset($_SESSION['username'])) {
+                                                echo 'dropdown-toggle';
+                                            } ?>" <?php if (isset($_SESSION['username'])) {
+                                                        echo 'id="navbarDropdownMenuLink-333" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"';
+                                                    } else {
+                                                        echo 'href="?page=login"';
+                                                    } ?>>
+                            <i class="fas fa-user"></i> บัญชีของฉัน
+                        </a>
+                        <?php
+                        if (isset($_SESSION['username'])) { ?>
+                            <div class="dropdown-menu dropdown-menu-right dropdown-default" aria-labelledby="navbarDropdownMenuLink-333">
+                                <a class="dropdown-item" href="#"><i class="far fa-sliders-v-square"></i> จัดการบัญชีของฉัน</a>
+                                <a class="dropdown-item" href="#"><i class="far fa-box"></i> รายการสั่งซื้อของฉัน</a>
+                                <a class="dropdown-item" href="#"><i class="far fa-heart"></i> รายการสินค้าที่ฉันชอบ</a>
+                                <a class="dropdown-item" href="#"><i class="far fa-star"></i> รายการร้านค้าที่ฉันชอบ</a>
+                                <a class="dropdown-item" href="#"><i class="far fa-comment"></i> ประวัติการรีวิวสินค้า</a>
+                                <a class="dropdown-item" href="?page=logout"><i class="far fa-sign-out"></i> ออกจากระบบ</a>
+                            </div>
+                        <?php } ?>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <!--/.Navbar -->
+    <?php
+    }
+    ?>
+    <div class="container-md">
+        <?php
         if ($_GET["page"] == "home") {
             include_once __DIR__ . '/page/home.php';
         } elseif ($_GET['page'] == "product") {
@@ -113,6 +204,18 @@
             include_once __DIR__ . '/page/event.php';
         } elseif ($_GET['page'] == "cart") {
             include_once __DIR__ . '/page/cart.php';
+        } elseif ($_GET['page'] == "create_store") {
+            include_once __DIR__ . '/page/create_store.php';
+        } elseif ($_GET['page'] == "store") {
+            include_once __DIR__ . '/page/store.php';
+        } elseif ($_GET['page'] == "store_order") {
+            include_once __DIR__ . '/page/store_order.php';
+        } elseif ($_GET['page'] == "store_product") {
+            include_once __DIR__ . '/page/store_product.php';
+        } elseif ($_GET['page'] == "store_setting") {
+            include_once __DIR__ . '/page/store_setting.php';
+        } elseif ($_GET['page'] == "register") {
+            include_once __DIR__ . '/page/register.php';
         } elseif ($_GET['page'] == "login") {
             include_once __DIR__ . '/page/login.php';
         } elseif ($_GET['page'] == "logout") {
@@ -124,16 +227,27 @@
         } ?>
     </div>
     <br>
-    <script defer src="asset/js/bootstrap.js"></script>
-    <script defer src="asset/js/mdb.js"></script>
+    <!-- JQuery -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"></script>
     <script defer src="asset/js/popper.js"></script>
+    <!-- Star Rating -->
+    <link href="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-star-rating@4.1.0/css/star-rating.css" media="all" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-star-rating@4.1.0/themes/krajee-svg/theme.css" media="all" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-star-rating@4.1.0/js/star-rating.js" type="text/javascript"></script>
+    <script src="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-star-rating@4.1.0/themes/krajee-svg/theme.js"></script>
 </body>
 
 <!-- Footer -->
 <footer class="page-footer font-small teal pt-4">
     <div class="container-fluid text-md-left">
         <div class="row">
-            <div class="col-sm-3">
+            <div class="col-sm-6">
                 <b>ศูนย์ช่วยเหลือ</b>
                 <ul>
                     <li>Live Chat</li>
@@ -145,7 +259,7 @@
                     <li>การคืนเงินและคืนสินค้า</li>
                 </ul>
             </div>
-            <div class="col-sm-3">
+            <div class="col-sm-6">
                 <b>เกี่ยวกับเรา</b>
                 <ul>
                     <li>เกี่ยวกับเรา</li>
@@ -153,30 +267,6 @@
                     <li>นโยบายความเป็นส่วนตัว</li>
                     <li>Seller Center</li>
                 </ul>
-            </div>
-            <div class="col-sm-3">
-                <b>หัวข้อยอดนิยม</b>
-                <ul>
-                    <li>บลา</li>
-                    <li>บลา</li>
-                    <li>บลา</li>
-                    <li>บลา</li>
-                    <li>บลา</li>
-                </ul>
-            </div>
-            <div class="col-sm-3">
-                <div class="text-align">
-                    <b>ติดตามพวกเรา</b>
-                    <ul>
-                        <li>fb</li>
-                        <li>line</li>
-                        <li>mail</li>
-                        <li>google+</li>
-                        <li>youtube</li>
-                        <li>instagram</li>
-                        <li>twitter</li>
-                    </ul>
-                </div>
             </div>
         </div>
     </div>
