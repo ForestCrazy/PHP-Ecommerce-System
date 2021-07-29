@@ -94,7 +94,7 @@ if (isset($_SESSION['username'])) {
     ?>
         <!--Navbar -->
         <nav class="mb-1 navbar navbar-expand-lg navbar-dark default-color">
-            <a class="navbar-brand" href="?page=store">Store Management</a>
+            <a class="navbar-brand" href="?page=store_dashboard">Store Management</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-333" aria-controls="navbarSupportedContent-333" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -104,7 +104,7 @@ if (isset($_SESSION['username'])) {
                         <a class="nav-link" href="?page=home"><i class="far fa-home"></i> หน้าหลัก</a>
                     </li>
                     <li class="nav-item" id="sell">
-                        <a class="nav-link" href="?page=store"><i class="fas fa-chart-line"></i></i> แดชบอร์ด</a>
+                        <a class="nav-link" href="?page=store_dashboard"><i class="fas fa-chart-line"></i></i> แดชบอร์ด</a>
                     </li>
                     <li class="nav-item" id="store_order">
                         <a class="nav-link" href="?page=store_order"><i class="fas fa-list"></i> ออเดอร์</a>
@@ -209,6 +209,8 @@ if (isset($_SESSION['username'])) {
             include_once __DIR__ . '/page/create_store.php';
         } elseif ($_GET['page'] == "store") {
             include_once __DIR__ . '/page/store.php';
+        } elseif ($_GET['page'] == "store_dashboard") {
+            include_once __DIR__ . '/page/store_dashboard.php';
         } elseif ($_GET['page'] == "store_order") {
             include_once __DIR__ . '/page/store_order.php';
         } elseif ($_GET['page'] == "store_product") {
