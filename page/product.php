@@ -273,7 +273,7 @@ if (!$res_product) {
                 </div>
             </div>
             <?php
-            $sql_product_review = 'SELECT user.username, product_review.star_score, product_review.review_msg FROM user INNER JOIN `order` AS order_product ON user.u_id = order_product.u_id INNER JOIN sub_order ON order_product.order_id = sub_order.order_id INNER JOIN product_review ON sub_order.sub_order_id = product_review.sub_order_id WHERE sub_order.product_id = "' . $fetch_product['product_id'] . '"';
+            $sql_product_review = 'SELECT user.username, product_review.star_score, product_review.review_msg FROM user INNER JOIN `order` AS order_product ON user.u_id = order_product.u_id INNER JOIN sub_order ON order_product.order_id = sub_order.order_id INNER JOIN product_review ON sub_order.sub_order_id = product_review.sub_order_id WHERE sub_order.product_id = "' . $fetch_product['product_id'] . '" ORDER BY RAND() LIMIT 10';
             $res_product_review = mysqli_query($connect, $sql_product_review);
             if (!$res_product_review) {
                 gotoPage('home');
