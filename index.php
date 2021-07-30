@@ -182,7 +182,7 @@ if (isset($_SESSION['username'])) {
                                 <a class="dropdown-item" href="#"><i class="far fa-sliders-v-square"></i> จัดการบัญชีของฉัน</a>
                                 <a class="dropdown-item" href="#"><i class="far fa-box"></i> รายการสั่งซื้อของฉัน</a>
                                 <a class="dropdown-item" href="#"><i class="far fa-heart"></i> รายการสินค้าที่ฉันชอบ</a>
-                                <a class="dropdown-item" href="#"><i class="far fa-star"></i> รายการร้านค้าที่ฉันชอบ</a>
+                                <a class="dropdown-item" href="#"><i class="far fa-star"></i> รายการร้านค้าที่ฉันติดตาม</a>
                                 <a class="dropdown-item" href="#"><i class="far fa-comment"></i> ประวัติการรีวิวสินค้า</a>
                                 <a class="dropdown-item" href="?page=logout"><i class="far fa-sign-out"></i> ออกจากระบบ</a>
                             </div>
