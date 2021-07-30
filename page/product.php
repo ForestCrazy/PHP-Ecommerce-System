@@ -20,6 +20,19 @@ if (!$res_product) {
                 font-size: 0px !important;
             }
         </style>
+        <script>
+            function checkout() {
+                window.location.href = '?page=checkout&p_id=<?php echo $_GET['p_id']; ?>' + '&p_quantity=' + document.getElementById('quantity').value;
+            }
+
+            function checkQuantity() {
+                var input_quantity = document.getElementById('quantity').value;
+                var product_quantity = <?= $fetch_product['product_quantity'] ?>;
+                if (input_quantity > product_quantity) {
+                    document.getElementById('quantity').value = product_quantity;
+                }
+            }
+        </script>
         <div class="row">
             <div class="col-lg-4 col-top">
                 <?php
@@ -113,7 +126,7 @@ if (!$res_product) {
                         <div class="row">
                             <div class="col-3"><label class="shipping-label">จำนวน</label></div>
                             <div class="col-3">
-                                <input type="number" value="1" aria-label="Search" min="1" max="<?php echo $fetch_product['product_quantity']; ?>" class="form-control w-100">
+                                <input type="number" value="1" min="1" max="<?php echo $fetch_product['product_quantity']; ?>" id='quantity' class="form-control w-100" onkeyup="checkQuantity()">
                             </div>
                             <div class="col-6">มีสินค้าทั้งหมด <?php echo $fetch_product['product_quantity']; ?> ชิ้น</div>
                         </div>
@@ -121,9 +134,7 @@ if (!$res_product) {
                         <button class="btn btn-primary waves-effect waves-light">เพิ่มเข้าตะกร้า
                             <i class="fas fa-shopping-cart ml-1"></i>
                         </button>
-                        <a href='?page=checkout&p_id=<?php echo $_GET['p_id']; ?>'>
-                            <div class="btn btn-success waves-effect waves-light">ซื้อสินค้า</div>
-                        </a>
+                        <div class="btn btn-success waves-effect waves-light" onclick='checkout()'>ซื้อสินค้า</div>
                     </form>
                 </div>
             </div>
