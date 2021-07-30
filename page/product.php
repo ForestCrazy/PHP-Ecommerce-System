@@ -121,20 +121,30 @@ if (!$res_product) {
                             </div>
                         </div>
                     </div>
-                    <form name="add-product-to-cart" action="javascript:void(0)">
+                    <form name="add-product-to-cart" method='POST' action=''>
                         <!-- Default input -->
                         <div class="row">
                             <div class="col-3"><label class="shipping-label">จำนวน</label></div>
                             <div class="col-3">
-                                <input type="number" value="1" min="1" max="<?php echo $fetch_product['product_quantity']; ?>" id='quantity' class="form-control w-100" onkeyup="checkQuantity()">
+                                <input type="number" value="<?= $fetch_product['product_quantity'] == 0 ? $fetch_product['product_quantity'] : 1 ?>" min="<?= $fetch_product['product_quantity'] == 0 ? $fetch_product['product_quantity'] : 1 ?>" max="<?php echo $fetch_product['product_quantity']; ?>" name='quantity' id='quantity' class="form-control w-100" onkeyup="checkQuantity()">
                             </div>
                             <div class="col-6">มีสินค้าทั้งหมด <?php echo $fetch_product['product_quantity']; ?> ชิ้น</div>
                         </div>
                         <br>
-                        <button class="btn btn-primary waves-effect waves-light">เพิ่มเข้าตะกร้า
-                            <i class="fas fa-shopping-cart ml-1"></i>
-                        </button>
-                        <div class="btn btn-success waves-effect waves-light" onclick='checkout()'>ซื้อสินค้า</div>
+                        <?php
+                        if ($fetch_product['product_quantity'] == 0) {
+                        ?>
+                            <button type='submit' name='submit_favoriteProduct' class='btn text-white' style='background-color: #acb0b6 !important;'><i class="far fa-heart"></i> เพิ่มเป็นสินค้าที่ชื่นชอบ</button>
+                        <?php
+                        } else {
+                        ?>
+                            <button type='submit' class="btn btn-primary waves-effect waves-light" name='submit_addToCart'>เพิ่มเข้าตะกร้า
+                                <i class="fas fa-shopping-cart ml-1"></i>
+                            </button>
+                            <div class="btn btn-success waves-effect waves-light" onclick='checkout()'>ซื้อสินค้า</div>
+                        <?php
+                        }
+                        ?>
                     </form>
                 </div>
             </div>
@@ -308,7 +318,29 @@ if (!$res_product) {
         <script>
             window.location.href = '?page=home';
         </script>
-<?php
+    <?php
     }
+}
+if (isset($_POST['submit_addToCart'])) {
+    $sql_addToCart = 'INSERT INTO cart (u_id, product_id, quantity, shipping_id) VALUES ("' . $_SESSION['u_id'] . '", "' . mysqli_real_escape_string($connect, $_GET['p_id']) . '", "' . $_POST['quantity'] . '", "' . mysqli_real_escape_string($connect, $_POST['shipping_id']) . '")';
+    $res_addToCart = mysqli_query($connect, $sql_addTOCart);
+    if ($res_addToCart) {
+        $alrt_icon = 'success';
+        $alrt_title = 'เพิ่มสินค้าเข้ารถเข็นสำเร็จ';
+    } else {
+        $alrt_icon = 'error';
+        $alrt_title = 'เกิดข้อผิดพลาดในการเพิ่มสินค้าเข้ารถเข็น';
+    }
+    ?>
+    <script>
+        Swal.fire(
+            '<?php echo $alrt_title ?>',
+            '',
+            '<?php echo $alrt_icon ?>',
+        ).then((value) => {
+            window.location.href = window.location.href;
+        });
+    </script>
+<?php
 }
 ?>
