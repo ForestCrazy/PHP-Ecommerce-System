@@ -90,7 +90,7 @@ if (isset($_SESSION['username'])) {
 
 <body>
     <?php
-    if ($_GET['page'] == 'store' || $_GET['page'] == 'store_order' || $_GET['page'] == 'store_product' || $_GET['page'] == 'store_setting') {
+    if ($_GET['page'] == 'store_dashboard' || $_GET['page'] == 'store_order' || $_GET['page'] == 'store_product' || $_GET['page'] == 'store_setting') {
     ?>
         <!--Navbar -->
         <nav class="mb-1 navbar navbar-expand-lg navbar-dark default-color">
@@ -137,7 +137,7 @@ if (isset($_SESSION['username'])) {
                         <?php
                         if (isset($_SESSION['username'])) {
                             if ($user_info['hasStore']) {
-                                echo '<a class="nav-link" href="?page=store"><i class="far fa-store-alt"></i> ร้านค้าของฉัน</a>';
+                                echo '<a class="nav-link" href="?page=store_dashboard"><i class="far fa-store-alt"></i> ร้านค้าของฉัน</a>';
                             } else {
                                 echo '<a class="nav-link" href="?page=create_store"><i class="far fa-store-alt"></i> ขายสินค้า</a>';
                             }
