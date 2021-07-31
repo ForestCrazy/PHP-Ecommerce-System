@@ -40,7 +40,6 @@ if (!$res_product) {
                     quantity: input_quantity
                 }, function(res) {
                     var resp = JSON.parse(res);
-                    console.log(resp);
                     if (resp['success'] == true) {
                         Swal.fire(
                             'เพิ่มสินค้าเข้ารถเข็นสำเร็จ',
@@ -50,6 +49,27 @@ if (!$res_product) {
                     } else {
                         Swal.fire(
                             'เกิดข้อผิดพลาดในการเพิ่มสินค้าเข้ารถเข็น',
+                            '',
+                            'error',
+                        )
+                    }
+                })
+            }
+
+            function addFavoriteItem() {
+                $.get('API/addFavoriteItem.php', {
+                    p_id: '<?= $_GET['p_id'] ?>'
+                }, function(res) {
+                    var resp = JSON.parse(res);
+                    if (resp['success'] == true) {
+                        Swal.fire(
+                            'เพิ่มเป็นสินค้าที่ชื่นชอบสำเร็จ',
+                            '',
+                            'success',
+                        )
+                    } else {
+                        Swal.fire(
+                            'เกิดข้อผิดพลาดในการเพิ่มเป็นสินค้าที่ชื่นชอบ',
                             '',
                             'error',
                         )
@@ -157,7 +177,7 @@ if (!$res_product) {
                     <?php
                     if ($fetch_product['product_quantity'] == 0) {
                     ?>
-                        <button type='submit' name='submit_favoriteProduct' class='btn text-white' style='background-color: #acb0b6 !important;'><i class="far fa-heart"></i> เพิ่มเป็นสินค้าที่ชื่นชอบ</button>
+                        <button class='btn text-white' style='background-color: #acb0b6 !important;' onclick='addFavoriteItem()'><i class="far fa-heart"></i> เพิ่มเป็นสินค้าที่ชื่นชอบ</button>
                     <?php
                     } else {
                     ?>
