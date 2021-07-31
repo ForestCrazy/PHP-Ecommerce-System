@@ -321,26 +321,3 @@ if (!$res_product) {
     <?php
     }
 }
-if (isset($_POST['submit_addToCart'])) {
-    $sql_addToCart = 'INSERT INTO cart (u_id, product_id, quantity, shipping_id) VALUES ("' . $_SESSION['u_id'] . '", "' . mysqli_real_escape_string($connect, $_GET['p_id']) . '", "' . $_POST['quantity'] . '", "' . mysqli_real_escape_string($connect, $_POST['shipping_id']) . '")';
-    $res_addToCart = mysqli_query($connect, $sql_addTOCart);
-    if ($res_addToCart) {
-        $alrt_icon = 'success';
-        $alrt_title = 'เพิ่มสินค้าเข้ารถเข็นสำเร็จ';
-    } else {
-        $alrt_icon = 'error';
-        $alrt_title = 'เกิดข้อผิดพลาดในการเพิ่มสินค้าเข้ารถเข็น';
-    }
-    ?>
-    <script>
-        Swal.fire(
-            '<?php echo $alrt_title ?>',
-            '',
-            '<?php echo $alrt_icon ?>',
-        ).then((value) => {
-            window.location.href = window.location.href;
-        });
-    </script>
-<?php
-}
-?>
