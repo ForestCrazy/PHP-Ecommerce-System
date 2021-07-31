@@ -179,7 +179,7 @@ if (isset($_SESSION['username'])) {
                         <?php
                         if (isset($_SESSION['username'])) { ?>
                             <div class="dropdown-menu dropdown-menu-right dropdown-default" aria-labelledby="navbarDropdownMenuLink-333">
-                                <a class="dropdown-item" href="#"><i class="far fa-sliders-v-square"></i> จัดการบัญชีของฉัน</a>
+                                <a class="dropdown-item" href="?page=change_password"><i class="far fa-sliders-v-square"></i> เปลี่ยนรหัสผ่าน</a>
                                 <a class="dropdown-item" href="#"><i class="far fa-box"></i> รายการสั่งซื้อของฉัน</a>
                                 <a class="dropdown-item" href="#"><i class="far fa-heart"></i> รายการสินค้าที่ฉันชอบ</a>
                                 <a class="dropdown-item" href="#"><i class="far fa-star"></i> รายการร้านค้าที่ฉันติดตาม</a>
@@ -225,6 +225,10 @@ if (isset($_SESSION['username'])) {
             include_once __DIR__ . '/page/login.php';
         } elseif ($_GET['page'] == "logout") {
             include_once __DIR__ . '/page/logout.php';
+        } elseif ($_GET['page'] == "account") {
+            include_once __DIR__ . '/page/account.php';
+        } elseif ($_GET['page'] == "change_password") {
+            include_once __DIR__ . '/page/change_password.php';
         } else {
             echo '<br>';
             echo '<div class="container"><div class="alert alert-danger" role="alert"><i class="fas fa-exclamation-triangle"></i> ไม่พบหน้าที่ท่านร้องขอ กำลังพาท่านกลับไปหน้าหลัก...</div></div>';
@@ -249,7 +253,7 @@ if (isset($_SESSION['username'])) {
 </body>
 
 <!-- Footer -->
-<footer class="page-footer font-small teal pt-4">
+<footer class="page-footer font-small teal fixed-bottom" style='padding-top: 2rem;'>
     <div class="container-fluid text-md-left">
         <div class="row">
             <div class="col-sm-6">
