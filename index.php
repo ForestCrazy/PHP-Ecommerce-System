@@ -253,7 +253,7 @@ if (isset($_SESSION['username'])) {
 </body>
 
 <!-- Footer -->
-<footer class="page-footer font-small teal fixed-bottom" style='padding-top: 2rem;'>
+<footer class="page-footer font-small teal" style='padding-top: 2rem;'>
     <div class="container-fluid text-md-left">
         <div class="row">
             <div class="col-sm-6">
