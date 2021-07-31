@@ -32,6 +32,30 @@ if (!$res_product) {
                     document.getElementById('quantity').value = product_quantity;
                 }
             }
+
+            function addToCart() {
+                var input_quantity = document.getElementById('quantity').value;
+                $.get('/API/addItemToCart.php', {
+                    p_id: '<?= $_GET['p_id'] ?>',
+                    quantity: input_quantity
+                }, function(res) {
+                    var resp = JSON.parse(res);
+                    console.log(resp);
+                    if (resp['success'] == true) {
+                        Swal.fire(
+                            'เพิ่มสินค้าเข้ารถเข็นสำเร็จ',
+                            '',
+                            'success',
+                        )
+                    } else {
+                        Swal.fire(
+                            'เกิดข้อผิดพลาดในการเพิ่มสินค้าเข้ารถเข็น',
+                            '',
+                            'error',
+                        )
+                    }
+                })
+            }
         </script>
         <div class="row">
             <div class="col-lg-4 col-top">
@@ -121,31 +145,29 @@ if (!$res_product) {
                             </div>
                         </div>
                     </div>
-                    <form name="add-product-to-cart" method='POST' action=''>
-                        <!-- Default input -->
-                        <div class="row">
-                            <div class="col-3"><label class="shipping-label">จำนวน</label></div>
-                            <div class="col-3">
-                                <input type="number" value="<?= $fetch_product['product_quantity'] == 0 ? $fetch_product['product_quantity'] : 1 ?>" min="<?= $fetch_product['product_quantity'] == 0 ? $fetch_product['product_quantity'] : 1 ?>" max="<?php echo $fetch_product['product_quantity']; ?>" name='quantity' id='quantity' class="form-control w-100" onkeyup="checkQuantity()">
-                            </div>
-                            <div class="col-6">มีสินค้าทั้งหมด <?php echo $fetch_product['product_quantity']; ?> ชิ้น</div>
+                    <!-- Default input -->
+                    <div class="row">
+                        <div class="col-3"><label class="shipping-label">จำนวน</label></div>
+                        <div class="col-3">
+                            <input type="number" value="<?= $fetch_product['product_quantity'] == 0 ? $fetch_product['product_quantity'] : 1 ?>" min="<?= $fetch_product['product_quantity'] == 0 ? $fetch_product['product_quantity'] : 1 ?>" max="<?php echo $fetch_product['product_quantity']; ?>" name='quantity' id='quantity' class="form-control w-100" onkeyup="checkQuantity()">
                         </div>
-                        <br>
-                        <?php
-                        if ($fetch_product['product_quantity'] == 0) {
-                        ?>
-                            <button type='submit' name='submit_favoriteProduct' class='btn text-white' style='background-color: #acb0b6 !important;'><i class="far fa-heart"></i> เพิ่มเป็นสินค้าที่ชื่นชอบ</button>
-                        <?php
-                        } else {
-                        ?>
-                            <button type='submit' class="btn btn-primary waves-effect waves-light" name='submit_addToCart'>เพิ่มเข้าตะกร้า
-                                <i class="fas fa-shopping-cart ml-1"></i>
-                            </button>
-                            <div class="btn btn-success waves-effect waves-light" onclick='checkout()'>ซื้อสินค้า</div>
-                        <?php
-                        }
-                        ?>
-                    </form>
+                        <div class="col-6">มีสินค้าทั้งหมด <?php echo $fetch_product['product_quantity']; ?> ชิ้น</div>
+                    </div>
+                    <br>
+                    <?php
+                    if ($fetch_product['product_quantity'] == 0) {
+                    ?>
+                        <button type='submit' name='submit_favoriteProduct' class='btn text-white' style='background-color: #acb0b6 !important;'><i class="far fa-heart"></i> เพิ่มเป็นสินค้าที่ชื่นชอบ</button>
+                    <?php
+                    } else {
+                    ?>
+                        <button class="btn btn-primary waves-effect waves-light" onclick='addToCart()'>เพิ่มเข้าตะกร้า
+                            <i class="fas fa-shopping-cart ml-1"></i>
+                        </button>
+                        <div class="btn btn-success waves-effect waves-light" onclick='checkout()'>ซื้อสินค้า</div>
+                    <?php
+                    }
+                    ?>
                 </div>
             </div>
         </div>
@@ -318,6 +340,6 @@ if (!$res_product) {
         <script>
             window.location.href = '?page=home';
         </script>
-    <?php
+<?php
     }
 }
