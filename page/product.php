@@ -130,7 +130,7 @@ if (!$res_product) {
                 ?>
             </div>
             <div class="col-lg-8 col-top">
-                <div class='product_info card w-100 h-100' style='padding: 1rem; max-height: 350px;'>
+                <div class='product_info card w-100 h-100' style='padding: 1rem;'>
                     <p class="lead font-weight-bold"><?php echo $fetch_product['product_name']; ?></p>
                     <!--
         <a><span class="badge purple mr-1">Category 2</span></a>
@@ -196,7 +196,7 @@ if (!$res_product) {
                         </div>
                         <div class="col-6">มีสินค้าทั้งหมด <?php echo $fetch_product['product_quantity']; ?> ชิ้น</div>
                     </div>
-                    <br>
+                    <!-- <br> -->
                     <?php
                     if ($fetch_product['product_quantity'] == 0) {
                     ?>
