@@ -70,7 +70,7 @@ if (!$res_product) {
                     } else {
                         Swal.fire(
                             'เกิดข้อผิดพลาดในการเพิ่มเป็นสินค้าที่ชื่นชอบ',
-                            '',
+                            resp['reason'] ? resp['reason'] : '',
                             'error',
                         )
                     }
@@ -161,7 +161,30 @@ if (!$res_product) {
                         <div class="col-3 col-top"><label class="shipping-label">การจัดส่ง</label></div>
                         <div class="col-9 col-top">
                             <div class="shipping-type">
-                                <!--<img src="https://image.flaticon.com/icons/svg/3176/3176178.svg" width="25px" height="25px">--><i class="fas fa-truck"></i> ฟรีค่าจัดส่ง
+                                <?php
+                                $sql_shipping_type = 'SELECT * FROM shipping_provider INNER JOIN product_shipping ON shipping_provider.shipping_provider_id = product_shipping.shipping_provider_id WHERE product_shipping.product_id = "' . $fetch_product['product_id'] . '"';
+                                $res_shipping_type = mysqli_query($connect, $sql_shipping_type);
+                                if ($res_shipping_type) {
+                                    if (mysqli_num_rows($res_shipping_type) > 0) {
+                                        $check_shipping_type = true;
+                                        while ($fetch_shipping_type = mysqli_fetch_assoc($res_shipping_type)) {
+                                ?>
+                                            <div class="custom-control">
+                                                <input type="radio" name="shipping_id" value="<?= $fetch_shipping_type['shipping_provider_id'] ?>" <?php if ($check_shipping_type) {
+                                                                                                                                                        echo 'checked';
+                                                                                                                                                        $check_shipping_type = false;
+                                                                                                                                                    } ?>>
+                                                <label>
+                                                    จัดส่งโดย <small><?= $fetch_shipping_type['shipping_name'] ?></small>
+                                                    เวลาในการจัดส่ง <small><?= $fetch_shipping_type['shipping_time'] ?></small> วัน
+                                                </label>
+                                            </div>
+                                <?php
+                                        }
+                                    }
+                                }
+                                ?>
+                                <!--<img src="https://image.flaticon.com/icons/svg/3176/3176178.svg" width="25px" height="25px"><i class="fas fa-truck"></i> ฟรีค่าจัดส่ง--><br />
                             </div>
                         </div>
                     </div>
