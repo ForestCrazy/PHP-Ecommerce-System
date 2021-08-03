@@ -22,7 +22,7 @@ if (!$res_product) {
         </style>
         <script>
             function checkout() {
-                window.location.href = '?page=checkout&p_id=<?php echo $_GET['p_id']; ?>' + '&p_quantity=' + document.getElementById('quantity').value;
+                window.location.href = '?page=checkout&p_id=<?php echo $_GET['p_id']; ?>' + '&p_quantity=' + document.getElementById('quantity').value + '&shipping_id=' + $('input[name="shipping_id"]:checked').val();
             }
 
             function checkQuantity() {
@@ -35,9 +35,11 @@ if (!$res_product) {
 
             function addToCart() {
                 var input_quantity = document.getElementById('quantity').value;
+                var shipping_id = $('input[name="shipping_id"]:checked').val();
                 $.get('/API/addItemToCart.php', {
                     p_id: '<?= $_GET['p_id'] ?>',
-                    quantity: input_quantity
+                    quantity: input_quantity,
+                    shipping_id: shipping_id
                 }, function(res) {
                     var resp = JSON.parse(res);
                     if (resp['success'] == true) {
@@ -162,7 +164,7 @@ if (!$res_product) {
                         <div class="col-9 col-top">
                             <div class="shipping-type">
                                 <?php
-                                $sql_shipping_type = 'SELECT * FROM shipping_provider INNER JOIN product_shipping ON shipping_provider.shipping_provider_id = product_shipping.shipping_provider_id WHERE product_shipping.product_id = "' . $fetch_product['product_id'] . '"';
+                                $sql_shipping_type = 'SELECT * FROM shipping_provider INNER JOIN product_shipping ON shipping_provider.shipping_provider_id = product_shipping.shipping_provider_id WHERE product_shipping.product_id = "' . $fetch_product['product_id'] . '" ORDER BY product_shipping.shipping_price, product_shipping.shipping_time';
                                 $res_shipping_type = mysqli_query($connect, $sql_shipping_type);
                                 if ($res_shipping_type) {
                                     if (mysqli_num_rows($res_shipping_type) > 0) {
@@ -170,13 +172,14 @@ if (!$res_product) {
                                         while ($fetch_shipping_type = mysqli_fetch_assoc($res_shipping_type)) {
                                 ?>
                                             <div class="custom-control">
-                                                <input type="radio" name="shipping_id" value="<?= $fetch_shipping_type['shipping_provider_id'] ?>" <?php if ($check_shipping_type) {
-                                                                                                                                                        echo 'checked';
-                                                                                                                                                        $check_shipping_type = false;
-                                                                                                                                                    } ?>>
-                                                <label>
-                                                    จัดส่งโดย <small><?= $fetch_shipping_type['shipping_name'] ?></small>
-                                                    เวลาในการจัดส่ง <small><?= $fetch_shipping_type['shipping_time'] ?></small> วัน
+                                                <label style='font-size: 0.9rem'>
+                                                    <input type="radio" name="shipping_id" value="<?= $fetch_shipping_type['shipping_provider_id'] ?>" <?php if ($check_shipping_type) {
+                                                                                                                                                            echo 'checked';
+                                                                                                                                                            $check_shipping_type = false;
+                                                                                                                                                        } ?>>
+                                                    จัดส่งโดย <small style='font-weight: 800;'><?= $fetch_shipping_type['shipping_name'] ?></small>
+                                                    เวลาในการจัดส่ง <small style='font-weight: 800;'><?= $fetch_shipping_type['shipping_time'] ?></small> วัน
+                                                    ค่าจัดส่ง <small style='font-weight: 800'><?= $fetch_shipping_type['shipping_price'] ?></small> บาท
                                                 </label>
                                             </div>
                                 <?php
