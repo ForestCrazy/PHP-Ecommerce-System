@@ -33,7 +33,7 @@ if (!isset($_SESSION['username'])) {
         <h3>รายการสินค้าที่ชื่นชอบ</h3>
         <div class='col-12'>
             <?php
-            $sql_product_favorite = 'SELECT * FROM product_favorite INNER JOIN product ON product_favorite.product_id = product.product_id LEFT JOIN (SELECT product_id, img_url FROM product_img GROUP BY product_id ORDER BY weight ASC) AS product_img ON product.product_id = product_img.product_id WHERE product_favorite.u_id = "' . $_SESSION['u_id'] . '"';
+            $sql_product_favorite = 'SELECT product_img.img_url, product.product_name, product_favorite.createtime FROM product_favorite INNER JOIN product ON product_favorite.product_id = product.product_id LEFT JOIN (SELECT product_id, img_url FROM product_img GROUP BY product_id ORDER BY weight ASC) AS product_img ON product.product_id = product_img.product_id WHERE product_favorite.u_id = "' . $_SESSION['u_id'] . '"';
             $res_product_favorite = mysqli_query($connect, $sql_product_favorite);
             if ($res_product_favorite) {
                 while ($fetch_product_favorite = mysqli_fetch_assoc($res_product_favorite)) {
@@ -47,6 +47,10 @@ if (!isset($_SESSION['username'])) {
                                 <div class='col-12 row py-3 px-0'>
                                     <div class='col-12 col-sm-8 col-md-8'>
                                         <h5 class='card-title'><?= $fetch_product_favorite['product_name'] ?></h5>
+                                        <br />
+                                        <span>
+                                            เพิ่มเป็นสินค้าที่ชื่นชอบเมื่อวันที่ <?= $fetch_product_favorite['createtime'] ?>
+                                        </span>
                                     </div>
                                     <div class='col-4 col-sm-4 col-md-4 px-0'>
                                         <div class='float-md-right'>
