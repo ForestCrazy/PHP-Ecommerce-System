@@ -47,13 +47,17 @@ if (!$res_product) {
                             'เพิ่มสินค้าเข้ารถเข็นสำเร็จ',
                             '',
                             'success',
-                        )
+                        ).then(() => {
+                            window.location.reload();
+                        })
                     } else {
                         Swal.fire(
                             'เกิดข้อผิดพลาดในการเพิ่มสินค้าเข้ารถเข็น',
-                            '',
+                            resp['reason'] ? resp['reason'] : '',
                             'error',
-                        )
+                        ).then(() => {
+                            window.location.reload();
+                        })
                     }
                 })
             }
