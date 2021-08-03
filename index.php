@@ -155,10 +155,9 @@ if (isset($_SESSION['username'])) {
                 </ul>
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link waves-effect waves-light">
+                        <a class="nav-link waves-effect waves-light" href='?page=cart'>
                             <i class="far fa-shopping-cart"></i>
                             <sup class="sup-shopping-cart"><span class="badge badge-success">23</span></sup> ตะกร้าสินค้า
-
                         </a>
                     </li>
                     <li class="nav-item">
