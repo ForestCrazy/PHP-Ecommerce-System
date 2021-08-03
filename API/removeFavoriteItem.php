@@ -6,10 +6,10 @@ if (isset($_SESSION['username'])) {
     $sql_removeFavoriteItem = 'DELETE FROM product_favorite WHERE u_id = "' . $_SESSION['u_id'] . '" AND product_id = "' . mysqli_real_escape_string($connect, $_GET['p_id']) . '"';
     $res_removeFavoriteItem = mysqli_query($connect, $sql_removeFavoriteItem);
     if ($res_removeFavoriteItem) {
-        echo json_encode(array('success' => true));
+        echo json_encode(array('success' => true, 'code' => 201));
     } else {
-        echo json_encode(array('success' => false, 'code' => '500'));
+        echo json_encode(array('success' => false, 'code' => 500));
     }
 } else {
-    echo json_encode(array('success' => false, 'code' => '401'));
+    echo json_encode(array('success' => false, 'code' => 401));
 }
