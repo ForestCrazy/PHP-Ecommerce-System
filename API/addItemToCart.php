@@ -12,7 +12,8 @@ if (isset($_SESSION['username'])) {
             $res_product = mysqli_query($connect, $sql_product);
             if ($res_product) {
                 $fetch_product = mysqli_fetch_assoc($res_product);
-                if ($fetch_product['product_quantity'] > $fetch_ItemInCart['quantity']) {
+                $ItemInCart = mysqli_num_rows($res_check_addToCart) == 1 ? $fetch_ItemInCart['quantity'] : 0;
+                if ($fetch_product['product_quantity'] > $ItemInCart) {
                     if (mysqli_num_rows($res_check_addToCart) == 0) {
                         $sql_addToCart = 'INSERT INTO cart (u_id, product_id, quantity, shipping_id) VALUES ("' . $_SESSION['u_id'] . '", "' . mysqli_real_escape_string($connect, $_GET['p_id']) . '", "' . $_GET['quantity'] . '", "' . mysqli_real_escape_string($connect, $_GET['shipping_id']) . '")';
                         $res_addToCart = mysqli_query($connect, $sql_addToCart);
@@ -22,7 +23,7 @@ if (isset($_SESSION['username'])) {
                             echo json_encode(array('success' => false, 'code' => 500));
                         }
                     } else {
-                        $sql_addToCart = 'UPDATE cart SET quantity = quantity + ' . intval($_GET['quantity']) . ' WHERE u_id = "' . $_SESSION['u_id'] . '" AND product_id = "' . $_GET['p_id'] . '"';
+                        $sql_addToCart = 'UPDATE cart SET quantity = quantity + ' . intval($_GET['quantity']) . ', shipping_id = "' . $_GET['shipping_id'] . '" WHERE u_id = "' . $_SESSION['u_id'] . '" AND product_id = "' . $_GET['p_id'] . '"';
                         $res_addToCart = mysqli_query($connect, $sql_addToCart);
                         if ($res_addToCart) {
                             echo json_encode(array('success' => true, 'code' => 201));
