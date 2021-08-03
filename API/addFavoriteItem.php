@@ -15,7 +15,7 @@ if (isset($_SESSION['username'])) {
                 echo json_encode(array('success' => false, 'code' => 500));
             }
         } else {
-            echo json_encode(array('success' => false, 'code' => 500, 'reason' => 'ไม่สามารถเพิ่มสินค้าที่ชื่นชอบซ้ำได้'));
+            echo json_encode(array('success' => false, 'code' => 10101, 'reason' => 'ไม่สามารถเพิ่มสินค้าที่ชื่นชอบซ้ำได้'));
         }
     } else {
         echo json_encode(array('success' => false, 'code' => 500));
