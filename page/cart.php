@@ -170,29 +170,35 @@ if (!isset($_SESSION['username'])) {
         }
 
         function changeItemQuantity(p_id, operator, min_val, max_val) {
-            var cur_val, def_val = parseInt(document.getElementById('product-qty-' + p_id).value);
-            if (cur_val == 1 && operator == '-') {
-                removeItemFromCart(p_id);
-            } else {
-                if (cur_val > 0) {
-                    if (operator == '+') {
-                        if (cur_val < max_val) {
-                            cur_val += 1;
-                            document.getElementById('product-qty-' + p_id).value = cur_val;
-                        }
-                    } else {
-                        cur_val -= 1;
-                        document.getElementById('product-qty-' + p_id).value = cur_val;
-                    }
-                }
-            }
+            // var def_val = 0;
+            // var cur_val = def_val = parseInt(document.getElementById('product-qty-' + p_id).value);
+            // if (cur_val == 1 && operator == '-') {
+            //     removeItemFromCart(p_id);
+            // } else {
+            //     if (cur_val > 0) {
+            //         if (operator == '+') {
+            //             if (cur_val < max_val) {
+            //                 cur_val += 1;
+            //                 document.getElementById('product-qty-' + p_id).value = cur_val;
+            //             }
+            //         } else {
+            //             cur_val -= 1;
+            //             document.getElementById('product-qty-' + p_id).value = cur_val;
+            //         }
+            //     }
+            // }
             $.get('API/updateItemCartQty.php', {
                 p_id: p_id,
-                qty: document.getElementById('product-qty-' + p_id).value
+                qty: document.getElementById('product-qty-' + p_id).value,
+                operator: operator
             }).then((res) => {
                 var resp = JSON.parse(res);
-                if (resp['success'] !== true) {
-                    document.getElementById('product-qty-' + p_id).value = def_val;
+                if (resp['success'] == true) {
+                    if (resp['code'] == 204) {
+                        document.getElementById('product-' + p_id).remove();
+                    } else {
+                        document.getElementById('product-qty-' + p_id).value = resp['itemInCartQty'];
+                    }
                 }
             })
         }
@@ -206,7 +212,7 @@ if (!isset($_SESSION['username'])) {
             if ($res_cart) {
                 while ($fetch_cart = mysqli_fetch_assoc($res_cart)) {
             ?>
-                    <div class='col card col-top'>
+                    <div id='product-<?= $fetch_cart['product_id'] ?>' class='col card col-top'>
                         <div class="h-100 d-flex justify-content-start align-items-center">
                             <input type='checkbox' class='productSelect' name='product_checkout[]' value='<?= $fetch_cart['product_id'] ?>' />
                             <img src='<?= $fetch_cart['img_url'] ?>' style="max-height: 120px;" alt="" class="img-fluid" />
