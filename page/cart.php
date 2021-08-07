@@ -122,7 +122,6 @@ if (!isset($_SESSION['username'])) {
         }
 
         function checkoutFromCart(p_id = 0) {
-
             var productSelect = $('input.productSelect:checked').map(function() {
                 return $(this).val();
             })
@@ -198,10 +197,36 @@ if (!isset($_SESSION['username'])) {
                         document.getElementById('product-' + p_id).remove();
                     } else {
                         document.getElementById('product-qty-' + p_id).value = resp['itemInCartQty'];
+                        updateItemInfo(p_id);
                     }
                 }
+                updateOrderDetail();
             })
         }
+
+        function updateItemInfo(p_id) {
+            var product_price = parseInt(document.getElementById('product-price-' + p_id).textContent);
+            document.getElementById('all-price-product-' + p_id).textContent = product_price * document.getElementById('product-qty-' + p_id).value;
+        }
+
+        function updateOrderDetail() {
+            document.getElementById('count-product-select').textContent = $('input.productSelect:checkbox:checked').length;
+            var productSelect = $('input.productSelect:checked').map(function() {
+                return $(this).val();
+            }).get();
+            var all_order_price = 0;
+            productSelect.map((index) => {
+                all_order_price += parseInt(document.getElementById('all-price-product-' + index).textContent);
+            })
+            document.getElementById('all-product-price').textContent = '฿' + all_order_price.toString();
+
+        }
+
+        $(document).ready(function() {
+            $("input[type=checkbox]").change(function() {
+                updateOrderDetail();
+            });
+        });
     </script>
     <div class='row col-top'>
         <h3>ตระกร้าสินค้าของฉัน</h3>
@@ -226,7 +251,7 @@ if (!isset($_SESSION['username'])) {
                                                     ราคาต่อชิ้น
                                                 </span>
                                                 <span class='d-inline d-md-none'> :</span>
-                                                <span class='d-inline d-md-block'>
+                                                <span id='product-price-<?= $fetch_cart['product_id'] ?>' class='d-inline d-md-block'>
                                                     <?= $fetch_cart['product_price'] ?>
                                                 </span>
                                             </div>
@@ -248,7 +273,7 @@ if (!isset($_SESSION['username'])) {
                                                 <span class='d-inline d-md-none'>
                                                     :
                                                 </span>
-                                                <span class='d-inline d-md-block'>
+                                                <span id='all-price-product-<?= $fetch_cart['product_id'] ?>' class='d-inline d-md-block'>
                                                     <?= $fetch_cart['product_price'] * $fetch_cart['quantity'] ?>
                                                 </span>
                                             </div>
@@ -294,11 +319,11 @@ if (!isset($_SESSION['username'])) {
                 <div class='col-md-3'>
                     <div>
                         <span class='d-inline'>จำนวนสินค้าที่เลือก : </span>
-                        <h5 class='d-inline' style='color: var(--red);'>0</h5>
+                        <h5 id='count-product-select' class='d-inline' style='color: var(--red);'>0</h5>
                     </div>
                     <div>
                         <span class='d-inline'>รวม : </span>
-                        <h5 class='d-inline' style='color: var(--red);'>฿0</h5>
+                        <h5 id='all-product-price' class='d-inline' style='color: var(--red);'>฿0</h5>
                     </div>
                 </div>
                 <div class='col-md-3'>
