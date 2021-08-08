@@ -69,6 +69,7 @@ function removeItemFromCart(p_id, alert = true) {
                 }
                 document.getElementById("product-" + p_id).remove();
                 updateOrderDetail();
+                updateItemInCart();
             } else {
                 if (alert) {
                     Swal.fire(
@@ -182,6 +183,7 @@ function changeItemQuantity(p_id, operator, min_val, max_val) {
                     document.getElementById("product-qty-" + p_id).value =
                         resp["itemInCartQty"];
                     updateItemInfo(p_id);
+                    updateItemInCart();
                 }
             }
             updateOrderDetail();
@@ -242,6 +244,7 @@ function removeSelectItemFromCart() {
             productSelect.map((index) => {
                 removeItemFromCart(index, false);
             });
+            updateItemInCart();
         }
     });
 }
@@ -269,6 +272,7 @@ function addFavoriteSelectItemFromCart() {
                 addFavoriteItem(index, false);
                 removeItemFromCart(index, false);
             });
+            updateItemInCart();
         } else if (result.isDenied) {
             productSelect.map((index) => {
                 addFavoriteItem(index, false);
