@@ -225,60 +225,72 @@ $(document).ready(function() {
 });
 
 function removeSelectItemFromCart() {
-    Swal.fire({
-        title: "คุณแน่ใจว่าต้องการลบหรือไม่?",
-        text: "",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "ใช่",
-        cancelButtonText: "ไม่",
-    }).then((result) => {
-        if (result.isConfirmed) {
-            var productSelect = $("input.productSelect:checked")
-                .map(function() {
-                    return $(this).val();
-                })
-                .get();
-            productSelect.map((index) => {
-                removeItemFromCart(index, false);
-            });
-            updateItemInCart();
-        }
-    });
+    var productSelect = $("input.productSelect:checked")
+        .map(function() {
+            return $(this).val();
+        })
+        .get();
+    if (productSelect.length > 0) {
+        Swal.fire({
+            title: "คุณแน่ใจว่าต้องการลบหรือไม่?",
+            text: "",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "ใช่",
+            cancelButtonText: "ไม่",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                productSelect.map((index) => {
+                    removeItemFromCart(index, false);
+                });
+                updateItemInCart();
+            }
+        });
+    } else {
+        Swal.fire("เกิดข้อผิดลาด", "กรุณาเลือกสินค้าก่อนลบสินค้า", "error");
+    }
 }
 
 function addFavoriteSelectItemFromCart() {
-    Swal.fire({
-        title: "เมื่อเพิ่มสินค้าในรายการสินค้าที่ชอบแล้ว ต้องการนำสินค้าที่เลือกออกจากตะกร้าสินค้าด้วยหรือไม่?",
-        text: "",
-        icon: "warning",
-        showDenyButton: true,
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "ใช่",
-        denyButtonText: "ไม่",
-        cancelButtonText: "ยกเลิก",
-    }).then((result) => {
-        var productSelect = $("input.productSelect:checked")
-            .map(function() {
-                return $(this).val();
-            })
-            .get();
-        if (result.isConfirmed) {
-            productSelect.map((index) => {
-                addFavoriteItem(index, false);
-                removeItemFromCart(index, false);
-            });
-            updateItemInCart();
-        } else if (result.isDenied) {
-            productSelect.map((index) => {
-                addFavoriteItem(index, false);
-            });
-        }
-    });
+    var productSelect = $("input.productSelect:checked")
+        .map(function() {
+            return $(this).val();
+        })
+        .get();
+    if (productSelect.length > 0) {
+        Swal.fire({
+            title: "เมื่อเพิ่มสินค้าในรายการสินค้าที่ชอบแล้ว ต้องการนำสินค้าที่เลือกออกจากตะกร้าสินค้าด้วยหรือไม่?",
+            text: "",
+            icon: "warning",
+            showDenyButton: true,
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "ใช่",
+            denyButtonText: "ไม่",
+            cancelButtonText: "ยกเลิก",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                productSelect.map((index) => {
+                    addFavoriteItem(index, false);
+                    removeItemFromCart(index, false);
+                });
+                updateItemInCart();
+            } else if (result.isDenied) {
+                productSelect.map((index) => {
+                    addFavoriteItem(index, false);
+                });
+            }
+        });
+    } else {
+        Swal.fire(
+            "เกิดข้อผิดลาด",
+            "กรุณาเลือกสินค้าก่อนเพิ่มเป็นสินค้าที่ชอบ",
+            "error"
+        );
+    }
 }
 
 function updateItemInCart() {
