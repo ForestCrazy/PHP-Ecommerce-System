@@ -87,31 +87,30 @@ function removeItemFromCart(p_id, alert = true) {
     );
 }
 
-function checkoutFromCart(p_id = 0) {
+function checkoutFromCart() {
     var productSelect = $("input.productSelect:checked").map(function() {
         return $(this).val();
     });
-    productSelect = p_id != 0 ? p_id : productSelect.get();
+    productSelect = productSelect.get();
     if (productSelect.length > 0) {
         $.post("API/generateCartTemp.php", {
             p_id: productSelect,
-            format: p_id !== 0 ? "number" : "array",
         }).then((res) => {
             try {
                 var resp = JSON.parse(res);
+                if (resp["success"] == true) {
+                    window.location.href = "?page=checkout&cart_id=" + resp["cart_token"];
+                } else {
+                    Swal.fire(
+                        "เกิดข้อผิดพลาดในการสั่งซื้อสินค้า",
+                        resp["reason"] ? resp["reason"] : "",
+                        "error"
+                    );
+                }
             } catch (e) {
                 Swal.fire(
                     "เกิดข้อผิดพลาดในการสั่งซื้อสินค้า",
                     "เกิดข้อผิดพลาดไม่ทราบสาเหตุ",
-                    "error"
-                );
-            }
-            if (resp["success"] == true) {
-                window.location.href = "?page=checkout&cart_id=" + resp["cart_token"];
-            } else {
-                Swal.fire(
-                    "เกิดข้อผิดพลาดในการสั่งซื้อสินค้า",
-                    resp["reason"] ? resp["reason"] : "",
                     "error"
                 );
             }
