@@ -61,27 +61,6 @@ if (!$res_product) {
                     }
                 })
             }
-
-            function addFavoriteItem() {
-                $.get('API/addFavoriteItem.php', {
-                    p_id: '<?= $_GET['p_id'] ?>'
-                }, function(res) {
-                    var resp = JSON.parse(res);
-                    if (resp['success'] == true) {
-                        Swal.fire(
-                            'เพิ่มเป็นสินค้าที่ชื่นชอบสำเร็จ',
-                            '',
-                            'success',
-                        )
-                    } else {
-                        Swal.fire(
-                            'เกิดข้อผิดพลาดในการเพิ่มเป็นสินค้าที่ชื่นชอบ',
-                            resp['reason'] ? resp['reason'] : '',
-                            'error',
-                        )
-                    }
-                })
-            }
         </script>
         <div class="row">
             <div class="col-lg-4 col-top">
@@ -207,7 +186,7 @@ if (!$res_product) {
                     <?php
                     if ($fetch_product['product_quantity'] == 0) {
                     ?>
-                        <button class='btn text-white' style='background-color: #acb0b6 !important;' onclick='addFavoriteItem()'><i class="far fa-heart"></i> เพิ่มเป็นสินค้าที่ชื่นชอบ</button>
+                        <button class='btn text-white' style='background-color: #acb0b6 !important;' onclick='addFavoriteItem(<?= $fetch_product['product_id'] ?>)'><i class="far fa-heart"></i> เพิ่มเป็นสินค้าที่ชื่นชอบ</button>
                     <?php
                     } else {
                     ?>
