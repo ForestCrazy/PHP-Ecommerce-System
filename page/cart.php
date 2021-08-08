@@ -96,27 +96,35 @@ if (!isset($_SESSION['username'])) {
         }
     </style>
     <script>
-        function removeItemFromCart(p_id) {
+        function removeItemFromCart(p_id, alert = true) {
             $.get('API/removeItemFromCart.php', {
                 p_id: p_id
             }, function(res) {
                 var resp = JSON.parse(res);
                 if (resp['success'] == true) {
-                    Swal.fire(
-                        'ลบสินค้าออกจากตระกร้าสำเร็จ',
-                        '',
-                        'success',
-                    ).then(() => {
-                        window.location.reload();
-                    })
+                    if (alert) {
+                        Swal.fire(
+                            'ลบสินค้าออกจากตระกร้าสำเร็จ',
+                            '',
+                            'success',
+                        );
+                    } else {
+                        console.log('remove item from cart success.');
+                    }
+                    document.getElementById('product-' + p_id).remove();
+                    updateOrderDetail();
                 } else {
-                    Swal.fire(
-                        'เกิดข้อผิดพลาดในการลบสินค้าออกจากตระกร้า',
-                        '',
-                        'error',
-                    ).then(() => {
-                        window.location.reload();
-                    })
+                    if (alert) {
+                        Swal.fire(
+                            'เกิดข้อผิดพลาดในการลบสินค้าออกจากตระกร้า',
+                            '',
+                            'error',
+                        ).then(() => {
+                            window.location.reload();
+                        })
+                    } else {
+                        console.error('error when remove item from cart.');
+                    }
                 }
             })
         }
@@ -186,22 +194,39 @@ if (!isset($_SESSION['username'])) {
             //         }
             //     }
             // }
-            $.get('API/updateItemCartQty.php', {
-                p_id: p_id,
-                qty: document.getElementById('product-qty-' + p_id).value,
-                operator: operator
-            }).then((res) => {
-                var resp = JSON.parse(res);
-                if (resp['success'] == true) {
-                    if (resp['code'] == 204) {
-                        document.getElementById('product-' + p_id).remove();
-                    } else {
-                        document.getElementById('product-qty-' + p_id).value = resp['itemInCartQty'];
-                        updateItemInfo(p_id);
+            if (document.getElementById('product-qty-' + p_id).value == 1 && operator == '-') {
+                Swal.fire({
+                    title: 'คุณแน่ใจว่าต้องการลบหรือไม่?',
+                    text: document.getElementById('product-name-' + p_id).textContent,
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'ใช่',
+                    cancelButtonText: 'ไม่'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        removeItemFromCart(p_id);
                     }
-                }
-                updateOrderDetail();
-            })
+                })
+            } else {
+                $.get('API/updateItemCartQty.php', {
+                    p_id: p_id,
+                    qty: document.getElementById('product-qty-' + p_id).value,
+                    operator: operator
+                }).then((res) => {
+                    var resp = JSON.parse(res);
+                    if (resp['success'] == true) {
+                        if (resp['code'] == 204) {
+                            document.getElementById('product-' + p_id).remove();
+                        } else {
+                            document.getElementById('product-qty-' + p_id).value = resp['itemInCartQty'];
+                            updateItemInfo(p_id);
+                        }
+                    }
+                    updateOrderDetail();
+                })
+            }
         }
 
         function updateItemInfo(p_id) {
@@ -227,6 +252,57 @@ if (!isset($_SESSION['username'])) {
                 updateOrderDetail();
             });
         });
+
+        function removeSelectItemFromCart() {
+            Swal.fire({
+                title: 'คุณแน่ใจว่าต้องการลบหรือไม่?',
+                text: '',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'ใช่',
+                cancelButtonText: 'ไม่'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    var productSelect = $('input.productSelect:checked').map(function() {
+                        return $(this).val();
+                    }).get();
+                    productSelect.map((index) => {
+                        removeItemFromCart(index, false);
+                    });
+                }
+            })
+        }
+
+        function addFavoriteSelectItemFromCart() {
+            Swal.fire({
+                title: 'เมื่อเพิ่มสินค้าในรายการสินค้าที่ชอบแล้ว ต้องการนำสินค้าที่เลือกออกจากตะกร้าสินค้าด้วยหรือไม่?',
+                text: '',
+                icon: 'warning',
+                showDenyButton: true,
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'ใช่',
+                denyButtonText: 'ไม่',
+                cancelButtonText: 'ยกเลิก'
+            }).then((result) => {
+                var productSelect = $('input.productSelect:checked').map(function() {
+                    return $(this).val();
+                }).get();
+                if (result.isConfirmed) {
+                    productSelect.map((index) => {
+                        addFavoriteItem(index, false);
+                        removeItemFromCart(index, false);
+                    });
+                } else if (result.isDenied) {
+                    productSelect.map((index) => {
+                        addFavoriteItem(index, false);
+                    });
+                }
+            });
+        }
     </script>
     <div class='row col-top'>
         <h3>ตระกร้าสินค้าของฉัน</h3>
@@ -244,7 +320,7 @@ if (!isset($_SESSION['username'])) {
                             <div class='flex-fill'>
                                 <div class='row' style='margin-left: 0px!important; margin-right: 0px!important;'>
                                     <div class='col-10'>
-                                        <h5 class='card-title'><?= $fetch_cart['product_name'] ?></h5>
+                                        <h5 id='product-name-<?= $fetch_cart['product_id'] ?>' class='card-title'><?= $fetch_cart['product_name'] ?></h5>
                                         <div class='row text-md-center'>
                                             <div class='col-sm-4'>
                                                 <span class='d-inline d-md-block'>
@@ -307,14 +383,14 @@ if (!isset($_SESSION['username'])) {
             <div class="categories-line"></div>
             <div class='row text-center'>
                 <div class='col-md-3'>
-                    <button class='btn btn-danger'>
+                    <div class='btn btn-danger' onclick='removeSelectItemFromCart()'>
                         ลบสินค้าที่เลือก
-                    </button>
+                    </div>
                 </div>
                 <div class='col-md-3'>
-                    <button class='btn btn-primary' style='background-color: rgb(255, 69, 0);'>
+                    <div class='btn btn-primary' style='background-color: rgb(255, 69, 0);' onclick='addFavoriteSelectItemFromCart()'>
                         ย้ายไปยังสินค้าที่ถูกใจ
-                    </button>
+                    </div>
                 </div>
                 <div class='col-md-3'>
                     <div>
