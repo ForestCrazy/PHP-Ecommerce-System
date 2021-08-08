@@ -20,19 +20,19 @@ if (isset($_SESSION['username'])) {
                 <!-- Password -->
                 <input type="password" name='password' id="defaultLoginFormPassword" class="form-control mb-4" placeholder="รหัสผ่าน" required>
 
-                <div class="d-flex justify-content-around">
-                    <div>
+                <!-- <div class="d-flex justify-content-around">
+                    <div> -->
                         <!-- Remember me -->
-                        <div class="custom-control custom-checkbox">
+                        <!-- <div class="custom-control custom-checkbox">
                             <input type="checkbox" class="custom-control-input" id="defaultLoginFormRemember">
                             <label class="custom-control-label" for="defaultLoginFormRemember">จดจำการเข้าสู่ระบบ</label>
-                        </div>
-                    </div>
-                    <div>
+                        </div> -->
+                    <!-- </div> -->
+                    <!-- <div> -->
                         <!-- Forgot password -->
-                        <a href="">ลืมรหัสผ่าน?</a>
-                    </div>
-                </div>
+                        <!-- <a href="">ลืมรหัสผ่าน?</a>
+                    </div> -->
+                <!-- </div> -->
 
                 <!-- Sign in button -->
                 <button class="btn btn-green btn-block my-4" type="submit" name='submit_login'>เข้าสู่ระบบ</button>
