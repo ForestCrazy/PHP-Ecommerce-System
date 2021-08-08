@@ -3,37 +3,11 @@ if (!isset($_SESSION['username'])) {
     gotoPage('home');
 } else {
 ?>
-    <script>
-        function removeFavoriteItem(p_id) {
-            $.get('API/removeFavoriteItem.php', {
-                p_id: p_id
-            }, function(res) {
-                var resp = JSON.parse(res);
-                if (resp['success'] == true) {
-                    Swal.fire(
-                        'ลบออกจากสินค้าที่ชื่นชอบสำเร็จ',
-                        '',
-                        'success',
-                    ).then(() => {
-                        window.location.reload();
-                    })
-                } else {
-                    Swal.fire(
-                        'เกิดข้อผิดพลาดในการลบออกจากสินค้าที่ชื่นชอบ',
-                        '',
-                        'error',
-                    ).then(() => {
-                        window.location.reload();
-                    })
-                }
-            })
-        }
-    </script>
     <div class='row col-top'>
         <h3>รายการสินค้าที่ชื่นชอบ</h3>
         <div class='col-12'>
             <?php
-            $sql_product_favorite = 'SELECT product_img.img_url, product.product_name, product_favorite.createtime FROM product_favorite INNER JOIN product ON product_favorite.product_id = product.product_id LEFT JOIN (SELECT product_id, img_url FROM product_img GROUP BY product_id ORDER BY weight ASC) AS product_img ON product.product_id = product_img.product_id WHERE product_favorite.u_id = "' . $_SESSION['u_id'] . '"';
+            $sql_product_favorite = 'SELECT product_img.img_url, product.product_id, product.product_name, product_favorite.createtime FROM product_favorite INNER JOIN product ON product_favorite.product_id = product.product_id LEFT JOIN (SELECT product_id, img_url FROM product_img GROUP BY product_id ORDER BY weight ASC) AS product_img ON product.product_id = product_img.product_id WHERE product_favorite.u_id = "' . $_SESSION['u_id'] . '"';
             $res_product_favorite = mysqli_query($connect, $sql_product_favorite);
             if ($res_product_favorite) {
                 while ($fetch_product_favorite = mysqli_fetch_assoc($res_product_favorite)) {
