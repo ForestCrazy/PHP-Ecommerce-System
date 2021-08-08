@@ -90,6 +90,9 @@ if (isset($_SESSION['username'])) {
             content: "";
         }
     </style>
+    <script>
+        updateItemInCart();
+    </script>
 </head>
 
 <body>
@@ -161,7 +164,7 @@ if (isset($_SESSION['username'])) {
                     <li class="nav-item">
                         <a class="nav-link waves-effect waves-light" href='?page=cart'>
                             <i class="far fa-shopping-cart"></i>
-                            <sup class="sup-shopping-cart"><span class="badge badge-success">23</span></sup> ตะกร้าสินค้า
+                            <sup class="sup-shopping-cart"><span id='item-in-cart' class="badge badge-success"></span></sup> ตะกร้าสินค้า
                         </a>
                     </li>
                     <li class="nav-item">
