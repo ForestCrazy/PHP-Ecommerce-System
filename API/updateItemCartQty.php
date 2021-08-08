@@ -55,4 +55,6 @@ if (isset($_SESSION['username'])) {
     } else {
         echo json_encode(array('success' => false, 'itemInCartQty' => intval($_GET['qty'])));
     }
+} else {
+    echo json_encode(array('success' => false, 'code' => 401));
 }

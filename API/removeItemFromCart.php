@@ -10,4 +10,6 @@ if (isset($_SESSION['username'])) {
     } else {
         echo json_encode(array('success' => false, 'code' => 500));
     }
+} else {
+    echo json_encode(array('success' => false, 'code' => 401));
 }
