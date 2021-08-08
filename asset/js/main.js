@@ -276,3 +276,15 @@ function addFavoriteSelectItemFromCart() {
         }
     });
 }
+
+function updateItemInCart() {
+    $.get("API/itemInCart.php").then((res) => {
+        var resp = JSON.parse(res);
+        if (resp["success"] == true) {
+            document.getElementById("item-in-cart").textContent =
+                resp["amountItemInCart"];
+        } else {
+            document.getElementById("item-in-cart").textContent = 0;
+        }
+    });
+}
