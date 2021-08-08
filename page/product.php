@@ -21,45 +21,12 @@ if (!$res_product) {
             }
         </style>
         <script>
-            function checkout() {
-                window.location.href = '?page=checkout&p_id=<?php echo $_GET['p_id']; ?>' + '&p_quantity=' + document.getElementById('quantity').value + '&shipping_id=' + $('input[name="shipping_id"]:checked').val();
-            }
-
             function checkQuantity() {
                 var input_quantity = document.getElementById('quantity').value;
                 var product_quantity = <?= $fetch_product['product_quantity'] ?>;
                 if (input_quantity > product_quantity) {
                     document.getElementById('quantity').value = product_quantity;
                 }
-            }
-
-            function addToCart() {
-                var input_quantity = document.getElementById('quantity').value;
-                var shipping_id = $('input[name="shipping_id"]:checked').val();
-                $.get('/API/addItemToCart.php', {
-                    p_id: '<?= $_GET['p_id'] ?>',
-                    quantity: input_quantity,
-                    shipping_id: shipping_id
-                }, function(res) {
-                    var resp = JSON.parse(res);
-                    if (resp['success'] == true) {
-                        Swal.fire(
-                            'เพิ่มสินค้าเข้ารถเข็นสำเร็จ',
-                            '',
-                            'success',
-                        ).then(() => {
-                            window.location.reload();
-                        })
-                    } else {
-                        Swal.fire(
-                            'เกิดข้อผิดพลาดในการเพิ่มสินค้าเข้ารถเข็น',
-                            resp['reason'] ? resp['reason'] : '',
-                            'error',
-                        ).then(() => {
-                            window.location.reload();
-                        })
-                    }
-                })
             }
         </script>
         <div class="row">
@@ -156,10 +123,10 @@ if (!$res_product) {
                                 ?>
                                             <div class="custom-control">
                                                 <label style='font-size: 0.9rem'>
-                                                    <input type="radio" name="shipping_id" value="<?= $fetch_shipping_type['shipping_provider_id'] ?>" <?php if ($check_shipping_type) {
-                                                                                                                                                            echo 'checked';
-                                                                                                                                                            $check_shipping_type = false;
-                                                                                                                                                        } ?>>
+                                                    <input type="radio" name="shipping_id" class='shipping_id' value="<?= $fetch_shipping_type['shipping_provider_id'] ?>" <?php if ($check_shipping_type) {
+                                                                                                                                                                                echo 'checked';
+                                                                                                                                                                                $check_shipping_type = false;
+                                                                                                                                                                            } ?>>
                                                     จัดส่งโดย <small style='font-weight: 800;'><?= $fetch_shipping_type['shipping_name'] ?></small>
                                                     เวลาในการจัดส่ง <small style='font-weight: 800;'><?= $fetch_shipping_type['shipping_time'] ?></small> วัน
                                                     ค่าจัดส่ง <small style='font-weight: 800'><?= $fetch_shipping_type['shipping_price'] ?></small> บาท
@@ -193,7 +160,7 @@ if (!$res_product) {
                         <button class="btn btn-primary waves-effect waves-light" onclick='addToCart()'>เพิ่มเข้าตะกร้า
                             <i class="fas fa-shopping-cart ml-1"></i>
                         </button>
-                        <div class="btn btn-success waves-effect waves-light" onclick='checkout()'>ซื้อสินค้า</div>
+                        <div class="btn btn-success waves-effect waves-light" onclick="checkout(<?= $fetch_product['product_id'] ?>, document.getElementById('quantity').value, $('input.shipping_id:checked').val())">ซื้อสินค้า</div>
                     <?php
                     }
                     ?>
