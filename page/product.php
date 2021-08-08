@@ -28,6 +28,35 @@ if (!$res_product) {
                     document.getElementById('quantity').value = product_quantity;
                 }
             }
+
+            function addToCart(p_id) {
+                var input_quantity = document.getElementById('quantity').value;
+                var shipping_id = $('input[name="shipping_id"]:checked').val();
+                $.get('/API/addItemToCart.php', {
+                    p_id: p_id,
+                    quantity: input_quantity,
+                    shipping_id: shipping_id
+                }, function(res) {
+                    var resp = JSON.parse(res);
+                    if (resp['success'] == true) {
+                        Swal.fire(
+                            'เพิ่มสินค้าเข้ารถเข็นสำเร็จ',
+                            '',
+                            'success',
+                        ).then(() => {
+                            window.location.reload();
+                        })
+                    } else {
+                        Swal.fire(
+                            'เกิดข้อผิดพลาดในการเพิ่มสินค้าเข้ารถเข็น',
+                            resp['reason'] ? resp['reason'] : '',
+                            'error',
+                        ).then(() => {
+                            window.location.reload();
+                        })
+                    }
+                })
+            }
         </script>
         <div class="row">
             <div class="col-lg-4 col-top">
@@ -157,7 +186,7 @@ if (!$res_product) {
                     <?php
                     } else {
                     ?>
-                        <button class="btn btn-primary waves-effect waves-light" onclick='addToCart()'>เพิ่มเข้าตะกร้า
+                        <button class="btn btn-primary waves-effect waves-light" onclick='addToCart(<?= $fetch_product['product_id'] ?>)'>เพิ่มเข้าตะกร้า
                             <i class="fas fa-shopping-cart ml-1"></i>
                         </button>
                         <div class="btn btn-success waves-effect waves-light" onclick="checkout(<?= $fetch_product['product_id'] ?>, document.getElementById('quantity').value, $('input.shipping_id:checked').val())">ซื้อสินค้า</div>
