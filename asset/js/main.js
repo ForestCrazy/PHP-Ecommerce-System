@@ -67,9 +67,13 @@ function removeItemFromCart(p_id, alert = true) {
                 } else {
                     console.log("remove item from cart success.");
                 }
+                var store_id = $('#product-' + p_id).data("storeid");
                 document.getElementById("product-" + p_id).remove();
                 updateOrderDetail();
                 updateItemInCart();
+                if ($("div").find('[data-storeid="' + store_id + '"]').length == 0) {
+                    $("#store-" + store_id).remove();
+                }
             } else {
                 if (alert) {
                     Swal.fire(
@@ -132,7 +136,7 @@ function selectAllItem(checked) {
     }
 }
 
-function changeItemQuantity(p_id, operator, min_val, max_val) {
+function changeItemQuantity(p_id, operator) {
     // var def_val = 0;
     // var cur_val = def_val = parseInt(document.getElementById('product-qty-' + p_id).value);
     // if (cur_val == 1 && operator == '-') {
