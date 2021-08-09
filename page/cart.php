@@ -102,66 +102,81 @@ if (!isset($_SESSION['username'])) {
         <h3>ตระกร้าสินค้าของฉัน</h3>
         <div class='col-12'>
             <?php
-            $sql_cart = 'SELECT * FROM cart INNER JOIN product ON cart.product_id = product.product_id LEFT JOIN (SELECT product_id, img_url FROM product_img GROUP BY product_id ORDER BY weight ASC) AS product_img ON product.product_id = product_img.product_id INNER JOIN product_shipping ON product.product_id = product_shipping.product_id AND cart.shipping_id = product_shipping.shipping_provider_id WHERE cart.u_id = "' . $_SESSION['u_id'] . '"';
+            $sql_cart = 'SELECT store.store_id, store.store_name FROM cart INNER JOIN product ON cart.product_id = product.product_id INNER JOIN store ON product.store_id = store.store_id WHERE cart.u_id = "' . $_SESSION['u_id'] . '" GROUP BY store.store_id';
             $res_cart = mysqli_query($connect, $sql_cart);
             if ($res_cart) {
-                while ($fetch_cart = mysqli_fetch_assoc($res_cart)) {
+                while ($fetch_cart_store = mysqli_fetch_assoc($res_cart)) {
             ?>
-                    <div id='product-<?= $fetch_cart['product_id'] ?>' class='col card col-top'>
-                        <div class="h-100 d-flex justify-content-start align-items-center">
-                            <input type='checkbox' class='productSelect' name='product_checkout[]' value='<?= $fetch_cart['product_id'] ?>' />
-                            <img src='<?= $fetch_cart['img_url'] ?>' style="max-height: 120px;" alt="" class="img-fluid" />
-                            <div class='flex-fill'>
-                                <div class='row' style='margin-left: 0px!important; margin-right: 0px!important;'>
-                                    <div class='col-10'>
-                                        <h5 id='product-name-<?= $fetch_cart['product_id'] ?>' class='card-title'><?= $fetch_cart['product_name'] ?></h5>
-                                        <div class='row text-md-center'>
-                                            <div class='col-sm-4'>
-                                                <span class='d-inline d-md-block'>
-                                                    ราคาต่อชิ้น
-                                                </span>
-                                                <span class='d-inline d-md-none'> :</span>
-                                                <span id='product-price-<?= $fetch_cart['product_id'] ?>' class='d-inline d-md-block'>
-                                                    <?= $fetch_cart['product_price'] ?>
-                                                </span>
-                                            </div>
-                                            <div class='col-8 col-sm-4'>
-                                                <span class='d-inline d-md-block'>จำนวนสินค้า</span>
-                                                <span class='d-inline d-md-none'> : </span>
-                                                <div class='d-flex justify-content-md-center'>
-                                                    <div class="def-number-input number-input safari_only d-flex justify-content-center">
-                                                        <button onclick="changeItemQuantity('<?= $fetch_cart['product_id'] ?>', '-', <?= $fetch_cart['product_quantity'] ?>)" class="minus"></button>
-                                                        <input class="quantity" min="0" id='product-qty-<?= $fetch_cart['product_id'] ?>' name="quantity" value="<?= $fetch_cart['quantity'] ?>" type="number">
-                                                        <button onclick="changeItemQuantity('<?= $fetch_cart['product_id'] ?>', '+', <?= $fetch_cart['product_quantity'] ?>)" class="plus"></button>
+                    <div id='store-<?= $fetch_cart_store['store_id'] ?>' class='card col-top'>
+                        <div class='store-info' style='padding-left: 1rem; padding-right: 1rem; margin-top: 0.8rem;'>
+                            <i class="far fa-store"></i> <?= $fetch_cart_store['store_name'] ?>
+                        </div>
+                        <?php
+                        $sql_cart_product = 'SELECT product.*, cart.*, product_img.img_url FROM product INNER JOIN cart ON product.product_id = cart.product_id INNER JOIN store ON product.store_id = store.store_id LEFT JOIN (SELECT product_id, img_url FROM product_img GROUP BY product_id ORDER BY weight ASC) AS product_img ON product.product_id = product_img.product_id WHERE store.store_id = "' . $fetch_cart_store['store_id'] . '" AND cart.u_id = "' . $_SESSION['u_id'] . '"';
+                        $res_cart_product = mysqli_query($connect, $sql_cart_product);
+                        if ($res_cart_product) {
+                            while ($fetch_cart_product = mysqli_fetch_assoc($res_cart_product)) {
+                        ?>
+                                <div id="product-<?= $fetch_cart_product['product_id'] ?>" data-storeId="<?= $fetch_cart_store['store_id'] ?>" class="col card col-top">
+                                    <div class="h-100 d-flex justify-content-start align-items-center">
+                                        <input type="checkbox" class="productSelect" name="product_checkout[]" value="<?= $fetch_cart_product['product_id'] ?>">
+                                        <img src="<?= $fetch_cart_product['img_url'] ?>" style="max-height: 120px;" alt="" class="img-fluid">
+                                        <div class="flex-fill">
+                                            <div class="row" style="margin-left: 0px!important; margin-right: 0px!important;">
+                                                <div class="col-10">
+                                                    <h5 id="product-name-<?= $fetch_cart_product['product_id'] ?>" class="card-title"><?= $fetch_cart_product['product_name'] ?></h5>
+                                                    <div class="row text-md-center">
+                                                        <div class="col-sm-4">
+                                                            <span class="d-inline d-md-block">
+                                                                ราคาต่อชิ้น
+                                                            </span>
+                                                            <span class="d-inline d-md-none"> :</span>
+                                                            <span id="product-price-<?= $fetch_cart_product['product_id'] ?>" class="d-inline d-md-block">
+                                                                <?= $fetch_cart_product['product_price'] ?>
+                                                            </span>
+                                                        </div>
+                                                        <div class="col-8 col-sm-4">
+                                                            <span class="d-inline d-md-block">จำนวนสินค้า</span>
+                                                            <span class="d-inline d-md-none"> : </span>
+                                                            <div class="d-flex justify-content-md-center">
+                                                                <div class="def-number-input number-input safari_only d-flex justify-content-center">
+                                                                    <button onclick="changeItemQuantity('<?= $fetch_cart_product['product_id'] ?>', '-')" class="minus"></button>
+                                                                    <input class="quantity" min="0" id="product-qty-<?= $fetch_cart_product['product_id'] ?>" name="quantity" value="<?= $fetch_cart_product['quantity'] ?>" type="number">
+                                                                    <button onclick="changeItemQuantity('<?= $fetch_cart_product['product_id'] ?>', '+')" class="plus"></button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-8 col-sm-4">
+                                                            <span class="d-inline d-md-block">
+                                                                ราคารวม
+                                                            </span>
+                                                            <span class="d-inline d-md-none">
+                                                                :
+                                                            </span>
+                                                            <span id="all-price-product-<?= $fetch_cart_product['product_id'] ?>" class="d-inline d-md-block">
+                                                                <?= $fetch_cart_product['product_price'] * $fetch_cart_product['quantity'] ?>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-2">
+                                                    <div class="float-right">
+                                                        <button class="btn btn-danger d-none d-sm-block waves-effect waves-light" onclick="removeItemFromCart(<?= $fetch_cart_product['product_id'] ?>)">
+                                                            ลบ
+                                                        </button>
+                                                        <span class="d-block d-sm-none remove-btn-text" onclick="removeItemFromCart(<?= $fetch_cart_product['product_id'] ?>)">
+                                                            ลบ
+                                                        </span>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class='col-8 col-sm-4'>
-                                                <span class='d-inline d-md-block'>
-                                                    ราคารวม
-                                                </span>
-                                                <span class='d-inline d-md-none'>
-                                                    :
-                                                </span>
-                                                <span id='all-price-product-<?= $fetch_cart['product_id'] ?>' class='d-inline d-md-block'>
-                                                    <?= $fetch_cart['product_price'] * $fetch_cart['quantity'] ?>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class='col-2'>
-                                        <div class='float-right'>
-                                            <button class='btn btn-danger d-none d-sm-block' onclick='removeItemFromCart(<?= $fetch_cart['product_id'] ?>)'>
-                                                ลบ
-                                            </button>
-                                            <span class='d-block d-sm-none remove-btn-text' onclick='removeItemFromCart(<?= $fetch_cart['product_id'] ?>)'>
-                                                ลบ
-                                            </span>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
+                        <?php
+                            }
+                        }
+                        ?>
                     </div>
             <?php
                 }
