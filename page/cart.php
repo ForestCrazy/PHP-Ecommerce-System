@@ -95,6 +95,9 @@ if (!isset($_SESSION['username'])) {
             }
         }
     </style>
+    <script>
+        updateItemInCart();
+    </script>
     <div class='row col-top'>
         <h3>ตระกร้าสินค้าของฉัน</h3>
         <div class='col-12'>

@@ -10,6 +10,9 @@ if (!isset($_SESSION['username'])) {
         gotoPage('home');
     }
 ?>
+    <script>
+        updateItemInCart();
+    </script>
     <div class="col col-top">
 
         <!-- Default form login -->

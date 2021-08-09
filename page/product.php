@@ -61,6 +61,8 @@ if (!$res_product) {
             function checkout() {
                 window.location.href = '?page=checkout&p_id=<?php echo $_GET['p_id']; ?>' + '&p_quantity=' + document.getElementById('quantity').value + '&shipping_id=' + $('input[name="shipping_id"]:checked').val();
             }
+
+            updateItemInCart();
         </script>
         <div class="row">
             <div class="col-lg-4 col-top">

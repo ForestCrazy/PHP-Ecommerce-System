@@ -3,6 +3,9 @@ if (!isset($_SESSION['username'])) {
     gotoPage('home');
 } else {
 ?>
+    <script>
+        updateItemInCart();
+    </script>
     <div class='row col-top'>
         <h3>รายการสินค้าที่ชื่นชอบ</h3>
         <div class='col-12'>

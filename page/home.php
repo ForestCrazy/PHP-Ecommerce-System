@@ -41,6 +41,9 @@
         margin-bottom: 5px !important;
     }
 </style>
+<script>
+    updateItemInCart();
+</script>
 <div class="search-box-header card">
     <div class="d-flex justify-content-start align-items-center bd-highlight">
         <div class="p-2 bd-highlight" style="width: 90%"><input type="text" class="w-100 form-control" name="search" placeholder="พิมพ์เพื่อค้นหา"></div>
@@ -85,10 +88,10 @@
                 </div>
                 <a class="carousel-control-prev" href="#carouselBannerControls" role="button" data-slide="prev">
                     <i class="far fa-chevron-left"></i>
-                    </a>
+                </a>
                 <a class="carousel-control-next" href="#carouselBannerControls" role="button" data-slide="next">
                     <i class="far fa-chevron-right"></i>
-                    </a>
+                </a>
             </div>
         </div>
         <div class="col-sm-4">
