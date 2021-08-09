@@ -125,24 +125,7 @@ if (!$res_product) {
         <a><span class="badge red mr-1">Bestseller</span></a>
         -->
                     <section class="mdb-color lighten-5 p-1">
-                        <?php
-                        if (is_int($fetch_product['special_price'])) {
-                        ?>
-                            <del>฿ <?php echo $fetch_product['product_price']; ?></del>
-                        <?php
-                        } else {
-                        ?>
-                            <h4 style='margin-bottom: 0!important;'>฿ <?php echo $fetch_product['product_price']; ?></h4>
-                        <?php
-                        }
-                        ?>
-                        <?php
-                        if (is_int($fetch_product['special_price'])) {
-                        ?>
-                            <h4 style='margin-bottom: 0!important;'>฿ <?php echo $fetch_product['product_price']; ?></h4>
-                        <?php
-                        }
-                        ?>
+                        <h4 style='margin-bottom: 0!important;'>฿ <?php echo $fetch_product['product_price']; ?></h4>
                     </section>
                     <div class="row">
                         <div class="col-3 col-top"><label class="shipping-label">การจัดส่ง</label></div>
