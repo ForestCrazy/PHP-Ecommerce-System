@@ -90,9 +90,6 @@ if (isset($_SESSION['username'])) {
             content: "";
         }
     </style>
-    <script>
-        updateItemInCart();
-    </script>
 </head>
 
 <body>
@@ -167,11 +164,17 @@ if (isset($_SESSION['username'])) {
                             <sup class="sup-shopping-cart"><span id='item-in-cart' class="badge badge-success"></span></sup> ตะกร้าสินค้า
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link waves-effect waves-light">
-                            <i class="far fa-bell"></i> การแจ้งเตือน
-                        </a>
-                    </li>
+                    <?php
+                    if (isset($_SESSION['username'])) {
+                    ?>
+                        <li class="nav-item">
+                            <a class="nav-link waves-effect waves-light">
+                                <i class="far fa-bell"></i> การแจ้งเตือน
+                            </a>
+                        </li>
+                    <?php
+                    }
+                    ?>
                     <li class="nav-item dropdown">
                         <a class="nav-link <?php if (isset($_SESSION['username'])) {
                                                 echo 'dropdown-toggle';
@@ -180,11 +183,12 @@ if (isset($_SESSION['username'])) {
                                                     } else {
                                                         echo 'href="?page=login"';
                                                     } ?>>
-                            <i class="fas fa-user"></i> บัญชีของฉัน
+                            <i class="fas fa-user"></i> <?= isset($_SESSION['username']) ? 'บัญชีของฉัน' : 'เข้าสู่ระบบ' ?>
                         </a>
                         <?php
                         if (isset($_SESSION['username'])) { ?>
                             <div class="dropdown-menu dropdown-menu-right dropdown-default" aria-labelledby="navbarDropdownMenuLink-333">
+                                <a class="dropdown-item" href="#"><i class="far fa-user"></i> <?= $_SESSION['username'] ?></a>
                                 <a class="dropdown-item" href="?page=change_password"><i class="far fa-sliders-v-square"></i> เปลี่ยนรหัสผ่าน</a>
                                 <a class="dropdown-item" href="#"><i class="far fa-box"></i> รายการสั่งซื้อของฉัน</a>
                                 <a class="dropdown-item" href="?page=product_favorite"><i class="far fa-heart"></i> รายการสินค้าที่ฉันชอบ</a>
