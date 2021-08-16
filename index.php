@@ -49,6 +49,9 @@ if (isset($_SESSION['username'])) {
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Main.JS -->
     <script type='text/javascript' src='asset/js/main.js'></script>
+    <!-- Qill Editor -->
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
     <style>
         body {
             font-family: 'Kanit', sans-serif;
@@ -254,6 +257,7 @@ if (isset($_SESSION['username'])) {
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
     <!-- MDB core JavaScript -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"></script>
+    <!-- Popper JS -->
     <script defer src="asset/js/popper.js"></script>
     <!-- Star Rating -->
     <link href="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-star-rating@4.1.0/css/star-rating.css" media="all" rel="stylesheet" type="text/css" />
