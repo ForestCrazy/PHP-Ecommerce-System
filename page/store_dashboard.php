@@ -20,7 +20,7 @@ if (!isset($_SESSION['username'])) {
             }
         </style>
         <div class='row'>
-            <div class='col-md-4'>
+            <div class='col-md-4 col-top'>
                 <div class='card'>
                     <div class='card-body'>
                         <small>TODAY</small>
@@ -28,7 +28,7 @@ if (!isset($_SESSION['username'])) {
                     </div>
                 </div>
             </div>
-            <div class='col-md-4'>
+            <div class='col-md-4 col-top'>
                 <div class='card'>
                     <div class='card-body'>
                         <small>MONTH</small>
@@ -36,7 +36,7 @@ if (!isset($_SESSION['username'])) {
                     </div>
                 </div>
             </div>
-            <div class='col-md-4'>
+            <div class='col-md-4 col-top'>
                 <div class='card'>
                     <div class='card-body'>
                         <small>YEAR</small>
