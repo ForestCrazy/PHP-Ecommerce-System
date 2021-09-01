@@ -14,15 +14,7 @@ if (!$_GET["page"]) {
 
 if (isset($_SESSION['username'])) {
     $user_info = array();
-    $sql_check_hasStore = 'SELECT store_name FROM store WHERE u_id = "' . $_SESSION['u_id'] . '"';
-    $res_check_store = mysqli_query($connect, $sql_check_hasStore);
-    if ($res_check_store) {
-        if (mysqli_num_rows($res_check_store) == 1) {
-            $user_info['hasStore'] = true;
-        } else {
-            $user_info['hasStore'] = false;
-        }
-    }
+    $user_info['hasStore'] = hasOwnStore($_SESSION['u_id']);
     $user_info['itemInCart'] = 0;
 }
 ?>
