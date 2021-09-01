@@ -221,12 +221,6 @@ function updateOrderDetail() {
         "฿" + all_order_price.toString();
 }
 
-$(document).ready(function() {
-    $("input[type=checkbox]").change(function() {
-        updateOrderDetail();
-    });
-});
-
 function removeSelectItemFromCart() {
     var productSelect = $("input.productSelect:checked")
         .map(function() {

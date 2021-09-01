@@ -96,6 +96,11 @@ if (!isset($_SESSION['username'])) {
         }
     </style>
     <script>
+        $(document).ready(function() {
+            $("input[type=checkbox]").change(function() {
+                updateOrderDetail();
+            });
+        });
         updateItemInCart();
     </script>
     <div class='row col-top'>
