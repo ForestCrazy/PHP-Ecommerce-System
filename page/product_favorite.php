@@ -23,7 +23,9 @@ if (!isset($_SESSION['username'])) {
                             <div class='col-6 col-xl-10 col-sm-10'>
                                 <div class='col-12 row py-3 px-0'>
                                     <div class='col-12 col-sm-8 col-md-8'>
-                                        <h5 class='card-title'><?= $fetch_product_favorite['product_name'] ?></h5>
+                                        <a href='?page=product&p_id=<?= $fetch_product_favorite['product_id'] ?>'>
+                                            <h5 class='card-title'><?= $fetch_product_favorite['product_name'] ?></h5>
+                                        </a>
                                         <br />
                                         <span>
                                             เพิ่มเป็นสินค้าที่ชื่นชอบเมื่อวันที่ <?= $fetch_product_favorite['createtime'] ?>
