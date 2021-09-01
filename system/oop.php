@@ -34,3 +34,17 @@ function generateRandomString($length = 10)
     }
     return $randomString;
 }
+
+function hasOwnStore($u_id)
+{
+    global $connect;
+    $sql_check_hasStore = 'SELECT store_name FROM store WHERE u_id = "' . $u_id . '"';
+    $res_check_store = mysqli_query($connect, $sql_check_hasStore);
+    if ($res_check_store) {
+        if (mysqli_num_rows($res_check_store) == 1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+}
