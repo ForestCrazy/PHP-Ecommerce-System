@@ -97,7 +97,7 @@ if (!isset($_SESSION['username'])) {
     </style>
     <script>
         $(document).ready(function() {
-            $("input[type=checkbox]").change(function() {
+            $("input.productSelect[type=checkbox]").change(function() {
                 updateOrderDetail();
             });
         });
