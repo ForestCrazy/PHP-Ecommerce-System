@@ -49,7 +49,8 @@ function hasOwnStore($u_id, $reqStoreId = false)
     }
 }
 
-function isProductOfStore($p_id, $store_id) {
+function isProductOfStore($p_id, $store_id)
+{
     global $connect;
     $sql_check_product = 'SELECT product_id FROM product WHERE product_id = "' . mysqli_real_escape_string($connect, $p_id) . '" AND store_id = "' . mysqli_real_escape_string($connect, $store_id) . '"';
     $res_check_product = mysqli_query($connect, $sql_check_product);
