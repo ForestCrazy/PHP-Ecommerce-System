@@ -189,6 +189,7 @@ if (isset($_SESSION['username'])) {
                                 <a class="dropdown-item" href="?page=product_favorite"><i class="far fa-heart"></i> รายการสินค้าที่ฉันชอบ</a>
                                 <a class="dropdown-item" href="#"><i class="far fa-star"></i> รายการร้านค้าที่ฉันติดตาม</a>
                                 <a class="dropdown-item" href="#"><i class="far fa-comment"></i> ประวัติการรีวิวสินค้า</a>
+                                <a class="dropdown-item" href="?page=manage_address"><i class="fal fa-map-marked-alt"></i> จัดการที่อยู่จัดส่งของฉัน</a>
                                 <a class="dropdown-item" href="?page=logout"><i class="far fa-sign-out"></i> ออกจากระบบ</a>
                             </div>
                         <?php } ?>
@@ -214,6 +215,8 @@ if (isset($_SESSION['username'])) {
             include_once __DIR__ . '/page/event.php';
         } elseif ($_GET['page'] == "cart") {
             include_once __DIR__ . '/page/cart.php';
+        } elseif ($_GET['page'] == "manage_address") {
+            include_once __DIR__ . '/page/manage_address.php';
         } elseif ($_GET['page'] == "create_store") {
             include_once __DIR__ . '/page/create_store.php';
         } elseif ($_GET['page'] == "store") {
@@ -239,7 +242,7 @@ if (isset($_SESSION['username'])) {
         } else {
             echo '<br>';
             echo '<div class="container"><div class="alert alert-danger" role="alert"><i class="fas fa-exclamation-triangle"></i> ไม่พบหน้าที่ท่านร้องขอ กำลังพาท่านกลับไปหน้าหลัก...</div></div>';
-            echo '<meta http-equiv="refresh" content="3;URL=?page=home"';
+            echo '<meta http-equiv="refresh" content="3;URL=?page=home">';
         } ?>
     </div>
     <br>
