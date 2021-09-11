@@ -7,6 +7,7 @@ if (isset($_SESSION['username'])) {
     $res_product = mysqli_query($connect, $sql_product);
     if ($res_product) {
         $fetch_product = mysqli_fetch_assoc($res_product);
+        $sql_itemQtyInCart = 'SELECT quantity FROM cart WHERE u_id = "' . $_SESSION['u_id'] . '" AND product_id = "' . $_GET['p_id'] . '"';
         if ($_GET['operator'] == '-') {
             if (intval($_GET['qty']) == 1) {
                 $sql_removeItemFromCart = 'DELETE FROM cart WHERE u_id = "' . $_SESSION['u_id'] . '" AND product_id = "' . $_GET['p_id'] . '"';
@@ -20,7 +21,6 @@ if (isset($_SESSION['username'])) {
                 $sql_addItemQtyInCart = 'UPDATE cart SET quantity = quantity - 1 WHERE u_id = "' . $_SESSION['u_id'] . '" AND product_id = "' . $_GET['p_id'] . '"';
                 $res_addItemQtyInCart = mysqli_query($connect, $sql_addItemQtyInCart);
                 if ($res_addItemQtyInCart) {
-                    $sql_itemQtyInCart = 'SELECT quantity FROM cart WHERE u_id = "' . $_SESSION['u_id'] . '" AND product_id = "' . $_GET['p_id'] . '"';
                     $res_itemQtyInCart = mysqli_query($connect, $sql_itemQtyInCart);
                     if ($res_itemQtyInCart) {
                         $fetch_itemQtyInCart = mysqli_fetch_assoc($res_itemQtyInCart);
@@ -37,7 +37,6 @@ if (isset($_SESSION['username'])) {
                 $sql_addItemQtyInCart = 'UPDATE cart SET quantity = quantity + 1 WHERE u_id = "' . $_SESSION['u_id'] . '" AND product_id = "' . $_GET['p_id'] . '"';
                 $res_addItemQtyInCart = mysqli_query($connect, $sql_addItemQtyInCart);
                 if ($res_addItemQtyInCart) {
-                    $sql_itemQtyInCart = 'SELECT quantity FROM cart WHERE u_id = "' . $_SESSION['u_id'] . '" AND product_id = "' . $_GET['p_id'] . '"';
                     $res_itemQtyInCart = mysqli_query($connect, $sql_itemQtyInCart);
                     if ($res_itemQtyInCart) {
                         $fetch_itemQtyInCart = mysqli_fetch_assoc($res_itemQtyInCart);
@@ -58,7 +57,6 @@ if (isset($_SESSION['username'])) {
                 if ($res_setItemQtyInCart) {
                     echo json_encode(array('success' => true, 'code' => 200, 'itemInCartQty' => intval($_GET['qty'])));
                 } else {
-                    $sql_itemQtyInCart = 'SELECT quantity FROM cart WHERE u_id = "' . $_SESSION['u_id'] . '" AND product_id = "' . $_GET['p_id'] . '"';
                     $res_itemQtyInCart = mysqli_query($connect, $sql_itemQtyInCart);
                     if ($res_itemQtyInCart) {
                         echo json_encode(array('success' => false, 'code' => 500, 'itemInCartQty' => intval($fetch_itemQtyInCart['quantity'])));
@@ -67,7 +65,6 @@ if (isset($_SESSION['username'])) {
                     }
                 }
             } else {
-                $sql_itemQtyInCart = 'SELECT quantity FROM cart WHERE u_id = "' . $_SESSION['u_id'] . '" AND product_id = "' . $_GET['p_id'] . '"';
                 $res_itemQtyInCart = mysqli_query($connect, $sql_itemQtyInCart);
                 if ($res_itemQtyInCart) {
                     echo json_encode(array('success' => false, 'code' => 10100, 'reason' => 'ไม่สามารถเพิ่มจำนวนสินค้าในรถเข็นได้มากกว่าจำนวนที่มี', 'itemInCartQty' => intval($fetch_itemQtyInCart['quantity'])));
@@ -76,7 +73,6 @@ if (isset($_SESSION['username'])) {
                 }
             }
         } else {
-            $sql_itemQtyInCart = 'SELECT quantity FROM cart WHERE u_id = "' . $_SESSION['u_id'] . '" AND product_id = "' . $_GET['p_id'] . '"';
             $res_itemQtyInCart = mysqli_query($connect, $sql_itemQtyInCart);
             if ($res_itemQtyInCart) {
                 echo json_encode(array('success' => false, 'code' => 400, 'itemInCartQty' => intval($fetch_itemQtyInCart['quantity'])));
