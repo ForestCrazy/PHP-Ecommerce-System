@@ -322,7 +322,7 @@ if (!isset($_SESSION['username'])) {
             }
 
             function getProductShipping(p_id) {
-                $.get('/API/productShipping.php', {
+                $.get('/API/productShippingProvider.php', {
                     p_id: p_id ? p_id : new URL(window.location.href).searchParams.get('p_id')
                 }).then((res) => {
                     var resp = JSON.parse(res);
