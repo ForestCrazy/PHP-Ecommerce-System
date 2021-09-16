@@ -312,11 +312,17 @@ if (!isset($_SESSION['username'])) {
         </div>
     </div>
     <?php
+    $total_product_price = 0;
+    $total_shipping_price = 0;
     if (isset($_GET['p_id'])) {
+        if (!isset($_GET['p_quantity'])) {
+            $_GET['p_quantity'] = 1;
+        }
         $sql_product = 'SELECT product.product_id, product.product_name, product.product_price, store.store_name, product_img.img_url FROM product INNER JOIN (SELECT product_id, img_url FROM product_img GROUP BY product_id ORDER BY weight ASC) AS product_img ON product.product_id = product_img.product_id INNER JOIN store ON product.store_id = store.store_id WHERE product.product_id = "' . mysqli_real_escape_string($connect, $_GET['p_id']) . '"';
         $res_product = mysqli_query($connect, $sql_product);
         if ($res_product) {
             $fetch_product = mysqli_fetch_assoc($res_product);
+            $total_product_price += $fetch_product['product_price'] * $_GET['p_quantity'];
     ?>
             <div class='card col-top pt-3'>
                 <div class='d-flex justify-content-start align-items-center'>
@@ -413,6 +419,7 @@ if (!isset($_SESSION['username'])) {
                                         $fetch_shipping = mysqli_fetch_assoc($res_shipping_provider);
                                     }
                                 }
+                                $total_shipping_price += $fetch_shipping['shipping_price'];
                             } else {
                                 gotoPage('502');
                             }
@@ -431,6 +438,7 @@ if (!isset($_SESSION['username'])) {
     <?php
         }
     } elseif (isset($_GET['cart_id'])) {
+        
     } else {
         gotoPage('home');
     }
@@ -460,7 +468,7 @@ if (!isset($_SESSION['username'])) {
                         ยอดรวมสินค้า:
                     </div>
                     <div class='text-right col-6'>
-                        300
+                        <?= $total_product_price ?>
                     </div>
                 </div>
                 <div class='row col pr-0'>
@@ -468,7 +476,7 @@ if (!isset($_SESSION['username'])) {
                         ยอดรวมค่าจัดส่ง:
                     </div>
                     <div class='text-right col-6'>
-                        30
+                        <?= $total_shipping_price ?>
                     </div>
                 </div>
                 <div class='row col pr-0'>
@@ -476,7 +484,7 @@ if (!isset($_SESSION['username'])) {
                         รวมยอดที่ต้องชำระ:
                     </div>
                     <div class='text-right col-6'>
-                        330
+                        <?= $total_product_price + $total_shipping_price ?>
                     </div>
                 </div>
             </div>
