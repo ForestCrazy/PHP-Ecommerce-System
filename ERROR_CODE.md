@@ -4,3 +4,4 @@
 
 10100 | Common Error
 10101 | Duplicate value in Database
+10102 | No data found in Database
