@@ -124,14 +124,14 @@ if (!isset($_SESSION['username'])) {
                         ?>
                                 <div id="product-<?= $fetch_cart_product['product_id'] ?>" data-storeId="<?= $fetch_cart_store['store_id'] ?>" class="col card col-top">
                                     <div class="h-100 d-flex justify-content-start align-items-center">
-                                        <input type="checkbox" class="productSelect" name="product_checkout[]" value="<?= $fetch_cart_product['product_id'] ?>">
+                                        <input type="checkbox" id="checkbox-product-<?= $fetch_cart_product['product_id'] ?>" class="productSelect" name="product_checkout[]" value="<?= $fetch_cart_product['product_id'] ?>" <?= $fetch_cart_product['product_quantity'] < $fetch_cart_product['quantity'] ? 'disabled' : '' ?>>
                                         <img src="<?= $fetch_cart_product['img_url'] ?>" style="max-height: 120px;" alt="" class="img-fluid">
                                         <div class="flex-fill">
                                             <div class="row" style="margin-left: 0px!important; margin-right: 0px!important;">
                                                 <div class="col-10">
                                                     <h5 id="product-name-<?= $fetch_cart_product['product_id'] ?>" class="card-title"><?= $fetch_cart_product['product_name'] ?></h5>
                                                     <div class="row text-md-center">
-                                                        <div class="col-sm-4">
+                                                        <div class="col-md-4">
                                                             <span class="d-inline d-md-block">
                                                                 ราคาต่อชิ้น
                                                             </span>
@@ -140,18 +140,22 @@ if (!isset($_SESSION['username'])) {
                                                                 <?= $fetch_cart_product['product_price'] ?>
                                                             </span>
                                                         </div>
-                                                        <div class="col-8 col-sm-4">
+                                                        <div class="col-md-4">
                                                             <span class="d-inline d-md-block">จำนวนสินค้า</span>
                                                             <span class="d-inline d-md-none"> : </span>
                                                             <div class="d-flex justify-content-md-center">
                                                                 <div class="def-number-input number-input safari_only d-flex justify-content-center">
                                                                     <button onclick="changeItemQuantity('<?= $fetch_cart_product['product_id'] ?>', '-')" class="minus"></button>
-                                                                    <input class="quantity" min="0" id="product-qty-<?= $fetch_cart_product['product_id'] ?>" name="quantity" value="<?= $fetch_cart_product['quantity'] ?>" type="number">
+                                                                    <input class="quantity" min="0" id="product-qty-<?= $fetch_cart_product['product_id'] ?>" name="product-quantity-<?= $fetch_cart_product['product_id'] ?>" value="<?= $fetch_cart_product['quantity'] ?>" type="number">
+                                                                    <input type='hidden' id='max-product-qty-<?= $fetch_cart_product['product_id'] ?>' name='max-product-qty-<?= $fetch_cart_product['product_id'] ?>' value='<?= $fetch_cart_product['product_quantity'] ?>' />
                                                                     <button onclick="changeItemQuantity('<?= $fetch_cart_product['product_id'] ?>', '+')" class="plus"></button>
                                                                 </div>
                                                             </div>
+                                                            <small class='text-danger <?= $fetch_cart_product['product_quantity'] >= $fetch_cart_product['quantity'] ? 'd-none' : '' ?>' id='remain-product-qty-<?= $fetch_cart_product['product_id'] ?>'>
+                                                                เหลือสินค้าอยู่ <?= $fetch_cart_product['product_quantity'] ?> ชิ้น
+                                                            </small>
                                                         </div>
-                                                        <div class="col-8 col-sm-4">
+                                                        <div class="col-md-4">
                                                             <span class="d-inline d-md-block">
                                                                 ราคารวม
                                                             </span>
