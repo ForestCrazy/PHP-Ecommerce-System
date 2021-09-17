@@ -185,9 +185,22 @@ function changeItemQuantity(p_id, operator) {
                 } else {
                     document.getElementById("product-qty-" + p_id).value =
                         resp["itemInCartQty"];
+                    if (resp.productQty) {
+                        document.getElementById("max-product-qty-" + p_id).value = resp.productQty;
+                        if (resp.productQty < resp.itemInCartQty) {
+                            $('#remain-product-qty-' + p_id).removeClass('d-none');
+                            $('#remain-product-qty-' + p_id).text('เหลือสินค้าอยู่ ' + resp.productQty + ' ชิ้น');
+                            $('#checkbox-product-' + p_id).prop('disabled', true);
+                        } else {
+                            $('#remain-product-qty-' + p_id).addClass('d-none');
+                            $('#checkbox-product-' + p_id).prop('disabled', false);
+                        }
+                    }
                     updateItemInfo(p_id);
                     updateItemInCart();
                 }
+            } else {
+                console.error(resp.reason ? resp.reason : 'error when change product quantity in cart');
             }
             updateOrderDetail();
         });
