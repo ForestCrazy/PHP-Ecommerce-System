@@ -24,12 +24,12 @@ if (isset($_SESSION['username'])) {
                     $res_itemQtyInCart = mysqli_query($connect, $sql_itemQtyInCart);
                     if ($res_itemQtyInCart) {
                         $fetch_itemQtyInCart = mysqli_fetch_assoc($res_itemQtyInCart);
-                        echo json_encode(array('success' => true, 'itemInCartQty' => intval($fetch_itemQtyInCart['quantity'])));
+                        echo json_encode(array('success' => true, 'itemInCartQty' => intval($fetch_itemQtyInCart['quantity']), 'productQty' => intval($fetch_product['product_quantity'])));
                     } else {
-                        echo json_encode(array('success' => true, 'itemInCartQty' => intval($_GET['qty']) - 1));
+                        echo json_encode(array('success' => true, 'itemInCartQty' => intval($_GET['qty']) - 1, 'productQty' => intval($fetch_product['product_quantity'])));
                     }
                 } else {
-                    echo json_encode(array('success' => false, 'itemInCartQty' => intval($_GET['qty'])));
+                    echo json_encode(array('success' => false, 'itemInCartQty' => intval($_GET['qty']), 'productQty' => intval($fetch_product['product_quantity'])));
                 }
             }
         } else if ($_GET['operator'] == '+') {
@@ -40,44 +40,44 @@ if (isset($_SESSION['username'])) {
                     $res_itemQtyInCart = mysqli_query($connect, $sql_itemQtyInCart);
                     if ($res_itemQtyInCart) {
                         $fetch_itemQtyInCart = mysqli_fetch_assoc($res_itemQtyInCart);
-                        echo json_encode(array('success' => true, 'itemInCartQty' => intval($fetch_itemQtyInCart['quantity'])));
+                        echo json_encode(array('success' => true, 'itemInCartQty' => intval($fetch_itemQtyInCart['quantity']), 'productQty' => intval($fetch_product['product_quantity'])));
                     } else {
-                        echo json_encode(array('success' => true, 'itemInCartQty' => intval($_GET['qty']) + 1));
+                        echo json_encode(array('success' => true, 'itemInCartQty' => intval($_GET['qty']) + 1, 'productQty' => intval($fetch_product['product_quantity'])));
                     }
                 } else {
-                    echo json_encode(array('success' => false, 'code' => '500', 'itemInCartQty' => intval($_GET['qty'])));
+                    echo json_encode(array('success' => false, 'code' => 500, 'itemInCartQty' => intval($_GET['qty']), 'productQty' => intval($fetch_product['product_quantity'])));
                 }
             } else {
-                echo json_encode(array('success' => false, 'code' => '10100', 'reason' => 'ไม่สามารถเพิ่มจำนวนสินค้าในรถเข็นได้มากกว่าจำนวนที่มี', 'itemInCartQty' => intval($_GET['qty'])));
+                echo json_encode(array('success' => false, 'code' => '10100', 'reason' => 'ไม่สามารถเพิ่มจำนวนสินค้าในรถเข็นได้มากกว่าจำนวนที่มี', 'itemInCartQty' => intval($_GET['qty']), 'productQty' => intval($fetch_product['product_quantity'])));
             }
         } else if ($_GET['operator'] == '=') {
             if (intval($_GET['qty']) <= $fetch_product['product_quantity']) {
                 $sql_setItemQtyInCart = 'UPDATE cart SET quantity = "' . intval($_GET['qty']) . '" WHERE u_id = "' . $_SESSION['u_id'] . '" AND product_id = "' . $_GET['p_id'] . '"';
                 $res_setItemQtyInCart = mysqli_query($connect, $sql_setItemQtyInCart);
                 if ($res_setItemQtyInCart) {
-                    echo json_encode(array('success' => true, 'code' => 200, 'itemInCartQty' => intval($_GET['qty'])));
+                    echo json_encode(array('success' => true, 'code' => 200, 'itemInCartQty' => intval($_GET['qty']), 'productQty' => intval($fetch_product['product_quantity'])));
                 } else {
                     $res_itemQtyInCart = mysqli_query($connect, $sql_itemQtyInCart);
                     if ($res_itemQtyInCart) {
-                        echo json_encode(array('success' => false, 'code' => 500, 'itemInCartQty' => intval($fetch_itemQtyInCart['quantity'])));
+                        echo json_encode(array('success' => false, 'code' => 500, 'itemInCartQty' => intval($fetch_itemQtyInCart['quantity']), 'productQty' => intval($fetch_product['product_quantity'])));
                     } else {
-                        echo json_encode(array('success' => false, 'code' => 500, 'itemInCartQty' => 1));
+                        echo json_encode(array('success' => false, 'code' => 500, 'itemInCartQty' => 1, 'productQty' => intval($fetch_product['product_quantity'])));
                     }
                 }
             } else {
                 $res_itemQtyInCart = mysqli_query($connect, $sql_itemQtyInCart);
                 if ($res_itemQtyInCart) {
-                    echo json_encode(array('success' => false, 'code' => 10100, 'reason' => 'ไม่สามารถเพิ่มจำนวนสินค้าในรถเข็นได้มากกว่าจำนวนที่มี', 'itemInCartQty' => intval($fetch_itemQtyInCart['quantity'])));
+                    echo json_encode(array('success' => false, 'code' => 10100, 'reason' => 'ไม่สามารถเพิ่มจำนวนสินค้าในรถเข็นได้มากกว่าจำนวนที่มี', 'itemInCartQty' => intval($fetch_itemQtyInCart['quantity']), 'productQty' => intval($fetch_product['product_quantity'])));
                 } else {
-                    echo json_encode(array('success' => false, 'code' => 10100, 'sub_code' => 500, 'reason' => 'ไม่สามารถเพิ่มจำนวนสินค้าในรถเข็นได้มากกว่าจำนวนที่มี', 'itemInCartQty' => 1));
+                    echo json_encode(array('success' => false, 'code' => 10100, 'sub_code' => 500, 'reason' => 'ไม่สามารถเพิ่มจำนวนสินค้าในรถเข็นได้มากกว่าจำนวนที่มี', 'itemInCartQty' => 1, 'productQty' => intval($fetch_product['product_quantity'])));
                 }
             }
         } else {
             $res_itemQtyInCart = mysqli_query($connect, $sql_itemQtyInCart);
             if ($res_itemQtyInCart) {
-                echo json_encode(array('success' => false, 'code' => 400, 'itemInCartQty' => intval($fetch_itemQtyInCart['quantity'])));
+                echo json_encode(array('success' => false, 'code' => 400, 'itemInCartQty' => intval($fetch_itemQtyInCart['quantity']), 'productQty' => intval($fetch_product['product_quantity'])));
             } else {
-                echo json_encode(array('success' => false, 'code' => 400, 'sub_code' => 500, 'itemInCartQty' => 1));
+                echo json_encode(array('success' => false, 'code' => 400, 'sub_code' => 500, 'itemInCartQty' => 1, 'productQty' => intval($fetch_product['product_quantity'])));
             }
         }
     } else {
