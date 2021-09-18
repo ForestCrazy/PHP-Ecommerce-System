@@ -169,7 +169,7 @@ if (!$res_product) {
                     </div>
                     <!-- <br> -->
                     <?php
-                    if ($fetch_product['product_quantity'] == 0) {
+                    if ($fetch_product['product_quantity'] <= 0) {
                     ?>
                         <button class='btn text-white' style='background-color: #acb0b6 !important;' onclick='addFavoriteItem(<?= $fetch_product['product_id'] ?>)'><i class="far fa-heart"></i> เพิ่มเป็นสินค้าที่ชื่นชอบ</button>
                     <?php
