@@ -62,3 +62,73 @@ function isProductOfStore($p_id, $store_id)
         }
     }
 }
+
+function createSubOrder($order_id, $p_id, $p_qty)
+{
+    global $connect;
+    $sql_product = 'SELECT product_price, product_quantity FROM product WHERE product_id = "' . $p_id . '"';
+    $res_product = mysqli_query($connect, $sql_product);
+    if ($res_product) {
+        if (mysqli_num_rows($res_product) == 1) {
+            $fetch_product = mysqli_fetch_assoc($res_product);
+            if ($fetch_product['product_quantity'] >= 1) {
+                $sql_update_product = 'UPDATE product SET product_quantity = product_quantity - ' . $p_qty . ' WHERE product_id = "' . $p_id . '"';
+                $res_update_product = mysqli_query($connect, $sql_update_product);
+                if ($res_update_product) {
+                    $sql_sub_order = 'INSERT INTO sub_order (order_id, product_id, quantity, total_price) VALUES ("' . $order_id . '", "' . $p_id . '", "' . $p_qty . '", "' . $p_qty * $fetch_product['product_price'] . '")';
+                    $res_sub_order = mysqli_query($connect, $sql_sub_order);
+                    if ($res_sub_order) {
+                        return json_encode(array('success' => true, 'code' => 200, 'orderId' => $order_id));
+                    } else {
+                        $sql_update_product = 'UPDATE product SET product_quantity = product_quantity + ' . $p_qty . ' WHERE product_id = "' . $p_id . '"';
+                        $res_update_product = mysqli_query($connect, $sql_update_product);
+                        if ($res_update_product) {
+                            return json_encode(array('success' => false, 'code' => 500, 'reason' => 'เกิดข้อผิดพลาดในการเพิ่ม sub_order'));
+                        } else {
+                            return json_encode(array('success' => false, 'code' => 500, 'reason' => 'เกิดข้อผิดพลาดในการเพิ่ม sub_order', 'sub_code' => 500, 'sub_reason' => 'เกิดข้อผิดพลาดในการย้อนคืนจำนวนสินค้า'));
+                        }
+                    }
+                } else {
+                    return json_encode(array('success' => false, 'code' => 500, 'reason' => 'เกิดข้อผิดพลาดในการอัพเดทจำนวนสินค้า'));
+                }
+            } else {
+                return json_encode(array('success' => false, 'code' => 10100, 'reason' => 'จำนวนสินค้าคงเหลือไม่พอสำหรับคำสั่งซื้อ'));
+            }
+        } else {
+            return json_encode(array('success' => false, 'code' => 10102, 'reason' => 'ไม่พบสินค้าชิ้นนี้ในฐานข้อมูล'));
+        }
+    } else {
+        return json_encode(array('success' => false, 'code' => 500));
+    }
+}
+
+function createOrder($shipping_addr, $shipping_id, $payment_method, $shipping_price, $cart_id = null)
+{
+    global $connect;
+    $sql_shipping_addr = 'SELECT * FROM address WHERE address_id = "' . mysqli_real_escape_string($connect, $shipping_addr) . '" AND u_id = "' . $_SESSION['u_id'] . '"';
+    $res_shipping_addr = mysqli_query($connect, $sql_shipping_addr);
+    if ($res_shipping_addr) {
+        if (mysqli_num_rows($res_shipping_addr) == 1) {
+            $fetch_shipping_addr = mysqli_fetch_assoc($res_shipping_addr);
+            $order_status = $_GET['payment_method'] == 'tranfer' ? 'pending' : 'processing';
+            $sql_order = 'INSERT INTO `order` (`shipping_provider_id`, `shipping_price`, `address_id`, `first_name`, `last_name`, `phone`, `address`, `city`, `province`, `zip_code`, `u_id`, `status`, `payment_method`) VALUES ("' . $shipping_id . '", "' . $shipping_price . '", "' . $fetch_shipping_addr['address_id'] . '", "' . $fetch_shipping_addr['first_name'] . '", "' . $fetch_shipping_addr['last_name'] . '", "' . $fetch_shipping_addr['phone'] . '", "' . $fetch_shipping_addr['address'] . '", "' . $fetch_shipping_addr['city'] . '", "' . $fetch_shipping_addr['province'] . '", "' . $fetch_shipping_addr['zip_code'] . '", "' . $_SESSION['u_id'] . '", "' . $order_status . '", "' . $payment_method . '")';
+            $res_order = mysqli_query($connect, $sql_order);
+            if ($res_order) {
+                $sql_order_id = 'SELECT order_id FROM `order` WHERE shipping_provider_id = "' . $shipping_id . '" AND u_id = "' . $_SESSION['u_id'] . '" ORDER BY order_id DESC LIMIT 1';
+                $res_order_id = mysqli_query($connect, $sql_order_id);
+                if ($res_order_id) {
+                    $fetch_order_id = mysqli_fetch_assoc($res_order_id);
+                    return json_encode(array('success' => true, 'code' => 200, 'orderId' => $fetch_order_id['order_id']));
+                } else {
+                    return json_encode(array('success' => false, 'code' => 500, 'reason' => 'ไม่สามารถหา orderId จากฐานข้อมูลได้'));
+                }
+            } else {
+                return json_encode(array('success' => false, 'code' => 500, 'reason' => 'สร้าง order ไม่สำเร็จ'));
+            }
+        } else {
+            return json_encode(array('success' => false, 'code' => 10102, 'reason' => 'ไม่พบที่อยู่การจัดส่งนี้'));
+        }
+    } else {
+        return json_encode(array('success' => false, 'code' => 500));
+    }
+}
