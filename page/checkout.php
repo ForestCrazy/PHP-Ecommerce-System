@@ -42,13 +42,13 @@ if (!isset($_SESSION['username'])) {
             if (changeShippingProviderWithUrls) {
                 window.location.href = '?page=checkout&p_id=' + url.searchParams.get('p_id') + '&p_quantity=' + url.searchParams.get('p_quantity') + '&shipping_id=' + shipping_id;
             } else {
-                $.get('/updateItemCartShippingProvider.php', {
-                    shipping_provider_id: shipping_id,
+                $.get('/API/updateItemCartShippingProvider.php', {
+                    shipping_id: shipping_id,
                     p_id: p_id ? p_id : p_idCache
                 }).then((res) => {
                     var resp = JSON.parse(res);
                     if (resp.success) {
-                        $('#ShippingProviderModal').find('#productShippingProviderList').htm('');
+                        $('#ShippingProviderModal').find('#productShippingProviderList').html('');
                         location.reload();
                     } else {
                         console.error(resp.reason ? resp.reason : 'failed to change shipping provider');
@@ -58,50 +58,43 @@ if (!isset($_SESSION['username'])) {
         }
 
         function checkout() {
+            var shipping_addr = $('input[type="radio"][name="shipping_addr"]:checked').val();
+            var payment_method = $('input[type="radio"][name="payment"]:checked').val();
             if (url.searchParams.get('p_id')) {
                 var p_id = url.searchParams.get('p_id');
                 var p_quantity = url.searchParams.get('p_quantity');
                 var shipping_id = url.searchParams.get('shipping_id');
-                var shipping_price = $('input[type="hidden"][name="shipping_price"]').val();
-                var order_id = createOrder(shipping_id, shipping_price);
-                order_id.then((orderId) => {
-                    $.get('/API/createSubOrderWithProductId.php', {
-                        p_id: p_id,
-                        p_quantity: p_quantity,
-                        p_qty: p_quantity,
-                        order_id: orderId
-                    }).then((res) => {
-                        var resp = JSON.parse(res);
-                        if (resp.success) {
-                            console.log('create sub order success');
-                            window.location.href = '?page=order_result&order_id=' + orderId;
-                        } else {
-                            console.error(resp.reason ? resp.reason : 'failed to create sub order');
-                        }
-                    })
-                })
-            }
-        }
-
-        function createOrder(shipping_id, shipping_price) {
-            return new Promise((resolve, reject) => {
-                var shipping_addr = $('input[type="radio"][name="shipping_addr"]:checked').val();
-                var payment_method = $('input[type="radio"][name="payment"]:checked').val();
-                $.get('/API/createOrder.php', {
+                $.get('/API/checkoutWithProductId.php', {
+                    p_id: p_id,
+                    p_quantity: p_quantity,
+                    p_qty: p_quantity,
                     shipping_addr: shipping_addr,
                     shipping_id: shipping_id,
-                    payment_method: payment_method,
-                    shipping_price: shipping_price
+                    payment_method: payment_method
                 }).then((res) => {
                     var resp = JSON.parse(res);
                     if (resp.success) {
-                        console.log('create order success. order id : ' + resp.orderId);
-                        resolve(resp.orderId);
+                        console.log('create order success');
+                        window.location.href = '?page=order_result&order_id=' + resp.orderId;
                     } else {
-                        console.error(resp.reason ? resp.reason : 'failed to create order');
+                        console.error(resp.reason ? resp.reason : 'failed to create sub order');
                     }
                 })
-            })
+            } else {
+                $.post('/API/checkoutWithCartId.php', {
+                    cart_id: url.searchParams.get('cart_id'),
+                    shipping_addr: shipping_addr,
+                    payment_method: payment_method
+                }).then((res) => {
+                    var resp = JSON.parse(res);
+                    if (resp.success) {
+                        console.log('checkout with cart_id success');
+                        location.href = '?page=order_result&order_id=' + orderId + '&order_format=array';
+                    } else {
+                        console.error(resp.reason ? resp.reason : 'failed to checkout with cart_id');
+                    }
+                })
+            }
         }
     </script>
     <style>
@@ -145,171 +138,6 @@ if (!isset($_SESSION['username'])) {
             }
         }
         ?>
-    </div>
-    <div class='card col-top pt-3'>
-        <div class='d-flex justify-content-start align-items-center'>
-            <div class='text-nowrap' style='width: 120px;'>
-                &emsp;
-                <i class="far fa-store"></i>
-                ForestCrazy_Dev
-            </div>
-            <div class='flex-fill'>
-                <div class='row'>
-                    <div class='col-4'></div>
-                    <div class='col-8 text-center d-none d-md-block'>
-                        <div class='row'>
-                            <div class='col'>
-                                ราคาต่อชิ้น
-                            </div>
-                            <div class='col'>
-                                จำนวน
-                            </div>
-                            <div class='col'>
-                                รวม
-                            </div>
-                            <div class='col'>
-                                การจัดส่ง
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class='d-flex justify-content-start align-items-center'>
-            <img src='/asset/img/product_img/1631278166-ตี๋เล็กซาลาเปา-เปาหมูแดง.jpg' style='max-height: 120px;' class='img-fluid' />
-            <div class='flex-fill'>
-                <div class='row'>
-                    <div class='col-md-4'>
-                        <span>
-                            ซาลาเปาหมูแดง
-                        </span>
-                    </div>
-                    <div class='col-md-8 text-md-center'>
-                        <div class='row'>
-                            <div class='col-sm-3'>
-                                <span class='d-inline d-md-none'>
-                                    ราคาต่อชิ้น
-                                </span>
-                                <span class='d-inline d-md-none'>
-                                    :
-                                </span>
-                                <span class='d-inline d-md-block'>
-                                    ฿100
-                                </span>
-                            </div>
-                            <div class='col-sm-3'>
-                                <span class='d-inline d-md-none'>
-                                    จำนวน
-                                </span>
-                                <span class='d-inline d-md-none'>
-                                    :
-                                </span>
-                                <span class='d-inline d-md-block'>
-                                    0
-                                </span>
-                            </div>
-                            <div class='col-sm-3'>
-                                <span class='d-inline d-md-none'>
-                                    รวม
-                                </span>
-                                <span class='d-inline d-md-none'>
-                                    :
-                                </span>
-                                <span class='d-inline d-md-block'>
-                                    ฿100
-                                </span>
-                            </div>
-                            <div class='col-sm-3'>
-                                <span class='d-inline d-md-none'>
-                                    การจัดส่ง
-                                </span>
-                                <span class='d-inline d-md-none'>
-                                    :
-                                </span>
-                                <span class='d-inline d-md-block'>
-                                    Kerry Express
-                                    <span class='text-primary'>เปลี่ยน</span>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class='d-flex justify-content-start align-items-center'>
-            <img src='/asset/img/product_img/1631278166-ตี๋เล็กซาลาเปา-เปาหมูแดง.jpg' style='max-height: 120px;' class='img-fluid' />
-            <div class='flex-fill'>
-                <div class='row'>
-                    <div class='col-md-4'>
-                        <span>
-                            ซาลาเปาหมูแดง
-                        </span>
-                    </div>
-                    <div class='col-md-8 text-md-center'>
-                        <div class='row'>
-                            <div class='col-sm-3'>
-                                <span class='d-inline d-md-none'>
-                                    ราคาต่อชิ้น
-                                </span>
-                                <span class='d-inline d-md-none'>
-                                    :
-                                </span>
-                                <span class='d-inline d-md-block'>
-                                    ฿100
-                                </span>
-                            </div>
-                            <div class='col-sm-3'>
-                                <span class='d-inline d-md-none'>
-                                    จำนวน
-                                </span>
-                                <span class='d-inline d-md-none'>
-                                    :
-                                </span>
-                                <span class='d-inline d-md-block'>
-                                    0
-                                </span>
-                            </div>
-                            <div class='col-sm-3'>
-                                <span class='d-inline d-md-none'>
-                                    รวม
-                                </span>
-                                <span class='d-inline d-md-none'>
-                                    :
-                                </span>
-                                <span class='d-inline d-md-block'>
-                                    ฿100
-                                </span>
-                            </div>
-                            <div class='col-sm-3'>
-                                <span class='d-inline d-md-none'>
-                                    การจัดส่ง
-                                </span>
-                                <span class='d-inline d-md-none'>
-                                    :
-                                </span>
-                                <span class='d-inline d-md-block'>
-                                    Kerry Express
-                                    <span class='text-primary'>เปลี่ยน</span>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class='alert-secondary p-1'>
-            <div class='d-flex justify-content-around align-items-center text-center text-md-left'>
-                <span class='d-inline'>
-                    ช่องทางการจัดส่ง
-                </span>
-                <span class='d-inline'>
-                    Kerry Express
-                </span>
-                <span class='d-sm-block d-inline'>
-                    ฿0
-                </span>
-            </div>
-        </div>
     </div>
     <?php
     $total_product_price = 0;
@@ -435,10 +263,148 @@ if (!isset($_SESSION['username'])) {
                     </div>
                 </div>
             </div>
-    <?php
+            <?php
         }
     } elseif (isset($_GET['cart_id'])) {
-        
+        $sql_store = 'SELECT store.store_id, store.store_name FROM cart_temp INNER JOIN product ON cart_temp.product_id = product.product_id INNER JOIN store ON product.store_id = store.store_id WHERE cart_temp.cart_id = "' . $_GET['cart_id'] . '" AND cart_temp.u_id GROUP BY store.store_id';
+        $res_store = mysqli_query($connect, $sql_store);
+        if ($res_store) {
+            while ($fetch_store = mysqli_fetch_assoc($res_store)) {
+            ?>
+                <div class='card col-top pt-3'>
+                    <div class='d-flex justify-content-start align-items-center'>
+                        <div class='text-nowrap' style='width: 120px;'>
+                            &emsp;
+                            <i class="far fa-store"></i>
+                            <?= $fetch_store['store_name'] ?>
+                        </div>
+                        <div class='flex-fill'>
+                            <div class='row'>
+                                <div class='col-4'></div>
+                                <div class='col-8 text-center d-none d-md-block'>
+                                    <div class='row'>
+                                        <div class='col'>
+                                            ราคาต่อชิ้น
+                                        </div>
+                                        <div class='col'>
+                                            จำนวน
+                                        </div>
+                                        <div class='col'>
+                                            รวม
+                                        </div>
+                                        <div class='col'>
+                                            การจัดส่ง
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <?php
+                    $sql_shipping_store = 'SELECT cart.shipping_id FROM cart_temp INNER JOIN cart ON cart_temp.product_id = cart.product_id INNER JOIN product ON cart.product_id = product.product_id WHERE cart_temp.cart_id = "' . $_GET['cart_id'] . '" AND cart.u_id = "' . $_SESSION['u_id'] . '" AND product.store_id = "' . $fetch_store['store_id'] . '" GROUP BY cart.shipping_id';
+                    $res_shipping_store = mysqli_query($connect, $sql_shipping_store);
+                    if ($res_shipping_store) {
+                        while ($fetch_shipping_store = mysqli_fetch_assoc($res_shipping_store)) {
+                            $sql_product_checkout = 'SELECT product.*, cart.*, shipping_provider.shipping_name, product_img.img_url FROM cart_temp INNER JOIN cart ON cart_temp.product_id = cart.product_id INNER JOIN product ON cart.product_id = product.product_id INNER JOIN shipping_provider ON cart.shipping_id = shipping_provider.shipping_provider_id LEFT JOIN (SELECT product_id, img_url FROM product_img GROUP BY product_id ORDER BY weight ASC) AS product_img ON product.product_id = product_img.product_id WHERE cart_temp.cart_id = "' . $_GET['cart_id'] . '" AND cart.u_id = "' . $_SESSION['u_id'] . '" AND product.store_id = "' . $fetch_store['store_id'] . '" AND cart.shipping_id = "' . $fetch_shipping_store['shipping_id'] . '"';
+                            $res_product_checkout = mysqli_query($connect, $sql_product_checkout);
+                            if ($res_product_checkout) {
+                                while ($fetch_product_checkout = mysqli_fetch_assoc($res_product_checkout)) {
+                                    $total_product_price += $fetch_product_checkout['product_price'] * $fetch_product_checkout['quantity'];
+                    ?>
+                                    <div class='d-flex justify-content-start align-items-center'>
+                                        <img src='<?= $fetch_product_checkout['img_url'] ?>' style='max-height: 120px;' class='img-fluid' />
+                                        <div class='flex-fill'>
+                                            <div class='row'>
+                                                <div class='col-md-4'>
+                                                    <span>
+                                                        <?= $fetch_product_checkout['product_name'] ?>
+                                                    </span>
+                                                </div>
+                                                <div class='col-md-8 text-md-center'>
+                                                    <div class='row'>
+                                                        <div class='col-sm-3'>
+                                                            <span class='d-inline d-md-none'>
+                                                                ราคาต่อชิ้น
+                                                            </span>
+                                                            <span class='d-inline d-md-none'>
+                                                                :
+                                                            </span>
+                                                            <span class='d-inline d-md-block'>
+                                                                ฿<?= $fetch_product_checkout['product_price'] ?>
+                                                            </span>
+                                                        </div>
+                                                        <div class='col-sm-3'>
+                                                            <span class='d-inline d-md-none'>
+                                                                จำนวน
+                                                            </span>
+                                                            <span class='d-inline d-md-none'>
+                                                                :
+                                                            </span>
+                                                            <span class='d-inline d-md-block'>
+                                                                <?= $fetch_product_checkout['quantity'] ?>
+                                                            </span>
+                                                        </div>
+                                                        <div class='col-sm-3'>
+                                                            <span class='d-inline d-md-none'>
+                                                                รวม
+                                                            </span>
+                                                            <span class='d-inline d-md-none'>
+                                                                :
+                                                            </span>
+                                                            <span class='d-inline d-md-block'>
+                                                                ฿<?= $fetch_product_checkout['product_price'] * $fetch_product_checkout['quantity'] ?>
+                                                            </span>
+                                                        </div>
+                                                        <div class='col-sm-3'>
+                                                            <span class='d-inline d-md-none'>
+                                                                การจัดส่ง
+                                                            </span>
+                                                            <span class='d-inline d-md-none'>
+                                                                :
+                                                            </span>
+                                                            <span class='d-inline d-md-block'>
+                                                                <?= $fetch_product_checkout['shipping_name'] ?>
+                                                                <span class='text-primary' onclick="changeShippingProvider(<?= $fetch_product_checkout['product_id'] ?>, <?= $fetch_product_checkout['shipping_id'] ?>, false)">เปลี่ยน</span>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                            <?php
+                                }
+                            }
+                            $sql_shipping = 'SELECT product.store_id, cart.shipping_id, shipping_provider.shipping_name, MAX(product_shipping.shipping_price) AS shipping_price FROM cart_temp INNER JOIN cart ON cart_temp.product_id = cart.product_id INNER JOIN product ON cart.product_id = product.product_id INNER JOIN product_shipping ON product.product_id = product_shipping.product_id AND cart.shipping_id = product_shipping.shipping_provider_id INNER JOIN shipping_provider ON product_shipping.shipping_provider_id = shipping_provider.shipping_provider_id WHERE cart_temp.cart_id = "' . $_GET['cart_id'] . '" AND cart.u_id = "' . $_SESSION['u_id'] . '" AND product.store_id = "' . $fetch_store['store_id'] . '" AND cart.shipping_id = "' . $fetch_shipping_store['shipping_id'] . '"';
+                            $res_shipping = mysqli_query($connect, $sql_shipping);
+                            if ($res_shipping) {
+                                $fetch_shipping = mysqli_fetch_assoc($res_shipping);
+                                $total_shipping_price += $fetch_shipping['shipping_price'];
+                            } else {
+                                gotoPage('502');
+                            }
+                            ?>
+                            <div class='alert-secondary p-1'>
+                                <div class='d-flex justify-content-around align-items-center text-center text-md-left'>
+                                    <span class='d-inline'>
+                                        ช่องทางการจัดส่ง
+                                    </span>
+                                    <span class='d-inline'>
+                                        <?= $fetch_shipping['shipping_name'] ?>
+                                    </span>
+                                    <span class='d-sm-block d-inline'>
+                                        ฿<?= $fetch_shipping['shipping_price'] ?>
+                                    </span>
+                                </div>
+                            </div>
+                    <?php
+                        }
+                    }
+                    ?>
+                </div>
+    <?php
+            }
+        }
     } else {
         gotoPage('home');
     }
@@ -468,7 +434,7 @@ if (!isset($_SESSION['username'])) {
                         ยอดรวมสินค้า:
                     </div>
                     <div class='text-right col-6'>
-                        <?= $total_product_price ?>
+                        ฿ <?= $total_product_price ?>
                     </div>
                 </div>
                 <div class='row col pr-0'>
@@ -476,15 +442,15 @@ if (!isset($_SESSION['username'])) {
                         ยอดรวมค่าจัดส่ง:
                     </div>
                     <div class='text-right col-6'>
-                        <?= $total_shipping_price ?>
+                        ฿ <?= $total_shipping_price ?>
                     </div>
                 </div>
                 <div class='row col pr-0'>
                     <div class='text-left col-6'>
                         รวมยอดที่ต้องชำระ:
                     </div>
-                    <div class='text-right col-6'>
-                        <?= $total_product_price + $total_shipping_price ?>
+                    <div class='text-right col-6 font-weight-bold'>
+                        ฿ <?= $total_product_price + $total_shipping_price ?>
                     </div>
                 </div>
             </div>
