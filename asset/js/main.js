@@ -67,7 +67,7 @@ function removeItemFromCart(p_id, alert = true) {
                 } else {
                     console.log("remove item from cart success.");
                 }
-                var store_id = $('#product-' + p_id).data("storeid");
+                var store_id = $("#product-" + p_id).data("storeid");
                 document.getElementById("product-" + p_id).remove();
                 updateOrderDetail();
                 updateItemInCart();
@@ -155,7 +155,7 @@ function changeItemQuantity(p_id, operator) {
     //     }
     // }
     if (
-        document.getElementById("product-qty-" + p_id).value == 1 &&
+        document.getElementById("product-qty-" + p_id).value <= 1 &&
         operator == "-"
     ) {
         Swal.fire({
@@ -183,24 +183,35 @@ function changeItemQuantity(p_id, operator) {
                 if (resp["code"] == 204) {
                     document.getElementById("product-" + p_id).remove();
                 } else {
-                    document.getElementById("product-qty-" + p_id).value =
-                        resp["itemInCartQty"];
-                    if (resp.productQty) {
-                        document.getElementById("max-product-qty-" + p_id).value = resp.productQty;
-                        if (resp.productQty < resp.itemInCartQty) {
-                            $('#remain-product-qty-' + p_id).removeClass('d-none');
-                            $('#remain-product-qty-' + p_id).text('เหลือสินค้าอยู่ ' + resp.productQty + ' ชิ้น');
-                            $('#checkbox-product-' + p_id).prop('disabled', true);
-                        } else {
-                            $('#remain-product-qty-' + p_id).addClass('d-none');
-                            $('#checkbox-product-' + p_id).prop('disabled', false);
-                        }
-                    }
                     updateItemInfo(p_id);
                     updateItemInCart();
                 }
             } else {
-                console.error(resp.reason ? resp.reason : 'error when change product quantity in cart');
+                if (resp.code == 10100) {
+                    Swal.fire(resp.reason);
+                }
+                console.error(
+                    resp.reason ?
+                    resp.reason :
+                    "error when change product quantity in cart"
+                );
+            }
+
+            if (resp.productQty) {
+                document.getElementById("product-qty-" + p_id).value =
+                    resp["itemInCartQty"];
+                document.getElementById("max-product-qty-" + p_id).value =
+                    resp.productQty;
+                if (resp.productQty < resp.itemInCartQty) {
+                    $("#remain-product-qty-" + p_id).removeClass("d-none");
+                    $("#remain-product-qty-" + p_id).text(
+                        "เหลือสินค้าอยู่ " + resp.productQty + " ชิ้น"
+                    );
+                    $("#checkbox-product-" + p_id).prop("disabled", true);
+                } else {
+                    $("#remain-product-qty-" + p_id).addClass("d-none");
+                    $("#checkbox-product-" + p_id).prop("disabled", false);
+                }
             }
             updateOrderDetail();
         });
