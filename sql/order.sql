@@ -1,7 +1,9 @@
 CREATE TABLE IF NOT EXISTS `order` (
     `order_id` INT AUTO_INCREMENT,
+    `cart_id` varchar(20) NOT NULL,
     `shipping_provider_id` INT NOT NULL,
     `shipping_price` INT NOT NULL,
+    `product_price` INT NOT NULL,
     `track_code` varchar(300),
     `address_id` INT NOT NULL,
     `first_name` varchar(20) NOT NULL,
@@ -17,6 +19,6 @@ CREATE TABLE IF NOT EXISTS `order` (
     `payment_method` ENUM('tranfer', 'cod'),
     `context` varchar(300),
     `createtime` datetime DEFAULT CURRENT_TIMESTAMP,
-    `end_process_time` datetime DEFAULT CURRENT_TIMESTAMP,
+    `end_process_time` datetime,
     PRIMARY KEY(`order_id`)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8 AUTO_INCREMENT = 1;
