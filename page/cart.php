@@ -102,6 +102,19 @@ if (!isset($_SESSION['username'])) {
             });
         });
         updateItemInCart();
+
+        function changeQty(p_id) {
+            $.get('/API/productQtyRemain.php', {
+                p_id: p_id
+            }).then((res) => {
+                var resp = JSON.parse(res);
+                if (resp.success) {
+                    if ($('#product-qty-' + p_id).val() > resp.productQty) {
+                        $('#product-qty-' + p_id).val(resp.productQty);
+                    }
+                }
+            })
+        }
     </script>
     <div class='row col-top'>
         <h3>ตระกร้าสินค้าของฉัน</h3>
@@ -146,7 +159,7 @@ if (!isset($_SESSION['username'])) {
                                                             <div class="d-flex justify-content-md-center">
                                                                 <div class="def-number-input number-input safari_only d-flex justify-content-center">
                                                                     <button onclick="changeItemQuantity('<?= $fetch_cart_product['product_id'] ?>', '-')" class="minus"></button>
-                                                                    <input class="quantity" min="0" id="product-qty-<?= $fetch_cart_product['product_id'] ?>" name="product-quantity-<?= $fetch_cart_product['product_id'] ?>" value="<?= $fetch_cart_product['quantity'] ?>" type="number">
+                                                                    <input class="quantity" min="0" id="product-qty-<?= $fetch_cart_product['product_id'] ?>" name="product-quantity-<?= $fetch_cart_product['product_id'] ?>" value="<?= $fetch_cart_product['quantity'] ?>" type="number" onkeyup="changeQty(<?= $fetch_cart_product['product_id'] ?>)">
                                                                     <input type='hidden' id='max-product-qty-<?= $fetch_cart_product['product_id'] ?>' name='max-product-qty-<?= $fetch_cart_product['product_id'] ?>' value='<?= $fetch_cart_product['product_quantity'] ?>' />
                                                                     <button onclick="changeItemQuantity('<?= $fetch_cart_product['product_id'] ?>', '+')" class="plus"></button>
                                                                 </div>
