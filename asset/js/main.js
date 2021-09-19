@@ -134,6 +134,7 @@ function selectAllItem(checked) {
     } else {
         $("input.productSelect").not(this).prop("checked", false);
     }
+    updateOrderDetail();
 }
 
 function changeItemQuantity(p_id, operator) {
