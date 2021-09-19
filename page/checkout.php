@@ -89,7 +89,7 @@ if (!isset($_SESSION['username'])) {
                     var resp = JSON.parse(res);
                     if (resp.success) {
                         console.log('checkout with cart_id success');
-                        location.href = '?page=order_result&order_id=' + orderId + '&order_format=array';
+                        location.href = '?page=order_result&cart_id=' + url.searchParams.get('cart_id');
                     } else {
                         console.error(resp.reason ? resp.reason : 'failed to checkout with cart_id');
                     }
