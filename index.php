@@ -211,6 +211,10 @@ if (isset($_SESSION['username'])) {
             include_once __DIR__ . '/page/product_favorite.php';
         } elseif ($_GET['page'] == "checkout") {
             include_once __DIR__ . '/page/checkout.php';
+        } elseif ($_GET['page'] == "order_result") {
+            include_once __DIR__ . '/page/order_result.php';
+        } elseif ($_GET['page'] == "order_list") {
+            include_once __DIR__ . '/page/order_list.php';
         } elseif ($_GET['page'] == "event") {
             include_once __DIR__ . '/page/event.php';
         } elseif ($_GET['page'] == "cart") {
