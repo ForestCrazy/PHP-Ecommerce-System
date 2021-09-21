@@ -84,6 +84,14 @@ if (isset($_SESSION['username'])) {
             height: 1px;
             content: "";
         }
+
+        .rating-container .caption {
+            display: none !important;
+        }
+
+        .rating-md {
+            font-size: 0px !important;
+        }
     </style>
 </head>
 
@@ -185,7 +193,7 @@ if (isset($_SESSION['username'])) {
                             <div class="dropdown-menu dropdown-menu-right dropdown-default" aria-labelledby="navbarDropdownMenuLink-333">
                                 <a class="dropdown-item" href="#"><i class="far fa-user"></i> <?= $_SESSION['username'] ?></a>
                                 <a class="dropdown-item" href="?page=change_password"><i class="far fa-sliders-v-square"></i> เปลี่ยนรหัสผ่าน</a>
-                                <a class="dropdown-item" href="#"><i class="far fa-box"></i> รายการสั่งซื้อของฉัน</a>
+                                <a class="dropdown-item" href="?page=order_list"><i class="far fa-box"></i> รายการสั่งซื้อของฉัน</a>
                                 <a class="dropdown-item" href="?page=product_favorite"><i class="far fa-heart"></i> รายการสินค้าที่ฉันชอบ</a>
                                 <a class="dropdown-item" href="#"><i class="far fa-star"></i> รายการร้านค้าที่ฉันติดตาม</a>
                                 <a class="dropdown-item" href="#"><i class="far fa-comment"></i> ประวัติการรีวิวสินค้า</a>
