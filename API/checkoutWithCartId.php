@@ -24,7 +24,9 @@ if ($_SESSION['username']) {
                                 $res_product_checkout = mysqli_query($connect, $sql_product_checkout);
                                 if ($res_product_checkout) {
                                     $suborder_arr = [];
+                                    $total_product_price = 0;
                                     while ($fetch_product_checkout = mysqli_fetch_assoc($res_product_checkout)) {
+                                        $total_product_price += $fetch_product_checkout['product_price'];
                                         $suborder = createSubOrder($order_obj->orderId, $fetch_product_checkout['product_id'], $fetch_product_checkout['quantity']);
                                         array_push($suborder_arr, $suborder);
                                         $suborder_obj = json_decode($suborder);
@@ -33,6 +35,8 @@ if ($_SESSION['username']) {
                                             $res_delete_item = mysqli_query($connect, $sql_delete_item);
                                         }
                                     }
+                                    $sql_update_order = 'UPDATE `order` SET product_price = "' . $total_product_price . '" WHERE order_id = "' . $order_obj -> orderId . '"';
+                                    $res_update_order = mysqli_query($connect, $sql_update_order);
                                     array_push($order_arr, array('order' => $order, 'suborder' => $suborder_arr));
                                 } else {
                                     array_push($order_arr, array('order' => $order, 'suborder' => []));
