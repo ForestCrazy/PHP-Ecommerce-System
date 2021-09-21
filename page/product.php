@@ -11,14 +11,6 @@ if (!$res_product) {
             .carousel-indicators li {
                 background-color: #000;
             }
-
-            .rating-container .caption {
-                display: none !important;
-            }
-
-            .rating-md {
-                font-size: 0px !important;
-            }
         </style>
         <script>
             function checkQuantity() {
@@ -307,7 +299,7 @@ if (!$res_product) {
             </div>
         </div>
         <?php
-        $sql_product_review = 'SELECT AVG(product_review.star_score) AS star_score FROM product INNER JOIN sub_order ON product.product_id = sub_order.order_id INNER JOIN product_review ON sub_order.sub_order_id = product_review.sub_order_id WHERE product.product_id = "' . $fetch_product['product_id'] . '"';
+        $sql_product_review = 'SELECT AVG(product_review.star_score) AS star_score FROM product_review INNER JOIN sub_order ON product_review.sub_order_id = sub_order.sub_order_id WHERE sub_order.product_id = "' . $fetch_product['product_id'] . '"';
         $res_product_review = mysqli_query($connect, $sql_product_review);
         if (!$res_product_review) {
             gotoPage('home');
