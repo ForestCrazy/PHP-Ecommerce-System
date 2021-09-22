@@ -213,6 +213,8 @@ if (isset($_SESSION['username'])) {
         <?php
         if ($_GET["page"] == "home") {
             include_once __DIR__ . '/page/home.php';
+        } elseif ($_GET['page'] == "search") {
+            include_once __DIR__ . '/page/search.php';
         } elseif ($_GET['page'] == "product") {
             include_once __DIR__ . '/page/product.php';
         } elseif ($_GET['page'] == "product_favorite") {
