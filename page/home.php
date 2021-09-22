@@ -46,8 +46,10 @@
 </script>
 <div class="search-box-header card">
     <div class="d-flex justify-content-start align-items-center bd-highlight">
-        <div class="p-2 bd-highlight" style="width: 90%"><input type="text" class="w-100 form-control" name="search" placeholder="พิมพ์เพื่อค้นหา"></div>
-        <div class="p-2 bd-highlight"> <button type="submit" class="btn btn-green">ค้นหา</button></div>
+        <div class="p-2 bd-highlight" style="width: 90%"><input type="text" class="w-100 form-control" name="search" id="search" placeholder="พิมพ์เพื่อค้นหา"></div>
+        <div class="p-2 bd-highlight">
+            <div class="btn btn-green" onclick="window.location.href = '?page=search&query=' + $('#search').val()">ค้นหา</div>
+        </div>
     </div>
 </div>
 <br>
