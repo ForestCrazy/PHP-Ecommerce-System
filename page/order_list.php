@@ -307,6 +307,10 @@ if (!isset($_SESSION['username'])) {
                         ?>
                             <div class='alert-secondary col py-1'>
                                 <div class='d-flex justify-content-end text-md-right'>
+                                    <span class='text-primary' style='cursor: pointer;' onclick='orderStatus(<?= $fetch_order['order_id'] ?>)'>
+                                        สถานะสินค้า
+                                    </span>
+                                    <div style='width: 30px;'></div>
                                     <span>
                                         ยอดคำสั่งซื้อทั้งหมด :
                                         &nbsp;
@@ -321,15 +325,15 @@ if (!isset($_SESSION['username'])) {
                                         if ($fetch_order['status'] == 'pending') {
                                             if (empty($fetch_order['payment_id'])) {
                                     ?>
-                                            <div class='btn btn-primary' onclick='togglePaymentSlipModal(<?= $fetch_order['order_id'] ?>)'>ชำระเงิน</div>
-                                        <?php
+                                                <div class='btn btn-primary' onclick='togglePaymentSlipModal(<?= $fetch_order['order_id'] ?>)'>ชำระเงิน</div>
+                                            <?php
+                                            } else {
+                                            ?>
+                                                <div class='btn btn-blue-grey'>รอตรวจสอบหลักฐานการโอนเงิน</div>
+                                            <?php
+                                            }
                                         } else {
                                             ?>
-                                        <div class='btn btn-blue-grey'>รอตรวจสอบหลักฐานการโอนเงิน</div>
-                                            <?php
-                                        }
-                                        } else {
-                                        ?>
                                             <div class='btn btn-success' onclick='confirmShipped(<?= $fetch_order_id['order_id'] ?>)'>ยืนยันได้รับสินค้า</div>
                                         <?php
                                         }
