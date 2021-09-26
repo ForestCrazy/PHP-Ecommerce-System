@@ -239,7 +239,7 @@ if (!$res_product) {
                 <div class='col-sm-6' style='margin-top: 0!important;'>
                     <div class='row'>
                         <div class='col-4 col-sm-3 col-md-4 col-lg-3 col-xl-3' style='margin-top: 0!important;'>
-                            <img class="z-depth-2 img-fluid" style="width: 150px;" src="https://cf.shopee.co.th/file/acfb710a76fee2c2794fa5f22a858ed9_tn">
+                            <img class="z-depth-2 img-fluid" style="max-height: 150px;" src="<?= !empty($fetch_product['store_img']) ? $fetch_product['store_img'] : '/asset/img/store_default.png' ?>">
                         </div>
                         <div class='col-8 col-sm-9 col-md-8 col-lg-9 col-xl-9' style='margin-top: 0!important;'>
                             <h5 clas='align-middle'><?php echo $fetch_product['store_name']; ?></h5>
