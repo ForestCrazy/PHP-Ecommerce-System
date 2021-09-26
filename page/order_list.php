@@ -4,6 +4,7 @@ if (!isset($_SESSION['username'])) {
 } else {
 ?>
     <script>
+        var cachePaymentSlip = null;
         $(document).ready(function() {
             $('#product-review').on('rating:hover', function(event, value, caption, target) {
                 $('#review-score').html('&emsp;' + value + ' คะแนน');
@@ -47,12 +48,87 @@ if (!isset($_SESSION['username'])) {
                 })
             }
         }
+
+        function confirmShipped(order_id) {
+            Swal.fire({
+                title: 'แน่ใจหรือไม่ที่จะทำการยืนยันสินค้า',
+                text: "",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'ใช่ ยืนยัน',
+                cancelButtonText: 'ไม่ ยกเลิก'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.post('/API/confirmSuccessOrder.php', {
+                        order_id: order_id
+                    }, function(res) {
+                        var resp = JSON.parse(res);
+                        if (resp.success) {
+                            Swal.fire(
+                                'ยืนยันออเดอร์สำเร็จ',
+                                '',
+                                'success'
+                            ).then(() => {
+                                location.reload();
+                            })
+                        }
+                    })
+                }
+            })
+        }
+
+        function inputPaymentSlip(input) {
+            if (input.files.length == 1) {
+                cachePaymentSlip = input.files[0];
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $('#preview-payment-slip').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+            } else {
+                console.error('failed to preview payment slip');
+            }
+        }
+
+        function togglePaymentSlipModal(order_id) {
+            $('#updatePaymentModal').modal('show');
+            $('#update-payment-order-id').val(order_id);
+        }
+
+        function updatePaymentSlip() {
+            var order_id = $('#update-payment-order-id').val();
+            if (order_id !== '') {
+                if (cachePaymentSlip) {
+                    var formData = new FormData();
+                    formData.append('order_id', order_id);
+                    formData.append('paymentSlip', cachePaymentSlip);
+                    $.ajax({
+                        url: '/API/updatePaymentSlip.php',
+                        type: 'POST',
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        success: function(res) {
+                            var resp = JSON.parse(res);
+                            if (resp.success) {
+                                $('#updatePaymentModal').modal('hide');
+                                console.log('update payment slip success');
+                            } else {
+                                console.error(resp.reason ? resp.reason : 'failed to update payment slip');
+                            }
+                        }
+                    })
+                }
+            }
+        }
     </script>
-    <div class="modal fade" id="reviewProductModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="reviewProductModal" tabindex="-1" role="dialog" aria-labelledby="reviewProductModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">รีวิวสินค้า</h5>
+                    <h5 class="modal-title" id="reviewProductModalLabel">รีวิวสินค้า</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -72,8 +148,38 @@ if (!isset($_SESSION['username'])) {
             </div>
         </div>
     </div>
+    <div class="modal fade" id="updatePaymentModal" tabindex="-1" role="dialog" aria-labelledby="updatePaymentModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="updatePaymentModalLabel">อัพเดทหลักฐานการชำระเงิน</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class='col col-top'>
+                        <div class='text-center'>
+                            <img id='preview-payment-slip' style='min-height: 10rem; max-height: 280px;' src='' />
+                        </div>
+                        <div class='d-block'>
+                            <div class='d-flex justify-content-center'>
+                                <div class='btn btn-outline-primary d-block' onclick="$('#inputPaymentSlip').click();">เลือกรูป</div>
+                                <input type='file' class='d-none' id='inputPaymentSlip' onchange='inputPaymentSlip(this)' accept=".png, .jpg, .jpeg" />
+                            </div>
+                            <input type='hidden' id='update-payment-order-id' />
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">ยกเลิก</button>
+                    <button type="button" class="btn btn-primary" onclick='updatePaymentSlip()'>อัพเดทหลักฐานการโอนเงิน</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <?php
-    $sql_order_id = 'SELECT * FROM `order` WHERE u_id = "' . $_SESSION['u_id'] . '"';
+    $sql_order_id = 'SELECT * FROM `order` WHERE u_id = "' . $_SESSION['u_id'] . '" ORDER BY order_id DESC';
     $res_order_id = mysqli_query($connect, $sql_order_id);
     if ($res_order_id) {
         while ($fetch_order_id = mysqli_fetch_assoc($res_order_id)) {
@@ -163,22 +269,30 @@ if (!isset($_SESSION['username'])) {
                                             </div>
                                             <div class='col-sm-3'>
                                                 <?php
-                                                $sql_product_review = 'SELECT * FROM product_review WHERE sub_order_id = "' . $fetch_order['sub_order_id'] . '"';
-                                                $res_product_review = mysqli_query($connect, $sql_product_review);
-                                                if ($res_product_review) {
-                                                    if (mysqli_num_rows($res_product_review) == 1) {
+                                                if ($fetch_order['status'] == 'shipped') {
+                                                    $sql_product_review = 'SELECT * FROM product_review WHERE sub_order_id = "' . $fetch_order['sub_order_id'] . '"';
+                                                    $res_product_review = mysqli_query($connect, $sql_product_review);
+                                                    if ($res_product_review) {
+                                                        if (mysqli_num_rows($res_product_review) == 1) {
                                                 ?>
-                                                        <span>
-                                                            รีวิวสินค้านี้แล้ว
-                                                        </span>
+                                                            <span>
+                                                                รีวิวสินค้านี้แล้ว
+                                                            </span>
+                                                        <?php
+                                                        } else {
+                                                        ?>
+                                                            <span class='text-primary' onclick='review_product(<?= $fetch_order['sub_order_id'] ?>)'>
+                                                                รีวิวสินค้า
+                                                            </span>
                                                     <?php
-                                                    } else {
-                                                    ?>
-                                                        <span class='text-primary' onclick='review_product(<?= $fetch_order['sub_order_id'] ?>)'>
-                                                            รีวิวสินค้า
-                                                        </span>
-                                                <?php
+                                                        }
                                                     }
+                                                } else {
+                                                    ?>
+                                                    <span>
+                                                        -
+                                                    </span>
+                                                <?php
                                                 }
                                                 ?>
                                             </div>
@@ -204,11 +318,23 @@ if (!isset($_SESSION['username'])) {
                                 <div class='d-flex justify-content-end align-items-center text-center text-md-left'>
                                     <?php
                                     if (empty($fetch_order['end_process_time'])) {
+                                        if ($fetch_order['status'] == 'pending') {
+                                            if (empty($fetch_order['payment_id'])) {
                                     ?>
-                                        <div class='btn btn-success'>ยืนยันได้รับสินค้า</div>
-                                    <?php
+                                            <div class='btn btn-primary' onclick='togglePaymentSlipModal(<?= $fetch_order['order_id'] ?>)'>ชำระเงิน</div>
+                                        <?php
+                                        } else {
+                                            ?>
+                                        <div class='btn btn-blue-grey'>รอตรวจสอบหลักฐานการโอนเงิน</div>
+                                            <?php
+                                        }
+                                        } else {
+                                        ?>
+                                            <div class='btn btn-success' onclick='confirmShipped(<?= $fetch_order_id['order_id'] ?>)'>ยืนยันได้รับสินค้า</div>
+                                        <?php
+                                        }
                                     } else {
-                                    ?>
+                                        ?>
                                         <div class='btn btn-primary' onclick='window.location = "?page=product&p_id=<?= $fetch_order['product_id'] ?>"'>ซื้ออีกครั้ง</div>
                                     <?php
                                     }
