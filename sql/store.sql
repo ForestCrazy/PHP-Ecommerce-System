@@ -5,6 +5,7 @@ CREATE TABLE IF NOT EXISTS `store` (
     `store_description` varchar(800) NOT NULL,
     `store_img` varchar(200),
     `createtime` datetime DEFAULT CURRENT_TIMESTAMP,
+    `store_balance` INT NOT NULL,
     `store_address` varchar(100) NOT NULL,
     `store_city` varchar(100) NOT NULL,
     `store_province` varchar(100) NOT NULL,
