@@ -15,8 +15,7 @@ if (!isset($_SESSION['username'])) {
                 $('input[type="radio"][value="' + resp['lastShippingAddr'] + '"]').attr('checked', true);
             })
         })
-        updateItemInCart();
-
+        
         function changeShippingProvider(p_id, currentShippingId, withUrls = false) {
             p_idCache = p_id;
             changeShippingProviderWithUrls = withUrls;

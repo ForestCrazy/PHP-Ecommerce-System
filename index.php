@@ -206,6 +206,9 @@ if (isset($_SESSION['username'])) {
             </div>
         </nav>
         <!--/.Navbar -->
+        <script>
+            updateItemInCart();
+        </script>
     <?php
     }
     ?>

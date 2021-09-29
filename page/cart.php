@@ -101,8 +101,7 @@ if (!isset($_SESSION['username'])) {
                 updateOrderDetail();
             });
         });
-        updateItemInCart();
-
+        
         function changeQty(p_id) {
             $.get('/API/productQtyRemain.php', {
                 p_id: p_id

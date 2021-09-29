@@ -53,8 +53,6 @@ if (!$res_product) {
             function checkout() {
                 window.location.href = '?page=checkout&p_id=<?php echo $_GET['p_id']; ?>' + '&p_quantity=' + document.getElementById('quantity').value + '&shipping_id=' + $('input[name="shipping_id"]:checked').val();
             }
-
-            updateItemInCart();
         </script>
         <div class="row">
             <div class="col-lg-4 col-top">
@@ -242,7 +240,9 @@ if (!$res_product) {
                             <img class="z-depth-2 img-fluid" style="max-height: 150px;" src="<?= !empty($fetch_product['store_img']) ? $fetch_product['store_img'] : '/asset/img/store_default.png' ?>">
                         </div>
                         <div class='col-8 col-sm-9 col-md-8 col-lg-9 col-xl-9' style='margin-top: 0!important;'>
-                            <h5 clas='align-middle'><?php echo $fetch_product['store_name']; ?></h5>
+                            <a href='?page=store&store_id=<?= $fetch_product['store_id'] ?>'>
+                                <h5 clas='align-middle'><?php echo $fetch_product['store_name']; ?></h5>
+                            </a>
                             <!--<br>-->
                             <small>
                                 <!--
