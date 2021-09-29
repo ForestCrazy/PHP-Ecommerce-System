@@ -169,7 +169,7 @@ if (!isset($_SESSION['username'])) {
                         <div class='card p-2'>
                             <span>
                                 <?php
-                                if ($fetch_order['payment_method'] == 'tranfer') {
+                                if ($fetch_order['payment_method'] == 'transfer') {
                                     echo 'ชำระเงินผ่านธนาคาร';
                                 } else {
                                     echo 'ชำระเงินปลายทาง';

@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS `order` (
     `u_id` INT NOT NULL,
     `status` ENUM('pending', 'processing', 'shipped', 'cancelled'),
     `payment_id` INT,
-    `payment_method` ENUM('tranfer', 'cod'),
+    `payment_method` ENUM('transfer', 'cod'),
     `context` varchar(300),
     `createtime` datetime DEFAULT CURRENT_TIMESTAMP,
     `end_process_time` datetime,

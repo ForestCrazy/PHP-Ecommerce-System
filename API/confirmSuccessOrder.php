@@ -12,7 +12,7 @@ if (isset($_SESSION['username'])) {
                 $sql_update_order = 'UPDATE `order` SET status = "shipped", end_process_time = NOW() WHERE order_id = "' . $_POST['order_id'] . '"';
                 $res_update_order = mysqli_query($connect, $sql_update_order);
                 if ($res_update_order) {
-                    if ($fetch_order['payment_method'] == 'tranfer') {
+                    if ($fetch_order['payment_method'] == 'transfer') {
                         $sql_update_store_balance = 'UPDATE store SET store_balance += "' . $fetch_order['total_price'] . '"';
                         $res_update_store_balance = mysqli_query($connect, $sql_update_store_balance);
                         if ($res_update_store_balance) {

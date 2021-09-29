@@ -420,7 +420,7 @@ if (!isset($_SESSION['username'])) {
                     เก็บเงินปลายทาง
                 </label>
                 <label class='btn btn-primary form-check-label'>
-                    <input class='form-check-input' type='radio' name='payment' value='tranfer' />
+                    <input class='form-check-input' type='radio' name='payment' value='transfer' />
                     โอนเงินผ่านบัญชีธนาคาร
                 </label>
             </div>

@@ -110,7 +110,7 @@ function createOrder($shipping_addr, $shipping_id, $payment_method, $shipping_pr
     if ($res_shipping_addr) {
         if (mysqli_num_rows($res_shipping_addr) == 1) {
             $fetch_shipping_addr = mysqli_fetch_assoc($res_shipping_addr);
-            $order_status = $payment_method == 'tranfer' ? 'pending' : 'processing';
+            $order_status = $payment_method == 'transfer' ? 'pending' : 'processing';
             $sql_order = 'INSERT INTO `order` (`shipping_provider_id`, `shipping_price`, `address_id`, `first_name`, `last_name`, `phone`, `address`, `city`, `province`, `zip_code`, `u_id`, `status`, `payment_method`) VALUES ("' . $shipping_id . '", "' . $shipping_price . '", "' . $fetch_shipping_addr['address_id'] . '", "' . $fetch_shipping_addr['first_name'] . '", "' . $fetch_shipping_addr['last_name'] . '", "' . $fetch_shipping_addr['phone'] . '", "' . $fetch_shipping_addr['address'] . '", "' . $fetch_shipping_addr['city'] . '", "' . $fetch_shipping_addr['province'] . '", "' . $fetch_shipping_addr['zip_code'] . '", "' . $_SESSION['u_id'] . '", "' . $order_status . '", "' . $payment_method . '")';
             $res_order = mysqli_query($connect, $sql_order);
             if ($res_order) {
