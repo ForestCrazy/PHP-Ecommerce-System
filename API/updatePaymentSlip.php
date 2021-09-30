@@ -13,7 +13,7 @@ if (isset($_SESSION['username'])) {
                     $timestamp = time();
                     if (move_uploaded_file($_FILES['paymentSlip']['tmp_name'], '../asset/img/payment_slip/' . $timestamp . '-' . $_FILES['paymentSlip']['name'])) {
                         $file_name = '/asset/img/payment_slip/' . $timestamp . '-' . $_FILES['paymentSlip']['name'];
-                        $sql_payment = 'INSERT INTO payment (u_id, pay_slip) VALUES ("' . $_SESSION['u_id'] . '", "' . $file_name . '")';
+                        $sql_payment = 'INSERT INTO payment (u_id, pay_slip, order_id) VALUES ("' . $_SESSION['u_id'] . '", "' . $file_name . '", "' . $_POST['order_id'] . '")';
                         $res_payment = mysqli_query($connect, $sql_payment);
                         if ($res_payment) {
                             $sql_update_order = 'UPDATE `order` SET payment_id = "' . mysqli_insert_id($connect) . '" WHERE order_id = "' . $_POST['order_id'] . '"';
