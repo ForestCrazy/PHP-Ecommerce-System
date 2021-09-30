@@ -110,8 +110,8 @@ if (isset($_SESSION['username'])) {
                     <li class="nav-item" id="home">
                         <a class="nav-link" href="?page=home"><i class="far fa-home"></i> หน้าหลัก</a>
                     </li>
-                    <li class="nav-item" id="sell">
-                        <a class="nav-link" href="?page=store_dashboard"><i class="fas fa-chart-line"></i></i> แดชบอร์ด</a>
+                    <li class="nav-item" id="store_dashboard">
+                        <a class="nav-link" href="?page=store_dashboard"><i class="fas fa-chart-line"></i> แดชบอร์ด</a>
                     </li>
                     <li class="nav-item" id="store_order">
                         <a class="nav-link" href="?page=store_order"><i class="fas fa-list"></i> ออเดอร์</a>
@@ -121,6 +121,39 @@ if (isset($_SESSION['username'])) {
                     </li>
                     <li class="nav-item" id="store_setting">
                         <a class="nav-link" href="?page=store_setting"><i class="fas fa-cog"></i> ตั้งค่าร้านค้า</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <!--/.Navbar -->
+    <?php
+    } elseif ($_GET['page'] == 'admin') {
+    ?>
+        <!--Navbar -->
+        <nav class="mb-1 navbar navbar-expand-lg navbar-dark default-color">
+            <a class="navbar-brand" href="?page=manage_account">Backend</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-333" aria-controls="navbarSupportedContent-333" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent-333">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item" id="home">
+                        <a class="nav-link" href="?page=home"><i class="far fa-home"></i> หน้าหลัก</a>
+                    </li>
+                    <li class="nav-item" id="manage_account">
+                        <a class="nav-link" href="?page=admin&admin=manage_account"><i class="fas fa-user"></i> บัญชี</a>
+                    </li>
+                    <li class="nav-item" id="manage_order">
+                        <a class="nav-link" href="?page=admin&admin=manage_order"><i class="fas fa-dolly-flatbed"></i> ออเดอร์</a>
+                    </li>
+                    <li class="nav-item" id="approve_payment">
+                        <a class="nav-link" href="?page=admin&admin=approve_payment"><i class="fas fa-file-invoice"></i> โอนเงิน</a>
+                    </li>
+                    <li class="nav-item" id="manage_withdraw">
+                        <a class="nav-link" href="?page=admin&admin=manage_withdraw"><i class="fas fa-money-check"></i> ถอนเงิน</a>
+                    </li>
+                    <li class="nav-item" id="manage_banner">
+                        <a class="nav-link" href="?page=admin&admin=manage_banner"><i class="fas fa-cog"></i> แบนเนอร์</a>
                     </li>
                 </ul>
             </div>
@@ -151,6 +184,18 @@ if (isset($_SESSION['username'])) {
                         }
                         ?>
                     </li>
+                    <?php
+                    if (isset($_SESSION['username'])) {
+                        if (isAdmin($_SESSION['u_id'])) {
+                    ?>
+                            <li class='nav-item'>
+                                <a class='nav-link' href='?page=admin'><i class="fad fa-brackets-curly"></i> จัดการระบบ</a>
+                            </li>
+                    <?php
+                        }
+                    }
+                    ?>
+
                     <!--
                 <li class="nav-item" id="event">
                     <a class="nav-link" href="?page=event"><i class="far fa-calendar-star"></i> กิจกรรม</a>
@@ -246,6 +291,8 @@ if (isset($_SESSION['username'])) {
             include_once __DIR__ . '/page/store_product.php';
         } elseif ($_GET['page'] == "store_setting") {
             include_once __DIR__ . '/page/store_setting.php';
+        } elseif ($_GET['page'] == "admin") {
+            include_once __DIR__ . '/page/admin.php';
         } elseif ($_GET['page'] == "register") {
             include_once __DIR__ . '/page/register.php';
         } elseif ($_GET['page'] == "login") {
