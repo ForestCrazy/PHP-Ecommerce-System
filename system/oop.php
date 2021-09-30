@@ -125,3 +125,24 @@ function createOrder($shipping_addr, $shipping_id, $payment_method, $shipping_pr
         return json_encode(array('success' => false, 'code' => 500));
     }
 }
+
+function isAdmin($user_id)
+{
+    global $connect;
+    $sql_user = 'SELECT rank FROM user WHERE u_id = "' . $user_id . '"';
+    $res_user = mysqli_query($connect, $sql_user);
+    if ($res_user) {
+        if (mysqli_num_rows($res_user) == 1) {
+            $fetch_user = mysqli_fetch_assoc($res_user);
+            if ($fetch_user['rank'] == 'admin') {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    } else {
+        return false;
+    }
+}
