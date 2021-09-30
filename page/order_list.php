@@ -158,7 +158,8 @@ if (!isset($_SESSION['username'])) {
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div class='col col-top'>
+                    <div class='col col-top font-weight-bold text-center'>
+                        ชำระเงินที่หมายเลขพร้อมเพย์ 0886610924
                         <div class='text-center'>
                             <img id='preview-payment-slip' style='min-height: 10rem; max-height: 280px;' src='' />
                         </div>
@@ -213,7 +214,7 @@ if (!isset($_SESSION['username'])) {
                                                     รวม
                                                 </div>
                                                 <div class='col'>
-                                                    การรีวิว
+                                                    รีวิวสินค้า
                                                 </div>
                                             </div>
                                         </div>
@@ -332,11 +333,22 @@ if (!isset($_SESSION['username'])) {
                                             if (empty($fetch_order['payment_id'])) {
                                     ?>
                                                 <div class='btn btn-primary' onclick='togglePaymentSlipModal(<?= $fetch_order['order_id'] ?>)'>ชำระเงิน</div>
-                                            <?php
+                                                <?php
                                             } else {
-                                            ?>
-                                                <div class='btn btn-blue-grey'>รอตรวจสอบหลักฐานการโอนเงิน</div>
+                                                $sql_payment = 'SELECT status FROM payment WHERE payment_id = "' . $fetch_order['payment_id'] . '"';
+                                                $res_payment = mysqli_query($connect, $sql_payment);
+                                                if ($res_payment) {
+                                                    $fetch_payment = mysqli_fetch_assoc($res_payment);
+                                                    if ($fetch_payment['status'] == 'decline') {
+                                                ?>
+                                                        <div class='btn btn-danger' onclick='togglePaymentSlipModal(<?= $fetch_order['order_id'] ?>)'>การชำระเงินถูกปฏิเสธ ชำระเงินใหม่อีกครั้ง</div>
+                                                    <?php
+                                                    } elseif ($fetch_payment['status'] == 'pending') {
+                                                    ?>
+                                                        <div class='btn btn-blue-grey'>รอตรวจสอบหลักฐานการโอนเงิน</div>
                                             <?php
+                                                    }
+                                                }
                                             }
                                         } else {
                                             ?>
