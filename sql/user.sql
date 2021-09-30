@@ -4,6 +4,7 @@ CREATE TABLE IF NOT EXISTS `user` (
     `password` varchar(300) NOT NULL,
     `email` varchar(100),
     `last_notification_id` INT NOT NULL,
+    `rank` ENUM('admin', 'user') DEFAULT 'user',
     `createtime` datetime DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY(`u_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
