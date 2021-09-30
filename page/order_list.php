@@ -307,9 +307,15 @@ if (!isset($_SESSION['username'])) {
                         ?>
                             <div class='alert-secondary col py-1'>
                                 <div class='d-flex justify-content-end text-md-right'>
-                                    <span class='text-primary' style='cursor: pointer;' onclick='orderStatus(<?= $fetch_order['order_id'] ?>)'>
-                                        สถานะสินค้า
-                                    </span>
+                                    <?php
+                                    if ($fetch_order['status'] == 'processing') {
+                                    ?>
+                                        <span class='text-primary' style='cursor: pointer;' onclick='orderStatus(<?= $fetch_order['order_id'] ?>)'>
+                                            สถานะสินค้า
+                                        </span>
+                                    <?php
+                                    }
+                                    ?>
                                     <div style='width: 30px;'></div>
                                     <span>
                                         ยอดคำสั่งซื้อทั้งหมด :
