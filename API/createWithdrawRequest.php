@@ -19,7 +19,7 @@ if (isset($_SESSION['username'])) {
                         if ($res_update_store) {
                             $fees = intval($_POST['withdraw_amount'] / 100 * 3);
                             $withdraw_balance = $_POST['withdraw_amount'] - $fees;
-                            $sql_withdraw_request = 'INSERT INTO withdraw_request (store_id, withdraw_balance, fees, bank_id) VALUES ("' . hasOwnStore($_SESSION['u_id'], true) . '", "' . $withdraw_balance . '", "' . $fees . '", "' . $_POST['bank_id'] . '")';
+                            $sql_withdraw_request = 'INSERT INTO withdraw_request (store_id, withdraw_balance, fees, bank_id, account_number) VALUES ("' . hasOwnStore($_SESSION['u_id'], true) . '", "' . $withdraw_balance . '", "' . $fees . '", "' . $_POST['bank_id'] . '", "' . $_POST['account_number'] . '")';
                             $res_withdraw_request = mysqli_query($connect, $sql_withdraw_request);
                             if ($res_withdraw_request) {
                                 echo json_encode(array('success' => true, 'code' => 200));
