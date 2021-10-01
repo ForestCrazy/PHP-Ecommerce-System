@@ -114,6 +114,7 @@ if (!isset($_SESSION['username'])) {
                             var resp = JSON.parse(res);
                             if (resp.success) {
                                 $('#updatePaymentModal').modal('hide');
+                                location.reload();
                                 console.log('update payment slip success');
                             } else {
                                 console.error(resp.reason ? resp.reason : 'failed to update payment slip');
@@ -122,6 +123,12 @@ if (!isset($_SESSION['username'])) {
                     })
                 }
             }
+        }
+
+        function resetPaymentSlipModal() {
+            $('#update-payment-order-id').val(0);
+            $('#preview-payment-slip').attr('src', '');
+            $('#inputPaymentSlip').val(null);
         }
     </script>
     <div class="modal fade" id="reviewProductModal" tabindex="-1" role="dialog" aria-labelledby="reviewProductModalLabel" aria-hidden="true">
@@ -173,7 +180,7 @@ if (!isset($_SESSION['username'])) {
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">ยกเลิก</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick='resetPaymentSlipModal()'>ยกเลิก</button>
                     <button type="button" class="btn btn-primary" onclick='updatePaymentSlip()'>อัพเดทหลักฐานการโอนเงิน</button>
                 </div>
             </div>
