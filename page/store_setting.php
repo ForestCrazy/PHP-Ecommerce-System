@@ -85,7 +85,7 @@ if (!$_SESSION['username']) {
                 <div class='card p-3'>
                     <div class='card-body'>
                         <div class='text-center'>
-                            <img class="z-depth-2 img-fluid" style="max-height: 150px;" id='storeProfile' src="<?= !empty($fetch_store_info['store_img']) ? $fetch_store_info['store_img'] : '/asset/img/store_default.png' ?>">
+                            <img class="z-depth-2 img-fluid store-profile" id='storeProfile' src="<?= !empty($fetch_store_info['store_img']) ? $fetch_store_info['store_img'] : '/asset/img/store_profile/store_default.png' ?>">
                         </div>
                         <div class='d-block' id='inputStoreProfileBtnSection'>
                             <div class='d-flex justify-content-center'>
