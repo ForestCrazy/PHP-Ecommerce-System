@@ -4,7 +4,7 @@ require('../system/oop.php');
 
 if (isset($_SESSION['username'])) {
     if (isset($_POST['payment_id']) && isset($_POST['status'])) {
-        $sql_payment = 'SELECT status FROM payment WHERE payment_id = "' . $_POST['payment_id'] . '"';
+        $sql_payment = 'SELECT status, order_id FROM payment WHERE payment_id = "' . $_POST['payment_id'] . '"';
         $res_payment = mysqli_query($connect, $sql_payment);
         if ($res_payment) {
             if (mysqli_num_rows($res_payment) == 1) {
@@ -13,7 +13,19 @@ if (isset($_SESSION['username'])) {
                     $sql_update_payment = 'UPDATE payment SET status = "' . $_POST['status'] . '", update_status_time = NOW() WHERE payment_id = "' . $_POST['payment_id'] . '"';
                     $res_update_payment = mysqli_query($connect, $sql_update_payment);
                     if ($res_update_payment) {
-                        echo json_encode(array('success' => true, 'code' => 200));
+                        if ($_POST['status'] == 'approve') {
+                            $sql_update_order = 'UPDATE `order` SET status = "processing" WHERE order_id = "' . $fetch_payment['order_id'] . '"';
+                            $res_update_order = mysqli_query($connect, $sql_update_order);
+                            if ($res_update_order) {
+                                echo json_encode(array('success' => true, 'code' => 200));
+                            } else {
+                                $sql_update_payment = 'UPDATE payment SET status = "pending", update_status_time = NULL WHERE payment_id = "' . $_POST['payment_id'] . '"';
+                                $res_update_payment = mysqli_query($connect, $sql_update_payment);
+                                echo json_encode(array('success' => false, 'code' => 500));
+                            }
+                        } else {
+                            echo json_encode(array('success' => true, 'code' => 200));
+                        }
                     } else {
                         echo json_encode(array('success' => false, 'code' => 500));
                     }
