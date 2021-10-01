@@ -92,6 +92,11 @@ if (isset($_SESSION['username'])) {
         .rating-md {
             font-size: 0px !important;
         }
+
+        .store-profile {
+            min-height: 80px;
+            max-height: 120px;
+        }
     </style>
 </head>
 
