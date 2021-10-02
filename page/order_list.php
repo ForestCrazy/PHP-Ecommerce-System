@@ -18,6 +18,13 @@ if (!isset($_SESSION['username'])) {
                 const value = $('#product-review').val() == '' ? 0 : $('#product-review').val();
                 $('#review-score').html('&emsp;' + value + ' คะแนน');
             });
+
+            $('#orderStatusModal').on('hide.bs.modal', function() {
+                $('#shipping-info').addClass('d-none');
+                $('#order-status').text('');
+                $('#shipping-provider').text('');
+                $('#shipping-code').text('');
+            });
         });
 
         function review_product(p_id) {
@@ -130,6 +137,25 @@ if (!isset($_SESSION['username'])) {
             $('#preview-payment-slip').attr('src', '');
             $('#inputPaymentSlip').val(null);
         }
+
+        function orderStatus(order_id) {
+            $.get('/API/orderStatus.php', {
+                order_id: order_id
+            }, function(res) {
+                var resp = JSON.parse(res);
+                if (resp.success) {
+                    $('#orderStatusModal').modal('show');
+                    if (resp.track_code) {
+                        $('#shipping-info').removeClass('d-none');
+                        $('#order-status').text('กำลังจัดส่งสินค้า');
+                        $('#shipping-provider').text(resp.shipping_provider);
+                        $('#shipping-code').text(resp.track_code);
+                    } else {
+                        $('#order-status').text('รอผู้ขายทำการจัดส่งสินค้า');
+                    }
+                }
+            })
+        }
     </script>
     <div class="modal fade" id="reviewProductModal" tabindex="-1" role="dialog" aria-labelledby="reviewProductModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -182,6 +208,34 @@ if (!isset($_SESSION['username'])) {
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick='resetPaymentSlipModal()'>ยกเลิก</button>
                     <button type="button" class="btn btn-primary" onclick='updatePaymentSlip()'>อัพเดทหลักฐานการโอนเงิน</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="orderStatusModal" tabindex="-1" role="dialog" aria-labelledby="orderStatusLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="orderStatusLabel">สถานะสินค้า</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class='col col-top text-center'>
+                        <span class='font-weight-bold'>สถานะสินค้า : </span>
+                        <span id='order-status'></span>
+                        <div class='d-none' id='shipping-info'>
+                            <span class='font-weight-bold'>ขนส่งโดย : </span>
+                            <span id='shipping-provider' class='d-inline'></span>
+                            <br />
+                            <span class='font-weight-bold'>หมายเลขพัสดุ : </span>
+                            <span id='shipping-code' class='d-inline'></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">ยกเลิก</button>
                 </div>
             </div>
         </div>
