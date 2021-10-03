@@ -7,15 +7,15 @@ if (!isset($_SESSION['username'])) {
             $_GET['admin'] = 'manage_account';
         }
         if ($_GET['admin'] == 'manage_account') {
-            include_once __DIR__ . './admin/manage_account.php';
+            include_once __DIR__ . '/admin/manage_account.php';
         } elseif ($_GET['admin'] == 'manage_order') {
-            include __DIR__ . './admin/manage_order.php';
+            include_once __DIR__ . '/admin/manage_order.php';
         } elseif ($_GET['admin'] == 'manage_withdraw') {
-            include __DIR__ . './admin/manage_withdraw.php';
+            include_once __DIR__ . '/admin/manage_withdraw.php';
         } elseif ($_GET['admin'] == 'approve_payment') {
-            include __DIR__ . './admin/approve_payment.php';
+            include_once __DIR__ . '/admin/approve_payment.php';
         } elseif ($_GET['admin'] == 'manage_banner') {
-            include __DIR__ . './admin/manage_banner.php';
+            include_once __DIR__ . '/admin/manage_banner.php';
         } else {
             gotoPage('admin');
         }
