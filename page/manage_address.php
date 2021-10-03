@@ -42,50 +42,6 @@ if (!isset($_SESSION['username'])) {
                 }
             })
         }
-
-        function createAddress() {
-            var firstName = $('#first-name').val();
-            var lastName = $('#last-name').val();
-            var phone = $('#phone').val();
-            var address = $('#address').val();
-            var city = $('#city').val();
-            var province = $('#province').val();
-            var zipCode = $('#zip-code').val();
-
-            var formData = new FormData();
-            formData.append('firstname', firstName);
-            formData.append('lastname', lastName);
-            formData.append('phone', phone);
-            formData.append('address', address);
-            formData.append('city', city);
-            formData.append('province', province);
-            formData.append('zip_code', zipCode);
-            $.ajax({
-                url: '/API/createAddress.php',
-                type: 'POST',
-                data: formData,
-                processData: false,
-                contentType: false,
-                success: function(res) {
-                    var resp = JSON.parse(res);
-                    if (resp.success) {
-                        Swal.fire(
-                            'เพิ่มที่อยู่สำเร็จ',
-                            '',
-                            'success'
-                        ).then(() => {
-                            window.location.href = window.location.href;
-                        })
-                    } else {
-                        Swal.fire(
-                            'เกิดข้อผิดพลาด',
-                            'เพิ่มที่อยู่ไม่สำเร็จ',
-                            'error'
-                        )
-                    }
-                }
-            })
-        }
     </script>
     <div class='col'>
         <div class='col text-right'>
