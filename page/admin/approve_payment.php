@@ -44,7 +44,7 @@ if (!isset($_SESSION['username'])) {
                     <div class="modal-body text-center">
                         <div id='transfer-amount'></div>
                         <input type='hidden' id='payment-id' />
-                        <img id='payment-slip-img' style='max-height: 390px;' src='' />
+                        <img id='payment-slip-img' class='col' style='max-height: 390px;' src='' />
                         <div class='d-block'>
                             <div class='btn btn-success' onclick='updatePaymentSlipStatus("approve")'><i class="far fa-check-circle"></i></div>
                             <div class='btn btn-danger d-inline' onclick='updatePaymentSlipStatus("decline")'><i class="far fa-ban"></i></div>

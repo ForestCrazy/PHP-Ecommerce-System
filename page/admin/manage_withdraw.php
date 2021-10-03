@@ -51,8 +51,8 @@ if (!isset($_SESSION['username'])) {
                                 var resp = JSON.parse(res);
                                 if (resp.success) {
                                     $('#updateWIthdrawSlipModal').modal('hide');
-                                    location.reload();
                                     console.log('update payment slip success');
+                                    location.reload();
                                 } else {
                                     console.error(resp.reason ? resp.reason : 'failed to update payment slip');
                                 }
@@ -77,7 +77,7 @@ if (!isset($_SESSION['username'])) {
                         <div class='col col-top font-weight-bold text-center'>
                             <div id='transfer-amount'></div>
                             <div class='text-center'>
-                                <img id='preview-withdraw-slip' style='min-height: 10rem; max-height: 280px;' src='' />
+                                <img id='preview-withdraw-slip' class='col' style='min-height: 10rem; max-height: 280px;' src='' />
                             </div>
                             <div class='d-block'>
                                 <div class='d-flex justify-content-center'>
