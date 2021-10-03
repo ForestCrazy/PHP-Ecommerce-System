@@ -44,7 +44,7 @@ if (!isset($_SESSION['username'])) {
                         formData.append('withdrawSlip', cacheWithdrawSlip);
                         formData.append('status', status);
                         $.ajax({
-                            url: '/API/updateWIthdrawStatus.php',
+                            url: '/API/updateWithdrawStatus.php',
                             type: 'POST',
                             data: formData,
                             processData: false,
