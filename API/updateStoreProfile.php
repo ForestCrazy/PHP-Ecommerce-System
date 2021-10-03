@@ -5,7 +5,7 @@ require('../system/oop.php');
 if (isset($_SESSION['username'])) {
     if (hasOwnStore($_SESSION['u_id'])) {
         if (isset($_FILES['store_profile'])) {
-            $sql_store_img = 'SELECT store_img FROM store WHERE store_id = "' . hasOwnStore($_SESSION['u_id']) . '" AND u_id = "' . $_SESSION['u_id'] . '"';
+            $sql_store_img = 'SELECT store_img FROM store WHERE store_id = "' . hasOwnStore($_SESSION['u_id'], true) . '" AND u_id = "' . $_SESSION['u_id'] . '"';
             $res_store_img = mysqli_query($connect, $sql_store_img);
             if ($res_store_img) {
                 if (mysqli_num_rows($res_store_img) == 1) {
@@ -13,7 +13,7 @@ if (isset($_SESSION['username'])) {
                     $timestamp = time();
                     if (move_uploaded_file($_FILES['store_profile']['tmp_name'], '../asset/img/store_profile/' . $timestamp . '-' . $_FILES['store_profile']['name'])) {
                         $store_profile = '/asset/img/store_profile/' . $timestamp . '-' . $_FILES['store_profile']['name'];
-                        $sql_update_store = 'UPDATE store SET store_img = "' . $store_profile . '" WHERE store_id = "' . hasOwnStore($_SESSION['u_id']) . '" AND u_id = "' . $_SESSION['u_id'] . '"';
+                        $sql_update_store = 'UPDATE store SET store_img = "' . $store_profile . '" WHERE store_id = "' . hasOwnStore($_SESSION['u_id'], true) . '" AND u_id = "' . $_SESSION['u_id'] . '"';
                         $res_update_store = mysqli_query($connect, $sql_update_store);
                         if ($res_update_store) {
                             if (!empty($fetch_store_img['store_img'])) {
