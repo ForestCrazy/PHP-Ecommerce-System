@@ -13,7 +13,7 @@ if (isset($_SESSION['username'])) {
                 $res_update_order = mysqli_query($connect, $sql_update_order);
                 if ($res_update_order) {
                     if ($fetch_order['payment_method'] == 'transfer') {
-                        $sql_update_store_balance = 'UPDATE store SET store_balance += "' . $fetch_order['total_price'] . '"';
+                        $sql_update_store_balance = 'UPDATE store SET store_balance += ' . $fetch_order['total_price'] . ' WHERE store_id = "' . isOrderOfStore($_POST['order_id']) . '"';
                         $res_update_store_balance = mysqli_query($connect, $sql_update_store_balance);
                         if ($res_update_store_balance) {
                             echo json_encode(array('success' => true, 'code' => 200));
