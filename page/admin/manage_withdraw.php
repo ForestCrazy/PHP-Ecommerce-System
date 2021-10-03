@@ -9,6 +9,14 @@ if (!isset($_SESSION['username'])) {
         <script>
             var cacheWithdrawSlip = null;
 
+            $(document).ready(function() {
+                $('#updateWithdrawSlipModal').on('hide.bs.modal', function() {
+                    $('#update-withdraw-id').val(0);
+                    $('#preview-withdraw-slip').attr('src', '');
+                    $('#updateWIthdrawSlip').val(null);
+                });
+            });
+
             function updateWithdrawSlip(input) {
                 if (input.files.length == 1) {
                     cacheWithdrawSlip = input.files[0];
@@ -20,12 +28,6 @@ if (!isset($_SESSION['username'])) {
                 } else {
                     console.error('failed to preview payment slip');
                 }
-            }
-
-            function resetWithdrawSlipModal() {
-                $('#update-withdraw-id').val(0);
-                $('#preview-withdraw-slip').attr('src', '');
-                $('#updateWIthdrawSlip').val(null);
             }
 
             function toggleWithdrawSlipModal(withdraw_id) {
@@ -89,7 +91,7 @@ if (!isset($_SESSION['username'])) {
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick='resetWithdrawSlipModal()'>ยกเลิก</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">ยกเลิก</button>
                         <button type="button" class="btn btn-danger" onclick='updatePaymentSlip("decline")'>ปฏิเสธ</button>
                         <button type="button" class="btn btn-primary" onclick='updatePaymentSlip("approve")'>อัพเดทหลักฐานการโอนเงิน</button>
                     </div>
