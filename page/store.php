@@ -36,7 +36,9 @@ if (!isset($_SESSION['username'])) {
                         $sql_store_subscriber = 'SELECT COUNT(user_id) AS store_follower_amount FROM store_follower WHERE store_id = "' . $fetch_store['store_id'] . '"';
                         $res_store_subscriber = mysqli_query($connect, $sql_store_subscriber);
                         if (!$res_store_score || !$res_store_product_amount || !$res_store_subscriber) {
-                            gotoPage('home');
+                            $fetch_store_score['store_review_amount'] = 0;
+                            $fetch_store_product_amount['store_product_amount'] = 0;
+                            $fetch_store_subscriber['store_follower_amount'] = 0;
                         } else {
                             $fetch_store_score = mysqli_fetch_assoc($res_store_score);
                             $fetch_store_product_amount = mysqli_fetch_assoc($res_store_product_amount);
