@@ -194,7 +194,7 @@ if (!isset($_SESSION['username'])) {
                     <div class='col col-top font-weight-bold text-center'>
                         ชำระเงินที่หมายเลขพร้อมเพย์ 0886610924
                         <div class='text-center'>
-                            <img id='preview-payment-slip' class='col' style='min-height: 10rem; max-height: 280px;' src='' />
+                            <img id='preview-payment-slip' class='mw-100' style='min-height: 10rem; max-height: 280px;' src='' />
                         </div>
                         <div class='d-block'>
                             <div class='d-flex justify-content-center'>
