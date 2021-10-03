@@ -146,3 +146,19 @@ function isAdmin($user_id)
         return false;
     }
 }
+
+function isOrderOfStore($order_id, $store_id = null) {
+    global $connect;
+    $sql_order = 'SELECT product.store_id FROM `order` INNER JOIN sub_order ON order.order_id = sub_order.order_id INNER JOIN product ON sub_order.product_id = product.product_id WHERE order.order_id = "' . $order_id . '" LIMIT 1';
+    $res_order = mysqli_query($connect, $sql_order);
+    if ($res_order) {
+        if (mysqli_num_rows($res_order) == 1) {
+            $fetch_order = mysqli_fetch_assoc($res_order);
+            return $store_id ? $fetch_order['store_id'] == $store_id : $fetch_order['store_id'];
+        } else {
+            return false;
+        }
+    } else {
+        return false;
+    }
+}
