@@ -23,7 +23,7 @@ if (isset($_SESSION['username'])) {
                             echo json_encode(array('success' => false, 'code' => 500));
                         }
                     } else {
-                        echo json_encode(array('success' => false, 'code' => 10100));
+                        echo json_encode(array('success' => true, 'code' => 200));
                     }
                 } else {
                     echo json_encode(array('success' => false, 'code' => 500));
