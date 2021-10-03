@@ -3,7 +3,7 @@ if (!$_SESSION['username']) {
     gotoPage('home');
 } else {
     if (hasOwnStore($_SESSION['u_id'])) {
-        $sql_store_info = 'SELECT * FROM store WHERE u_id = "' . hasOwnStore($_SESSION['u_id'], true) . '"';
+        $sql_store_info = 'SELECT * FROM store WHERE store_id = "' . hasOwnStore($_SESSION['u_id'], true) . '"';
         $res_store_info = mysqli_query($connect, $sql_store_info);
         if ($res_store_info) {
             $fetch_store_info = mysqli_fetch_assoc($res_store_info);
