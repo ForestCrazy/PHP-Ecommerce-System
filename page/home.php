@@ -62,7 +62,7 @@
                 <div class="carousel-inner">
                     <?php
                     try {
-                        $sql_banner = 'SELECT banner_img, banner_alt FROM banner WHERE banner_tier = "%banner_tier" AND start_time < NOW() AND end_time > NOW()';
+                        $sql_banner = 'SELECT banner_img, banner_alt FROM banner WHERE banner_tier = "%banner_tier"';
                         $res_banner = mysqli_query($connect, str_replace('%banner_tier', '0', $sql_banner));
                         if ($res_banner) {
                             $banner_active = true;
