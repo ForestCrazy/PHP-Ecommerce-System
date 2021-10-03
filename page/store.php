@@ -66,6 +66,20 @@ if (!isset($_SESSION['username'])) {
                     </div>
                 </div>
             </div>
+            <?php
+            if (!empty($fetch_store['store_description'])) {
+            ?>
+                <div class='col col-top'>
+                    คำอธิบายร้านค้า
+                    <div class='card p-2'>
+                        <div class='card-body'>
+                            <?= $fetch_store['store_description'] ?>
+                        </div>
+                    </div>
+                </div>
+            <?php
+            }
+            ?>
             <div class='col col-top'>
                 สินค้าในร้าน
                 <div class='card p-2'>
