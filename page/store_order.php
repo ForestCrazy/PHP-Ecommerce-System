@@ -95,7 +95,7 @@ if (!isset($_SESSION['username'])) {
                                     }
                                         ?>
                                         <div class='d-flex justify-content-start align-items-center'>
-                                            <img src='<?= $fetch_order['img_url'] ?>' style='max-height: 120px;' class='img-fluid' />
+                                            <img src='<?= $fetch_order['img_url'] ?>' style='max-height: 120px; max-width: 120px;' class='img-fluid' />
                                             <div class='flex-fill'>
                                                 <div class='row'>
                                                     <div class='col-md-4'>
@@ -252,7 +252,7 @@ if (!isset($_SESSION['username'])) {
                             }
                                 ?>
                                 <div class='d-flex justify-content-start align-items-center'>
-                                    <img src='<?= $fetch_order['img_url'] ?>' style='max-height: 120px;' class='img-fluid' />
+                                    <img src='<?= $fetch_order['img_url'] ?>' style='max-height: 120px; max-width: 120px;' class='img-fluid' />
                                     <div class='flex-fill'>
                                         <div class='row'>
                                             <div class='col-md-4'>

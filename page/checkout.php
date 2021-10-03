@@ -220,7 +220,7 @@ if (!isset($_SESSION['username'])) {
                     </div>
                 </div>
                 <div class='d-flex justify-content-start align-items-center'>
-                    <img src='/asset/img/product_img/1631278166-ตี๋เล็กซาลาเปา-เปาหมูแดง.jpg' style='max-height: 120px;' class='img-fluid' />
+                    <img src='<?= $fetch_product['img_url'] ?>' style='max-height: 120px; max-width: 120px;' class='img-fluid' />
                     <div class='flex-fill'>
                         <div class='row'>
                             <div class='col-md-4'>
@@ -353,7 +353,7 @@ if (!isset($_SESSION['username'])) {
                                     $total_product_price += $fetch_product_checkout['product_price'] * $fetch_product_checkout['quantity'];
                     ?>
                                     <div class='d-flex justify-content-start align-items-center'>
-                                        <img src='<?= $fetch_product_checkout['img_url'] ?>' style='max-height: 120px;' class='img-fluid' />
+                                        <img src='<?= $fetch_product_checkout['img_url'] ?>' style='max-height: 120px; max-width: 120px;' class='img-fluid' />
                                         <div class='flex-fill'>
                                             <div class='row'>
                                                 <div class='col-md-4'>

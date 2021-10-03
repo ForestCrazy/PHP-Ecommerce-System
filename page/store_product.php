@@ -586,7 +586,7 @@ if (!isset($_SESSION['username'])) {
         ?>
                 <div id='product-<?= $fetch_store_product['product_id'] ?>' class='col card col-top'>
                     <div class="h-100 d-flex justify-content-start align-items-center">
-                        <img src='<?= $fetch_store_product['img_url'] ?>' style="max-height: 120px;" alt="" class="img-fluid" />
+                        <img src='<?= $fetch_store_product['img_url'] ?>' style="max-height: 120px; max-width: 120px;" alt="" class="img-fluid" />
                         <div class='flex-fill'>
                             <div class='row' style='margin-left: 0px!important; margin-right: 0px!important;'>
                                 <div class='col-10'>

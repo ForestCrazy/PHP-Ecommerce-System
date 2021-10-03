@@ -15,7 +15,7 @@ if (!isset($_SESSION['username'])) {
                     <div class='col-12 card col-top'>
                         <div class='row'>
                             <div class='col-4 col-xl-2 col-sm-2' style='padding: 0!important;'>
-                                <img src='<?= $fetch_product_favorite['img_url'] ?>' style="max-height: 120px;" alt="" class="img-fluid" />
+                                <img src='<?= $fetch_product_favorite['img_url'] ?>' style="max-height: 120px; max-width: 120px;" alt="" class="img-fluid" />
                             </div>
                             <div class='col-6 col-xl-10 col-sm-10'>
                                 <div class='col-12 row py-3 px-0'>
