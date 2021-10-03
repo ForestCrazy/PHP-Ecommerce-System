@@ -6,7 +6,7 @@ if (isset($_SESSION['username'])) {
     if (isAdmin($_SESSION['u_id'])) {
         if (isset($_POST['withdraw_id']) && isset($_POST['status'])) {
             if (isset($_FILES['withdrawSlip']) || $_POST['status'] == 'decline') {
-                $sql_withdraw = 'SELECT status FROM withdraw_request WHERE withdraw_id = "' . $_POST['withdraw_id'] . '"';
+                $sql_withdraw = 'SELECT status, (withdraw_balance + fees) AS withdraw_amount, store_id FROM withdraw_request WHERE withdraw_id = "' . $_POST['withdraw_id'] . '"';
                 $res_withdraw = mysqli_query($connect, $sql_withdraw);
                 if ($res_withdraw) {
                     if (mysqli_num_rows($res_withdraw) == 1) {
@@ -16,7 +16,15 @@ if (isset($_SESSION['username'])) {
                                 $sql_update_withdraw = 'UPDATE withdraw_request SET status = "decline", update_status_time = NOW() WHERE withdraw_id = "' . $_POST['withdraw_id'] . '"';
                                 $res_update_withdraw = mysqli_query($connect, $sql_update_withdraw);
                                 if ($res_update_withdraw) {
-                                    echo json_encode(array('success' => true, 'code' => 200));
+                                    $sql_update_balance_store = 'UPDATE store SET store_balance = store_balance + ' . $fetch_withdraw['withdraw_amount'] . ' WHERE store_id = "' . $fetch_withdraw['store_id'] . '"';
+                                    $res_update_balance_store = mysqli_query($connect, $sql_update_balance_store);
+                                    if ($res_update_balance_store) {
+                                        echo json_encode(array('success' => true, 'code' => 200));
+                                    } else {
+                                        $sql_update_withdraw = 'UPDATE withdraw_request SET status = "decline", update_status_time = NULL WHERE withdraw_id = "' . $_POST['withdraw_id'] . '"';
+                                        $res_update_withdraw = mysqli_query($connect, $sql_update_withdraw);
+                                        echo json_encode(array('success' => false, 'code' => 500));
+                                    }
                                 } else {
                                     echo json_encode(array('success' => false, 'code' => 500));
                                 }
