@@ -15,7 +15,7 @@ if (!isset($_SESSION['username'])) {
                 $('input[type="radio"][value="' + resp['lastShippingAddr'] + '"]').attr('checked', true);
             })
         })
-        
+
         function changeShippingProvider(p_id, currentShippingId, withUrls = false) {
             p_idCache = p_id;
             changeShippingProviderWithUrls = withUrls;
@@ -128,8 +128,50 @@ if (!isset($_SESSION['username'])) {
         $sql_shipping_addr = 'SELECT * FROM address WHERE u_id = "' . $_SESSION['u_id'] . '"';
         $res_shipping_addr = mysqli_query($connect, $sql_shipping_addr);
         if ($res_shipping_addr) {
-            while ($fetch_shipping_addr = mysqli_fetch_assoc($res_shipping_addr)) {
+            if (mysqli_num_rows($res_shipping_addr) == 0) {
         ?>
+                <div class='col text-right'>
+                    <button class='btn btn-outline-success' type="button" data-toggle="collapse" data-target="#collapse-address" aria-expanded="false" aria-controls="collapse-address">เพิ่มที่อยู่</button>
+                    <div class='collapse text-left' id='collapse-address'>
+                        <div class='row'>
+                            <div class='col-md-4 form-group'>
+                                <label>ชื่อ</label>
+                                <input type='text' class='form-control' name='first-name' id='first-name' />
+                            </div>
+                            <div class='col-md-4 form-group'>
+                                <label>นามสกุล</label>
+                                <input type='text' class='form-control' name='last-name' id='last-name' />
+                            </div>
+                            <div class='col-md-4 form-group'>
+                                <label>เบอร์โทร</label>
+                                <input type='text' class='form-control' name='phone' id='phone' />
+                            </div>
+                            <div class='col-md-9 form-group'>
+                                <label>ที่อยู่</label>
+                                <input type='text' class='form-control' name='address' id='address' />
+                            </div>
+                            <div class='col-md-3 form-group'>
+                                <label>อำเภอ</label>
+                                <input type='text' class='form-control' name='city' id='city' />
+                            </div>
+                            <div class='col-md-6 form-group'>
+                                <label>จังหวัด</label>
+                                <input type='text' class='form-control' name='province' id='province' />
+                            </div>
+                            <div class='col-md-6 form-group'>
+                                <label>รหัสไปรษณีย์</label>
+                                <input type='text' class='form-control' name='zip-code' id='zip-code' />
+                            </div>
+                            <div class='col btn btn-success' onclick="createAddress()">
+                                บันทึก
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php
+            }
+            while ($fetch_shipping_addr = mysqli_fetch_assoc($res_shipping_addr)) {
+            ?>
                 <label>
                     <input type='radio' name='shipping_addr' id='shipping-addr' value='<?= $fetch_shipping_addr['address_id'] ?>' /> <?= $fetch_shipping_addr['first_name'] . ' ' . $fetch_shipping_addr['last_name'] . ' ' . $fetch_shipping_addr['phone'] . '&emsp;' . $fetch_shipping_addr['address'] . ', อำเภอ' . $fetch_shipping_addr['city'] . ', จังหวัด' . $fetch_shipping_addr['province'] . ', ' . $fetch_shipping_addr['zip_code'] ?>
                 </label>
