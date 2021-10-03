@@ -18,7 +18,7 @@ if (!isset($_GET['query'])) {
             <?php
             while ($fetch_product = mysqli_fetch_assoc($res_product)) {
             ?>
-                <div class="col-sm-4 col-md-3 col-lg-2 col-top">
+                <div class="col-sm-4 col-lg-2 col-top">
                     <div class="card">
                         <a class='text-dark' href='?page=product&p_id=<?php echo $fetch_product['product_id']; ?>'>
                             <img loading="lazy" class="card-img-top w-100" src="<?php echo $fetch_product['img_url']; ?>" alt="<?php echo $fetch_product['product_name']; ?>">
