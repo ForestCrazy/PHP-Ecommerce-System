@@ -478,9 +478,6 @@ if (!isset($_SESSION['username'])) {
                                 </div>
                                 <ul class="float-right">
                                     <li class="list-inline-item">
-                                        <button type="button" class="btn btn-outline-danger" onclick='deleteProduct()'>ลบสินค้า</button>
-                                    </li>
-                                    <li class="list-inline-item">
                                         <button type="button" class="btn btn-primary next-step">Next</button>
                                     </li>
                                 </ul>
