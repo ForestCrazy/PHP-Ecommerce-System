@@ -10,7 +10,7 @@ if (isset($_SESSION['username'])) {
                 $res_bank_withdraw = mysqli_query($connect, $sql_bank_withdraw);
                 if ($res_bank_withdraw) {
                     if (mysqli_num_rows($res_bank_withdraw) == 1) {
-                        $sql_store_balance = 'SELECT store_balance FROM store WHERE store_id = "' . hasOwnStore($_SESSION['u_id']) . '"';
+                        $sql_store_balance = 'SELECT store_balance FROM store WHERE store_id = "' . hasOwnStore($_SESSION['u_id'], true) . '"';
                         $res_store_balance = mysqli_query($connect, $sql_store_balance);
                         if ($res_store_balance) {
                             $fetch_store_balance = mysqli_fetch_assoc($res_store_balance);
