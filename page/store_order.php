@@ -190,9 +190,9 @@ if (!isset($_SESSION['username'])) {
                                     หมายเลขติดตามพัสดุ
                                 </span>
                                 <div class='card p-2'>
-                                    <input type='text' class='form-control w-auto' style='margin: .375rem;' id='track-code' value='<?= $fetch_order['track_code'] ?>' <?= !empty($fetch_order['track_code']) ? 'readonly' : '' ?> />
+                                    <input type='text' class='form-control w-auto' style='margin: .375rem;' id='track-code' value='<?= $fetch_order['track_code'] ?>' <?= !empty($fetch_order['track_code']) || $fetch_order['status'] != 'processing' ? 'readonly' : '' ?> />
                                     <?php
-                                    if (empty($fetch_order['track_code'])) {
+                                    if (empty($fetch_order['track_code']) && $fetch_order['status'] == 'processing') {
                                     ?>
                                         <div class='btn btn-outline-success' onclick='updateTrackCode()'>บันทึก</div>
                                     <?php
