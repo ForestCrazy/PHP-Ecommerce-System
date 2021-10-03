@@ -245,7 +245,7 @@ if (!isset($_SESSION['username'])) {
     $res_order_id = mysqli_query($connect, $sql_order_id);
     if ($res_order_id) {
         while ($fetch_order_id = mysqli_fetch_assoc($res_order_id)) {
-            $sql_order = 'SELECT *, CAST(sub_order.total_price / sub_order.quantity AS INT) AS price_per_item, order.product_price AS total_product_price FROM `order` INNER JOIN sub_order ON order.order_id = sub_order.order_id INNER JOIN product ON sub_order.product_id = product.product_id INNER JOIN store ON product.store_id = store.store_id LEFT JOIN (SELECT product_id, img_url FROM product_img GROUP BY product_id ORDER BY weight ASC) AS product_img ON product.product_id = product_img.product_id WHERE order.u_id = "' . $_SESSION['u_id'] . '" AND order.order_id = "' . $fetch_order_id['order_id'] . '"';
+            $sql_order = 'SELECT *, CAST(sub_order.total_price / sub_order.quantity AS INT) AS price_per_item, order.product_price AS total_product_price, order.shipping_price AS shipping_price FROM `order` INNER JOIN sub_order ON order.order_id = sub_order.order_id INNER JOIN product ON sub_order.product_id = product.product_id INNER JOIN store ON product.store_id = store.store_id LEFT JOIN (SELECT product_id, img_url FROM product_img GROUP BY product_id ORDER BY weight ASC) AS product_img ON product.product_id = product_img.product_id WHERE order.u_id = "' . $_SESSION['u_id'] . '" AND order.order_id = "' . $fetch_order_id['order_id'] . '"';
             $res_order = mysqli_query($connect, $sql_order);
             if ($res_order) {
                 $loop = mysqli_num_rows($res_order);
@@ -384,7 +384,7 @@ if (!isset($_SESSION['username'])) {
                                         &nbsp;
                                     </span>
                                     <h4 class='text-orange'>
-                                        ฿ <?= $fetch_order['total_product_price'] ?>
+                                        ฿ <?= $fetch_order['total_product_price'] + $fetch_order['shipping_price'] ?>
                                     </h4>
                                 </div>
                                 <div class='d-flex justify-content-end align-items-center text-center text-md-left'>
