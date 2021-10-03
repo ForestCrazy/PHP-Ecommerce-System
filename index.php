@@ -217,17 +217,6 @@ if (isset($_SESSION['username'])) {
                             <sup class="sup-shopping-cart"><span id='item-in-cart' class="badge badge-success"></span></sup> ตะกร้าสินค้า
                         </a>
                     </li>
-                    <?php
-                    if (isset($_SESSION['username'])) {
-                    ?>
-                        <li class="nav-item">
-                            <a class="nav-link waves-effect waves-light">
-                                <i class="far fa-bell"></i> การแจ้งเตือน
-                            </a>
-                        </li>
-                    <?php
-                    }
-                    ?>
                     <li class="nav-item dropdown">
                         <a class="nav-link <?php if (isset($_SESSION['username'])) {
                                                 echo 'dropdown-toggle';
