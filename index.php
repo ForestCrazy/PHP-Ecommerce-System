@@ -319,31 +319,6 @@ if (isset($_SESSION['username'])) {
 
 <!-- Footer -->
 <footer class="page-footer font-small teal" style='padding-top: 2rem;'>
-    <div class="container-fluid text-md-left">
-        <div class="row">
-            <div class="col-sm-6">
-                <b>ศูนย์ช่วยเหลือ</b>
-                <ul>
-                    <li>Live Chat</li>
-                    <li>คำถามที่พบบ่อย</li>
-                    <li>สั่งซื้อสินค้าอย่างไร</li>
-                    <li>เริ่มขายสินค้าอย่างไร</li>
-                    <li>ช่องทางการชำระเงิน</li>
-                    <li>การจัดส่งสินค้า</li>
-                    <li>การคืนเงินและคืนสินค้า</li>
-                </ul>
-            </div>
-            <div class="col-sm-6">
-                <b>เกี่ยวกับเรา</b>
-                <ul>
-                    <li>เกี่ยวกับเรา</li>
-                    <li>ร่วมงานกับเรา</li>
-                    <li>นโยบายความเป็นส่วนตัว</li>
-                    <li>Seller Center</li>
-                </ul>
-            </div>
-        </div>
-    </div>
     <div class="footer-copyright text-center py-3" style="background-color:#2f3133!important">
         <small style="font-size:14px; color: white;">Copyright © <?php echo date("Y"); ?> TPS Marketplace</small>
     </div>
