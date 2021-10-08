@@ -147,7 +147,8 @@ function isAdmin($user_id)
     }
 }
 
-function isOrderOfStore($order_id, $store_id = null) {
+function isOrderOfStore($order_id, $store_id = null)
+{
     global $connect;
     $sql_order = 'SELECT product.store_id FROM `order` INNER JOIN sub_order ON order.order_id = sub_order.order_id INNER JOIN product ON sub_order.product_id = product.product_id WHERE order.order_id = "' . $order_id . '" LIMIT 1';
     $res_order = mysqli_query($connect, $sql_order);
@@ -161,4 +162,17 @@ function isOrderOfStore($order_id, $store_id = null) {
     } else {
         return false;
     }
+}
+
+function DateThai($strDate)
+{
+    $strYear = date("Y", strtotime($strDate)) + 543;
+    $strMonth = date("n", strtotime($strDate));
+    $strDay = date("j", strtotime($strDate));
+    $strHour = date("H", strtotime($strDate));
+    $strMinute = date("i", strtotime($strDate));
+    $strSeconds = date("s", strtotime($strDate));
+    $strMonthCut = array("", "ม.ค.", "ก.พ.", "มี.ค.", "เม.ย.", "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค.");
+    $strMonthThai = $strMonthCut[$strMonth];
+    return "$strDay $strMonthThai $strYear, $strHour:$strMinute";
 }
