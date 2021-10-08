@@ -19,6 +19,15 @@ if (!isset($_SESSION['username'])) {
         } else {
             gotoPage('admin');
         }
+?>
+        <script>
+            $(document).ready(function() {
+                $("#table-admin").DataTable({
+                    "pageLength": 25
+                });
+            });
+        </script>
+<?php
     } else {
         gotoPage('home');
     }
