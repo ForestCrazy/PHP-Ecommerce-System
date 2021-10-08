@@ -6,8 +6,8 @@ if (!isset($_SESSION['username'])) {
     $res_order = mysqli_query($connect, $sql_order);
     if ($res_order) {
 ?>
-        <div class="table-responsive">
-            <table class="table">
+        <div class="table-responsive col-top">
+            <table class="table display" id="table-admin">
                 <thead>
                     <tr>
                         <th scope="col">#</th>

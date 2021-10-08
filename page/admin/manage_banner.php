@@ -146,8 +146,8 @@ if (!isset($_SESSION['username'])) {
         if ($res_banner) {
     ?>
             <span class='font-weight-bold'>Banner Tier <?= $i ?></span>
-            <div class="table-responsive">
-                <table class="table">
+            <div class="table-responsive col-top">
+                <table class="table display" id="table-admin">
                     <thead>
                         <tr>
                             <th scope="col">#</th>

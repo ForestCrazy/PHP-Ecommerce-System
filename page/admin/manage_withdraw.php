@@ -98,8 +98,8 @@ if (!isset($_SESSION['username'])) {
                 </div>
             </div>
         </div>
-        <div class="table-responsive">
-            <table class="table">
+        <div class="table-responsive col-top">
+            <table class="table display" id="table-admin">
                 <thead>
                     <tr>
                         <th scope="col">#</th>
