@@ -25,7 +25,7 @@ if (!isset($_SESSION['username'])) {
                                         </a>
                                         <br />
                                         <span>
-                                            เพิ่มเป็นสินค้าที่ชื่นชอบเมื่อวันที่ <?= $fetch_product_favorite['createtime'] ?>
+                                            เพิ่มเป็นสินค้าที่ชื่นชอบเมื่อวันที่ <?= DateThai($fetch_product_favorite['createtime']) ?>
                                         </span>
                                     </div>
                                     <div class='col-4 col-sm-4 col-md-4 px-0'>
