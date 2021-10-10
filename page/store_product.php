@@ -34,6 +34,9 @@ if (!isset($_SESSION['username'])) {
 
             function nextTab(elem) {
                 $(elem).parent().next().find('a[data-toggle="tab"]').click();
+                if ($(elem).data('tabStep') === 3) {
+                    $('.nav-link[data-toggle="tab"]').not('.active').addClass('disabled');
+                }
             }
 
             function prevTab(elem) {
