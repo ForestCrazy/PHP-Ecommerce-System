@@ -33,6 +33,9 @@ if (!isset($_SESSION['username'])) {
                 $('#banner-alt').val(banner_alt);
             } else {
                 $('#banner-id').val(0);
+                $('#preview-banner').attr('src', '');
+                $('#banner-tier').val('');
+                $('#banner-alt').val('');
             }
         }
 
