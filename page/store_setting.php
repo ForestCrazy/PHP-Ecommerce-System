@@ -64,6 +64,7 @@ if (!$_SESSION['username']) {
                 }
 
                 function updateStoreDetail() {
+                    confirmChangeStoreProfile();
                     $.post('/API/updateStoreDetail.php', {
                         store_name: $('#store_name').val(),
                         store_description: $('#store_description').val(),
